@@ -1,0 +1,13 @@
+<ben-headBar noBack noHome="false" title="ROTHY'S"></ben-headBar>
+<view class="wrap {{isIPX?'isIPX':''}}">
+    <image class="image-bg" src="{{imageBg}}"></image>
+    <view class="content">
+        <view class="title">礼物无法领取</view>
+        <view class="subtitle">礼物已被他人领取</view>
+        <view class="line"></view>
+        <view class="desc">如您喜爱，可点击下方按钮进入首页，开启自购旅程</view>
+    </view>
+    <view class="ben-fixed-bottom btn-box {{isIPX?'isIPX':''}}">
+        <view catchtap="goToDetail" class="btn-green">进店逛逛</view>
+    </view>
+</view>

@@ -1,0 +1,31 @@
+<template name="ben-tabBar-contact">
+    <button catchtap="{{event||null}}" class="ben-absolute-top" openType="{{open_type}}"></button>
+</template>
+<template name="ben-tabBar-item">
+    <view class="ben-tabBar-item {{index==tab?'onTab':''}}">
+        <template is="ben-tabBar-{{open_type}}" data="{{event:event,open_type:open_type}}" wx:if="{{open_type}}"></template>
+        <block wx:else>
+            <button bindgetuserinfo="_on_getUserInfo" class="ben-absolute-top" data-index="{{index}}" data-link_type="{{link_type}}" openType="getUserInfo" wx:if="{{index!=tab&&needAuth&&!auth&&curWxs.hasIndex(authArr,index)}}"></button>
+        </block>
+        <view bind:tap="_on_tab" class="ben-flex-col" data-index="{{index}}" data-link_type="{{link_type}}">
+            <block wx:if="{{subIcon}}">
+                <text class="icon-font {{index==tab?icon[1]:icon[0]}}" style="font-size: 44rpx;" wx:if="{{cartNum>0}}">
+                    <text class="cart-num" wx:if="{{needCartNum&&index==cartIndex}}">{{cartNum>9?'···':cartNum}}</text>
+                </text>
+                <text class="icon-font {{index==tab?subIcon[1]:subIcon[0]}}" style="font-size: 44rpx;" wx:else></text>
+            </block>
+            <text class="icon-font {{index==tab?icon[1]:icon[0]}}" style="font-size: 44rpx;" wx:else></text>
+            <view>{{text}} </view>
+        </view>
+    </view>
+</template>
+<view class="ben-tabBar-con {{isIPX?'isIPX':''}} ben-flex-row ben-fixed-{{tabBar.position}}">
+    <template is="ben-tabBar-item" data="{{...item,index:index,tab:tab,auth:auth,needAuth:needAuth,authArr:authArr,needCartNum:needCartNum,cartIndex:cartIndex,cartNum:cartNum}}" wx:for="{{tabBar.list}}" wx:key="{{ index }}"></template>
+</view>
+<wxs module="curWxs">
+module.exports = ({
+    hasIndex: (function(arr, index) {
+        return (arr.indexOf(index) >= 0)
+    }),
+});
+</wxs>

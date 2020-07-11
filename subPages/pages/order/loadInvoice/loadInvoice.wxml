@@ -1,0 +1,4 @@
+<ben-headBar isHome title="发票详情"></ben-headBar>
+<view class="page-con">
+    <web-view src="{{url}}"></web-view>
+</view>

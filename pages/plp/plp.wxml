@@ -1,0 +1,71 @@
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<ben-headBar isSearch noBack>
+  <image class="custom-header-img" slot="title" src="/static/images/logo.png"></image>
+</ben-headBar>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}} {{isHuaweiMate?'huawei_mate':''}}" style="height: calc(100vh - {{statusBarHeight}}px - {{header_height}}px)" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+  <view class="bg"></view>
+  <view bind:tap="toAllProduct" class="all-btn" wx:if="{{showAllPlp}}">全部商品
+    <text class="icon-font icon-more"></text>
+  </view>
+  <view class="big-circle" style="height: calc(2* (100vh - {{statusBarHeight}}px - {{header_height}}px));top: {{statusBarHeight+header_height}}px;transform:rotate({{-rotateIndex*360/categoryNum}}deg);transition:transform 0.8s ease;">
+    <view class="view-out-li {{currentIndex==view_idx?'de_cur':''}}" style="transform: rotate({{view_idx*360/categoryNum}}deg);" wx:for="{{viewData}}" wx:for-index="view_idx" wx:key="{{view_idx}}">
+      <view bind:touchend="moveend" bind:touchstart="movestart" class="view-li">
+        <block wx:if="{{currentIndex==view_idx}}">
+          <view class="text-ch">
+            <view class="text1">{{item.ch[0]}}</view>
+            <view class="text2">{{item.ch[1]}}</view>
+          </view>
+          <view class="text-en">
+            <view class="text1">{{item.en[0]}}</view>
+            <view class="text2">{{item.en[1]}}</view>
+          </view>
+          <view class="dashed">
+            <image src="/static/images/dashed.png"></image>
+            <block wx:for="{{item.spuList}}" wx:for-item="spu_item" wx:key="{{index}}">
+              <view class="spu-li" style="transform: rotate({{format.odd_spu(item.spuList.length,index)}}deg);" wx:if="{{item.spuList.length%2}}">
+                <image bind:tap="check" class="spu-li-img {{spu_item.checked?'checked':''}}" data-spucode="{{spu_item.code}}" data-viewcode="{{view_idx}}" src="{{spu_item.colorUrl}}"></image>
+                <view class="bg-shadow" wx:if="{{spu_item.checked}}"></view>
+              </view>
+              <view class="spu-li" style="transform: rotate({{format.even_spu(item.spuList.length,index)}}deg);" wx:else>
+                <image bind:tap="check" class="spu-li-img {{spu_item.checked?'checked':''}}" data-spucode="{{spu_item.code}}" data-viewcode="{{view_idx}}" src="{{spu_item.colorUrl}}"></image>
+                <view class="bg-shadow" wx:if="{{spu_item.checked}}"></view>
+              </view>
+            </block>
+          </view>
+        </block>
+        <image class="slide-image-shadow" src="/static/images/plp_shadow.png" wx:if="{{currentIndex==view_idx}}"></image>
+        <block wx:for="{{item.spuList}}" wx:for-index="spu-index" wx:for-item="spu_item" wx:key="spu-index">
+          <image class="slide-image {{currentIndex==view_idx?'':'hide'}}" src="{{spu_item.imgUrl}}" wx:if="{{spu_item.checked}}"></image>
+          <view class="buy-info" wx:if="{{currentIndex==view_idx&&spu_item.checked}}">
+            <view class="product-info" style="animation: {{item.firstSpuInfo?'info-right-left-wait':'info-right-left-quick'}} {{item.firstSpuInfo?1.5:0.3}}s linear;">
+              <view class="title ben-ellips-line">
+                {{spu_item.title}}
+                <view class="line"></view>
+              </view>
+              <view class="price">￥{{spu_item.price}}</view>
+            </view>
+            <button bind:tap="buynow" class="buynow-btn ben-btn-default-special" data-spucode="{{spu_item.code}}" style="animation: fade-in {{item.firstSpuInfo?1.5:0}}s linear;">
+              + 立即购买
+            </button>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view bind:touchend="moveend" bind:touchstart="movestart" class="foot">
+    <image class="img-dial1" src="/static/images/dial-1.png"></image>
+    <view class="category" style="transform:rotate({{-rotateIndex*360/categoryNum}}deg);transition:transform 0.8s ease;">
+      <image class="img-dial3" src="/static/images/dial-3-4.png" wx:if="{{categoryNum==4}}"></image>
+      <image class="img-dial3" src="/static/images/dial-3-5.png" wx:if="{{categoryNum==5}}"></image>
+      <image class="img-dial3" src="/static/images/dial-3-6.png" wx:if="{{categoryNum==6}}"></image>
+      <view class="cate-li" style="transform: translate(-50%, 0) rotate({{index*360/categoryNum}}deg);" wx:for="{{category}}" wx:key="index">
+        <image class="cate-li-img {{currentIndex==index?'checked':''}}" src="{{item.imgUrl}}"></image>
+      </view>
+    </view>
+    <image class="img-dial2" src="/static/images/dial-2.png"></image>
+    <image class="img-arrow-left" src="/static/images/arrow-left.png"></image>
+    <image class="img-arrow-right" src="/static/images/arrow-right.png"></image>
+    <view class="count">{{currentIndex+1}}/{{category.length}}</view>
+  </view>
+</view>
+<wxs module="format" src="../../benUI/wxs/ben_format.wxs" />

@@ -1,0 +1,118 @@
+.ben-fixed-top,.ben-absolute-top {
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.ben-fixed-bottom {
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.ben-flex-row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ben-flex-col {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.ben-fixed-top {
+    position: fixed;
+}
+
+.ben-fixed-bottom {
+    position: fixed;
+}
+
+.ben-absolute-top {
+    position: absolute;
+    z-index: 9999;
+}
+
+.icon-font {
+    display: inline-block;
+    font-size: 32rpx;
+    font-family: icon-font;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+}
+
+.icon-tabBar_home:before {
+    content: "\e63f";
+}
+
+.icon-tabBar_allproducts:before {
+    content: "\e63e";
+}
+
+.icon-tabBar_cart:before {
+    content: "\e640";
+}
+
+.icon-tabBar_cart1:before {
+    content: "\e641";
+}
+
+.icon-tabBar_myaccount:before {
+    content: "\e642";
+}
+
+.icon-tabBar_liked:before {
+    content: "\e66a";
+}
+
+.ben-tabBar-con {
+    width: 100vw;
+    height: 116rpx;
+    background-color: #ffffff;
+    z-index: 99;
+}
+
+.ben-tabBar-con.isIPX {
+    height: 156rpx;
+    padding-bottom: 40rpx;
+}
+
+.ben-tabBar-item {
+    height: 116rpx;
+    position: relative;
+    flex: 1;
+    font-size: 20rpx;
+    color: #A4A3A4;
+}
+
+.ben-tabBar-item .icon-font {
+    position: relative;
+}
+
+.ben-tabBar-item .icon-font .cart-num {
+    position: absolute;
+    top: 16rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20rpx;
+}
+
+.ben-tabBar-item button {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.ben-tabBar-item.onTab {
+    color: #092DC5;
+}
+
+.ben-tabBar-item .ben-flex-col {
+    height: 116rpx;
+    justify-content: center;
+    align-items: center;
+}

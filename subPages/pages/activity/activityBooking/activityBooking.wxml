@@ -1,0 +1,83 @@
+<import src="../../../../benUI/template/ben-form.wxml"></import>
+<ben-headBar noBack="{{noBack}}" title="活动预约"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}} actBook-wrap" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="actBook-banner-w">
+        <image mode="widthFix" src="{{images[0].src}}"></image>
+        <view class="contact-w">
+            <button class="contact-btn" openType="contact">
+                <text class="icon-font icon-service"></text>
+            </button>
+        </view>
+        <view class="contact-w">
+            <button class="contact-btn" hoverClass="none" openType="contact">
+                <text class="icon-font icon-service"></text>
+            </button>
+        </view>
+        <view class="share-btn-w">
+            <button bindtap="showShareMask" class="share-btn" hoverClass="none">
+                <text class="icon-font icon-share"></text>
+            </button>
+        </view>
+    </view>
+    <view class="activity-info-w">
+        <view class="activity-info">
+            <block wx:if="{{saleStatus!=1}}">
+                <view class="end-title">活动已结束</view>
+                <view class="end-tips">下期活动正在筹备中，敬请期待</view>
+            </block>
+            <block wx:if="{{saleStatus==1}}">
+                <view class="title">我要报名</view>
+                <form reportSubmit bind:submit="_formSubmit" data-name="activitySubmit" data-submit="activitySubmit">
+                    <template is="ben-picker-group" data="{{...activityDate}}"></template>
+                    <template is="ben-input-group" data="{{...userName}}"></template>
+                    <template is="ben-input-group" data="{{...userPhoneNumber}}"></template>
+                    <view class="weChatCode-radio-title">*微信号</view>
+                    <view class="ben-flex-row weChatCode-radio-group {{weChatCodeType=='phone'?'phone':''}}">
+                        <view bind:tap="weChatCodeChange" class="ben-flex-row weChatCode-radio-item {{weChatCodeType=='phone'?'active':''}}" data-name="phone">
+                            <view class="label">
+                                <text class="icon-font {{weChatCodeType=='phone'?'icon-radio_selected':'icon-radio_default'}}"></text>
+                            </view>同手机号
+                        </view>
+                        <view bind:tap="weChatCodeChange" class="ben-flex-row weChatCode-radio-item {{weChatCodeType=='other'?'active':''}}" data-name="other">
+                            <view class="label">
+                                <text class="icon-font {{weChatCodeType=='other'?'icon-radio_selected':'icon-radio_default'}}"></text>
+                            </view>其他
+                        </view>
+                    </view>
+                    <template is="ben-input-group" data="{{...userWeChat}}" wx:if="{{!weChatCodeType||weChatCodeType=='other'}}"></template>
+                    <view class="activityInfo-submit">
+                        <template is="ben-noLoading-btn-submit" data="{{...activitySubmit}}"></template>
+                    </view>
+                </form>
+            </block>
+        </view>
+    </view>
+    <canvas canvasId="{{canvas.id}}" style="width:{{canvas.width}}px; height: {{canvas.height}}px;position:absolute;top:-100000px;background:#E8E8E8"></canvas>
+    <view class="share-card-con {{cardShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{cardShow}}">
+        <view bindtap="shareSaveCancel" class="bg-mask"></view>
+        <view class="white-bg">
+            <button bindopensetting="saveShareCard" class="save-share-card {{isIPX?'cps-margin':''}}" openType="openSetting" wx:if="{{noAuthor}}">
+                <text class="icon-font icon-save"></text>保存图片到相册</button>
+            <button bindtap="getSetting" class="save-share-card {{isIPX?'cps-margin':''}}" wx:if="{{!noAuthor}}">
+                <text class="icon-font icon-save"></text>保存图片到相册</button>
+            <image class="{{isIPX?'cps-img-margin':''}}" src="{{shareCardPath}}"></image>
+        </view>
+    </view>
+    <view class="pdp-share-con {{maskShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{maskShow}}">
+        <view bindtap="cancelShare" class="bg-mask"></view>
+        <view class="share-btn-con">
+            <view class="share-btn">
+                <button bindtap="onShareAppMessage" class="btn-con" hoverClass="none" openType="share">
+                    <text class="icon-font icon-wechat"></text>
+                    <view class="share-friend">分享好友</view>
+                </button>
+                <button bindtap="sharepdpCard" class="btn-con" hoverClass="none">
+                    <text class="icon-font icon-friendster"></text>
+                    <view class="share-space">分享海报</view>
+                </button>
+            </view>
+            <view bindtap="cancelShare" class="share-true">取消</view>
+        </view>
+    </view>
+</view>

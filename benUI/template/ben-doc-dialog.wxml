@@ -1,0 +1,28 @@
+<template name="doc-dialog">
+    <view class="mask" wx:if="{{open}}">
+        <view bindtap="_doc_dialog_close" class="doc-close-mask" data-name="{{name}}"></view>
+        <view class="doc-dialog-con">
+            <view class="title">{{title}}</view>
+            <view class="txt">
+                <scroll-view scrollY style="max-height: 756rpx;">
+                    <view wx:if="{{content}}" wx:for="{{content}}" wx:key="{{index}}">{{item}}</view>
+                    <view class="detailContent" wx:if="{{detailContent}}">
+                        <view class="detailContentBox" wx:if="{{detailContent}}" wx:for="{{detailContent}}" wx:key="{{index}}">
+                            <view class="middleTittle {{item.middleTittle.color=='black'?'black':'red'}}">{{item.middleTittle.text}}</view>
+                            <view class="contentInfo" wx:for="{{item.contentInfo}}" wx:key="index">
+                                <view class="smallTittle">
+                                    <text class="icon" wx:if="{{item.smallTittle.icon}}">{{item.smallTittle.icon}}</text>{{item.smallTittle.text}}</view>
+                                <view class="contentDes">
+                                    <view class="contentDesLi {{item==''?'padding-b':''}}" wx:for="{{item.contentDes}}" wx:key="index">{{item}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view bindtap="_doc_dialog_close" class="close" data-name="{{name}}">
+                <view class="icon icon-font icon-close"></view>
+            </view>
+        </view>
+    </view>
+</template>

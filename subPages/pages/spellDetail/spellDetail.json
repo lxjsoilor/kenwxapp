@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "",
+    "usingComponents": {
+        "ben-headBar": "../../../benUI/components/ben-headBar/ben-headBar",
+        "calculate-num": "../../../components/ui/calculateNum/calculateNum",
+        "error-panel": "/components/error-panel/error-panel"
+    }
+}

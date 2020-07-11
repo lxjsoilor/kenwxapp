@@ -1,0 +1,25 @@
+<import src="/benUI/template/load-more.wxml"></import>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<ben-headBar isHome isSearch noBack="{{noBack}}" title="全部商品"></ben-headBar>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}} {{isHuaweiMate?'huawei_mate':''}}" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="nav-wrap" style="top:{{statusBarHeight+header_height}}px">
+        <view bind:tap="onNavItemClicked" class="nav-item {{navActiveIndex==index?'active':''}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{navs}}" wx:key="index">
+        {{item.label}}
+        <view class="trangle-wrap" wx:if="{{item.name=='sale_price'}}">
+                <text class="trangle-up {{item.sort=='0'&&navs[navActiveIndex].name=='sale_price'?'active':''}}"></text>
+                <text class="trangle-down {{item.sort=='1'&&navs[navActiveIndex].name=='sale_price'?'active':''}}"></text>
+            </view>
+        </view>
+    </view>
+    <view class="list-wrap">
+        <view bind:tap="toPdpPage" class="product-wrap" data-spucode="{{item.spuCode}}" wx:for="{{itemList}}" wx:key="index">
+            <view class="tag-presell" wx:if="{{item.preOrder==0}}">预售</view>
+            <image class="image" mode="widthFix" src="{{item.images[0].src}}"></image>
+            <view class="title">{{item.title}}</view>
+            <view class="title">¥ {{format.currency(item.salePrice)}}</view>
+        </view>
+        <template is="ben-loading" data="{{loading:loading}}"></template>
+        <template is="no-more" data="{{list:itemList,loading:loading,isNoMore:isNoMore,noMoreConfig:noMoreConfig}}"></template>
+    </view>
+</view>
+<wxs module="format" src="../../benUI/wxs/ben_format.wxs" />

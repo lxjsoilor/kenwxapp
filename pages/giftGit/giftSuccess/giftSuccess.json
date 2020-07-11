@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "ROTHY’S",
+    "usingComponents": {
+        "ben-headBar": "../../../benUI/components/ben-headBar/ben-headBar"
+    }
+}

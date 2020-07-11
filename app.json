@@ -1,0 +1,75 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/pdp/pdp",
+        "pages/plp/plp",
+        "pages/plp-all/plp-all",
+        "pages/checkout/checkout",
+        "pages/plp-category/plp-category",
+        "pages/search/search",
+        "pages/orderShare/orderShare",
+        "pages/shoppingCart/shoppingCart",
+        "pages/myAccount/myAccount",
+        "pages/temp/temp",
+        "pages/gift/gift",
+        "pages/giftGit/giftGit",
+        "pages/giftGit/giftSuccess/giftSuccess",
+        "pages/giftGit/giftFailed/giftFailed",
+        "subPages/pages/spellDetail/spellDetail",
+        "subPages/pages/order/logistics/logistics",
+        "subPages/pages/order/orderList/orderList",
+        "subPages/pages/order/orderDetail/orderDetail",
+        "subPages/pages/order/loadInvoice/loadInvoice",
+        "subPages/pages/coupon/coupon",
+        "subPages/pages/userInfo/userInfo",
+        "subPages/pages/paymentResult/paysuccess/paysuccess",
+        "subPages/pages/paymentResult/payfailed/payfailed",
+        "subPages/pages/vote/voteStart/voteStart",
+        "subPages/pages/vote/voteResults/voteResults",
+        "subPages/pages/vote/voteSuccess/voteSuccess",
+        "subPages/pages/activity/activityBooking/activityBooking",
+        "subPages/pages/activity/bookSuccess/bookSuccess",
+        "subPages/pages/questionnaire/questionnaire"
+    ],
+    "window": {
+        "navigationStyle": "custom",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/plp/plp",
+                "text": "日志"
+            },
+            {
+                "pagePath": "pages/orderShare/orderShare",
+                "text": "晒单"
+            },
+            {
+                "pagePath": "pages/shoppingCart/shoppingCart",
+                "text": "购物袋"
+            },
+            {
+                "pagePath": "pages/myAccount/myAccount",
+                "text": "个人中心"
+            }
+        ]
+    },
+    "networkTimeout": {
+        "request": 4000,
+        "connectSocket": 20000,
+        "uploadFile": 20000,
+        "downloadFile": 20000
+    },
+    "navigateToMiniProgramAppIdList": [
+        "wx9db2c16d0633c2e7"
+    ],
+    "debug": true
+}

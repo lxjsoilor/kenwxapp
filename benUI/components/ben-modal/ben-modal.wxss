@@ -1,0 +1,144 @@
+.ben-fixed-top {
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.ben-toast-con,.ben-modal-dialog {
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.ben-mask {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.ben-flex-row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ben-fixed-top {
+    position: fixed;
+}
+
+.ben-toast-con,.ben-modal-dialog {
+    position: fixed;
+    z-index: 9999;
+    border-radius: 6rpx;
+}
+
+.ben-toast-con {
+    top: 40%;
+    width: 320rpx;
+    padding: 60rpx 40rpx;
+    background-color: rgba(0,0,0,0.8);
+    text-align: center;
+    font-size: 28rpx;
+    line-height: 52rpx;
+    color: #fff;
+}
+
+.ben-modal-dialog {
+    background-color: #fff;
+}
+
+.ben-modal-title {
+    text-align: center;
+    font-size: 32rpx;
+    line-height: 64rpx;
+    color: #000000;
+}
+
+.ben-modal-close {
+    position: absolute;
+    top: 30rpx;
+    right: 32rpx;
+    z-index: 999;
+    width: 40rpx;
+    height: 40rpx;
+    justify-content: center;
+}
+
+.ben-modal-close image {
+    width: 100%;
+    height: auto;
+}
+
+.ben-modal-bottom-close {
+    width: 100rpx;
+    height: 100rpx;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%,calc(100% + 40rpx));
+}
+
+.ben-btn-con {
+    height: 86rpx;
+    border-top: 2rpx solid #f1f1f1;
+    text-align: center;
+    font-size: 28rpx;
+    line-height: 84rpx;
+}
+
+.ben-btn-con .ben-btn {
+    flex: 1;
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium;
+    letter-spacing: 2rpx;
+}
+
+.ben-btn-con .ben-btn-cancel {
+    color: #666666;
+    border-right: 2rpx solid #f1f1f1;
+}
+
+.ben-btn-con .ben-btn-ensure {
+    color: #092DC5;
+}
+
+@-webkit-keyframes ben-toasting {
+    0% {
+        opacity: 0;
+        display: block;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes ben-toasting {
+    0% {
+        opacity: 0;
+        display: block;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.steps-mask {
+    position: absolute;
+    bottom: 0;
+    height: 184rpx;
+    width: 100%;
+    background: linear-gradient(-180deg,rgba(247,247,247,0) 0%,#F7F7F7 69%);
+}

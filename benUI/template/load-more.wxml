@@ -1,0 +1,16 @@
+<template name="no-more">
+    <view class="no-more-con" wx:if="{{list.length>4&&isNoMore}}">
+        <text class="no-more-msg">{{noMoreConfig.noMore}}</text>
+    </view>
+    <view class="ben-list-none" wx:if="{{!list.length&&!loading&&isNoMore}}">
+        <view class="none-list-icon icon-font {{noMoreConfig.icon}}" wx:if="{{noMoreConfig.icon}}"></view>
+        <view class="none-list-title">{{noMoreConfig.none}}</view>
+        <view class="none-list-msg">{{noMoreConfig.noneMsg}}</view>
+        <view class="explore" wx:if="{{noMoreConfig.btn}}">
+            <button bind:tap="{{noMoreConfig.btn.onTap}}" class="ben-btn-primary">{{noMoreConfig.btn.text}}</button>
+        </view>
+    </view>
+</template>
+<template name="ben-loading">
+    <view class="ben-loading" hidden="{{!loading}}">加载中...</view>
+</template>

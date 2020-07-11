@@ -1,0 +1,10 @@
+<view class="error-panel">
+    <view class="error-icon none-start-icon icon-font {{icon}}" wx:if="{{icon}}"></view>
+    <view class="error-panel-title">
+        <text>{{title}}</text>
+    </view>
+    <view class="error-panel-msg">{{msg}}</view>
+    <view wx:if="{{btn}}">
+        <view bind:tap="btn_on_tap" class="refresh">{{btn}}</view>
+    </view>
+</view>

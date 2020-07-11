@@ -1,0 +1,17 @@
+<ben-headBar noBack="{{noBack}}" noHome="false" title="ROTHY'S"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="wrap {{pageStatus.isIPX?'isIPX':''}}" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="gift-top">
+        <image class="gift-bg" src="{{giftBg}}"></image>
+        <image class="user-image" src="{{userImage}}"></image>
+    </view>
+    <view class="gift-content">
+        <view>Hi <open-data lang="zh_CN" type="userNickName"></open-data>
+        </view>
+        <view class="desc">{{wishCard}}</view>
+        <view class="name">{{nickname}}</view>
+    </view>
+    <view class="ben-fixed-bottom btn-box {{pageStatus.isIPX?'isIPX':''}}" wx:if="{{btnFlag}}">
+        <button bindgetuserinfo="onGotUserInfo" class="btn-green" lang="zh_CN" openType="getUserInfo">打开礼物</button>
+    </view>
+</view>

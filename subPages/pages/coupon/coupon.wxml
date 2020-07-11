@@ -1,0 +1,53 @@
+<template name="coupon-row">
+    <view class="coupon-item" data-id="{{couponCode}}">
+        <view class="coupon-item-left {{onTabName==='available'?'unUsed':''}}">
+            <text hidden class="icon-font icon-gift"></text>
+            <text hidden class="icon-font icon-wuliu"></text>
+            <text class="value">￥{{faceValue}}</text>
+        </view>
+        <view class="coupon-item-center {{onTabName==='available'?'unUsed':''}}">
+            <view class="item-c-top">{{activityName}}</view>
+            <view class="item-c-center">{{activityRuleDesc}}</view>
+            <view class="item-c-bottom" wx:if="{{validStartTime}}">
+                    {{format.timeParse(validStartTime,'yyyy-mm-dd hh:mm','.')}}至{{format.timeParse(validEndTime,'yyyy-mm-dd hh:mm','.')}}
+                </view>
+            <view class="item-c-bottom" wx:if="{{validBegin}}">
+                    {{format.timeParse(validBegin,'yyyy-mm-dd hh:mm','.')}}至{{format.timeParse(validEnd,'yyyy-mm-dd hh:mm','.')}}
+                </view>
+        </view>
+        <view catch:tap="onCouponUseClick" class="coupon-item-right {{onTabName==='available'?'unUsed':''}}" data-canjump="{{onTabName==='available'?couponWxs.hasStarted(validStartTime,currentDate):''}}">
+                {{onTabName==='available'?couponWxs.hasStarted(validStartTime,currentDate):onTabName==='used'?'已使用':'已到期'}}
+            </view>
+    </view>
+</template>
+<template name="coupon-product-list">
+    <template is="coupon-row" data="{{...item,index:index,onTabName:onTabName,currentDate:currentDate}}" wx:for="{{list}}" wx:key="{{ index }}"></template>
+    <template is="ben-loading" data="{{loading:loading}}"></template>
+    <template is="no-more" data="{{list:list,loading:loading,isNoMore:isNoMore,noMoreConfig:noMoreConfig}}"></template>
+</template>
+<import src="../../../benUI/template/load-more.wxml"></import>
+<ben-headBar isHome title="我的优惠券"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con coupon-wrap  {{pageStatus.isIPX?'coupon-wrap-IPX isIPX':''}}" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class=" ben-fixed-top ben-flex-row {{isIPX?'cp-bar':''}}" style="top:{{nfixeTop}}px;">
+        <view catch:tap="_status_on_tab" class="tab-status-item {{onTabName==item.name?'ben-active':''}}" data-name="{{item.name}}" data-status="{{item}}" wx:for="{{tabTitles}}" wx:key="{{ index }}">{{item.text}}</view>
+    </view>
+    <view class="coupon-list">
+        <template is="coupon-product-list" data="{{...dataList[onTabName],noMoreConfig:noMoreConfig,onTabName:onTabName,currentDate:currentDate}}"></template>
+    </view>
+</view>
+<wxs module="format" src="../../../benUI/wxs/ben_format.wxs" />
+<wxs module="couponWxs">
+module.exports = ({
+    hasStarted: (function(val, currentDate) {
+        var startTime = parseInt(val);
+        var currentTime = parseInt(currentDate);
+        var distance = startTime - currentTime;
+        console.log("hasStarted\x3d\x3d", val, currentDate, distance);
+        if (distance < 0) {
+            return ("立即使用")
+        };
+        return ("")
+    }),
+});
+</wxs>

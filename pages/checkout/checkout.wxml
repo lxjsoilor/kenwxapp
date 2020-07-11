@@ -1,0 +1,251 @@
+<ben-headBar isHome title="确认订单"></ben-headBar>
+<import src="/benUI/template/ben-form.wxml"></import>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="main-container {{pageStatus.isIPX?'isIPX':''}}" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="spell-txt" wx:if="{{orderType=='spell'}}">
+        <view class="icon-font icon-coupon"></view>
+        <view>本订单支付成功后，会正常发货；成团后每人返￥{{couponMoney}}现金券，下次购物使用。</view>
+    </view>
+    <view class="gift-header" wx:if="{{orderType=='gift'}}">
+        <image mode="widthFix" src="{{giftBg}}"></image>
+        <view class="txt">
+            <view class="icon-font icon-gift"></view>
+            <view class="h2">好友礼赠</view>
+            <view class="h3">收货地址将由您赠送的好友填写</view>
+        </view>
+    </view>
+    <view class="container">
+        <form reportSubmit bind:submit="_formSubmit" data-name="wxSaveAddress" data-submit="wxSaveAddress" wx:if="{{orderType!='gift'}}">
+            <view class="checkout-address">
+                <view class="ben-flex-row">
+                    <view class="title">收货信息（请务必完整准确填写）</view>
+                    <view bind:tap="get_wx_address" class="wechat-address">
+                        <text class="icon-font icon-wechat"></text>使用微信地址</view>
+                </view>
+                <view bind:tap="addAddress" class="add-address" wx:if="{{noAddress&&!showForm}}">
+                    <text class="icon-font icon-add"></text>添加收货信息</view>
+                <view class="checkout-address-form" wx:if="{{showForm&&!showAddress}}">
+                    <template is="ben-input-group" data="{{...consigneeName}}"></template>
+                    <template is="ben-input-group" data="{{...consigneePhoneNumber}}"></template>
+                    <template is="ben-region-picker" data="{{...region}}"></template>
+                    <input hidden name="provinceName" value="{{provinceName.value}}"></input>
+                    <input hidden name="cityName" value="{{cityName.value}}"></input>
+                    <input hidden name="districtName" value="{{districtName.value}}"></input>
+                    <view hidden="{{privacy_policy.open||sales_conditions.open?true:false}}">
+                        <template is="ben-textarea-group" data="{{...detailInfo}}"></template>
+                    </view>
+                    <view class="ben-flex-row btn-group">
+                        <view>
+                            <button bind:tap="addressCancel" class="ben-btn-default">取消</button>
+                        </view>
+                        <view>
+                            <template is="ben-btn-submit" data="{{...wxSaveAddress}}"></template>
+                        </view>
+                    </view>
+                </view>
+                <view class="checkout-address-detail" wx:if="{{showAddress}}">
+                    <view class="user">
+                        <text class="name">{{consigneeName.value}}</text>
+                        <text>{{consigneePhoneNumber.value}}</text>
+                    </view>
+                    <view class="address-info">
+                        <text>{{provinceName.value}}</text>
+                        <text>{{cityName.value}}</text>
+                        <text>{{districtName.value}}</text>
+                    </view>
+                    <view class="address-info">{{detailInfo.value}}</view>
+                    <view bind:tap="addressEdit" class="edit">
+                        <text class="icon-font icon-edit"></text>
+                    </view>
+                </view>
+            </view>
+        </form>
+        <form reportSubmit bind:submit="_formSubmit" data-name="wxCheckout" data-submit="wxCheckout">
+            <view class="product-list">
+                <view class="product ben-flex-row" wx:for="{{ableItems}}" wx:key="{{item.index}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.images}}"></image>
+                    </view>
+                    <view class="info">
+                        <view class="name ben-overflow-ellips">{{item.title}}</view>
+                        <view class="advance" wx:if="{{item.preOrder==0}}">预售</view>
+                        <view class="size">
+                            <block wx:for="{{item.salesProps}}" wx:for-item="sProps" wx:key="{{item.index}}">
+                                <text wx:if="{{sProps.groupName=='尺码'}}">{{sProps.groupName}}：{{sProps.propName}}</text>
+                                <text wx:if="{{sProps.groupName=='颜色分类'}}">  丨 {{sProps.groupName}}：{{sProps.propName}}</text>
+                            </block>
+                        </view>
+                        <view class="bottom-line ben-flex-row">
+                            <view class="price">￥{{item.salePrice}}</view>
+                            <view class="num">x {{item.buyCount}}</view>
+                        </view>
+                    </view>
+                </view>
+                <block wx:if="{{item.rewardType=='06'&&item.gifts.length>0}}" wx:for="{{ablePromotion}}" wx:key="index">
+                    <view class="freebie-item" wx:for="{{item.gifts}}" wx:for-item="giftitem" wx:key="index">
+                        <view class="left">
+                            <view class="img">
+                                <image mode="aspectFit" src="{{giftitem.images}}"></image>
+                            </view>
+                            <view class="freebie">
+                                <view class="txt">
+                                    <text class="tag">赠品</text>{{giftitem.title}}</view>
+                            </view>
+                        </view>
+                        <view class="num">x {{giftitem.count}}</view>
+                    </view>
+                </block>
+            </view>
+            <view class="wish-card" wx:if="{{orderType=='gift'}}">
+                <view class="ben-flex-row">
+                    <view>祝福语</view>
+                    <view bind:tap="changeWords">
+                        <text class="icon-font icon-handover"></text>换一句</view>
+                </view>
+                <view class="words">
+                {{wishCardGroup[wishCardIndex]}}
+            </view>
+            </view>
+            <view class="checkout-invoice">
+                <view class="ben-flex-row">
+                    <view class="title">开具发票</view>
+                    <view>
+                        <template is="ben-form-switch" data="{{...need_voice}}"></template>
+                    </view>
+                </view>
+                <block wx:if="{{needInvoice}}">
+                    <view class="ben-flex-row choose-wxinvoice">
+                        <view>发票信息</view>
+                        <view bind:tap="get_wx_invoice" class="wechat">
+                            <text class="icon-font icon-wechat"></text>使用微信发票</view>
+                    </view>
+                    <view class="invoice-checkbox-group">
+                        <view bind:tap="invoiceChange" class="invoice-checkbox-row {{usePersonalInvoice?'active':''}}" data-label="personal">
+                            <view class="label">
+                                <text class="icon-font {{usePersonalInvoice?'icon-radio_selected':''}}"></text>
+                            </view>个人发票</view>
+                        <view bind:tap="invoiceChange" class="invoice-checkbox-row {{usePersonalInvoice?'':'active'}}" data-label="company">
+                            <view class="label">
+                                <text class="icon-font {{usePersonalInvoice?'':'icon-radio_selected'}}"></text>
+                            </view>公司发票</view>
+                    </view>
+                    <template is="ben-input-group" data="{{...personal_title}}" wx:if="{{usePersonalInvoice}}"></template>
+                    <view class="main-info" wx:else>
+                        <template is="ben-input-group" data="{{...company_title}}"></template>
+                        <template is="ben-input-group" data="{{...taxCode}}"></template>
+                    </view>
+                </block>
+            </view>
+            <view class="ben-flex-col checkout-coupon">
+                <view class="ben-flex-row coupon-use-w">
+                    <view bind:tap="chooseCoupn" class="ben-flex-row coupon-box">
+                        <view class="title">使用优惠</view>
+                        <view class="nums-block">
+                            <block wx:if="{{couponList.length>0&&!needCoupon}}">
+                                <text class="num">{{couponList.length}}</text>
+                                <text class="txt"> 个优惠可用</text>
+                            </block>
+                            <text class="txt" wx:if="{{needCoupon}}">{{couponTitle}}</text>
+                        </view>
+                    </view>
+                    <text bind:tap="cancelCouponCode" class="icon-font icon-x" wx:if="{{needCoupon}}"></text>
+                    <text bind:tap="chooseCoupn" class="icon-font icon-arrow_right" wx:else></text>
+                </view>
+                <view class="checkoutNote-tips" wx:if="{{!!checkoutNote}}">{{checkoutNote}}</view>
+            </view>
+            <view class="checkout-price">
+                <view class="price-info">
+                    <view class="line ben-flex-row">
+                        <view>商品数量</view>
+                        <view class="gray">{{goodsCount}}</view>
+                    </view>
+                    <view class="line ben-flex-row">
+                        <view>商品金额</view>
+                        <view class="gray">￥{{format.currency(amount)}}</view>
+                    </view>
+                    <view class="line ben-flex-row">
+                        <view>优惠</view>
+                        <view class="gray {{coupon>0?'red':''}}">{{coupon>0?'-':''}}￥{{format.currency(coupon)}}</view>
+                    </view>
+                    <view class="line ben-flex-row">
+                        <view>运费</view>
+                        <view class="gray">￥{{format.currency(freight)}}</view>
+                    </view>
+                </view>
+                <view class="total ben-flex-row">
+                    <view>商品总计</view>
+                    <view>￥{{format.currency(payment)}}</view>
+                </view>
+            </view>
+            <view class="footer-panel">
+                <view class="conditions">
+                    <view bind:tap="toggleTermStatus" class="accept-checkbox {{isAcceptTerm?'active':''}}">
+                        <text class="icon-font {{isAcceptTerm?'icon-checkbox_selected':''}}"></text>
+                    </view>
+                    <view>我同意 <text bindtap="_doc_dialog_show" data-name="{{sales_conditions.name}}">销售条款</text> 和 <text bindtap="_doc_dialog_show" data-name="{{privacy_policy.name}}">隐私政策</text>
+                    </view>
+                </view>
+                <view class="checkout-pay">
+                    <button bind:tap="subscribeTheMessage" class="ben-btn ben-btn-primary" disabled="{{wxCheckout.state.disabled}}" formType="submit" loading="{{wxCheckout.state.disabled}}">
+                    {{wxCheckout.text}}
+                </button>
+                </view>
+            </view>
+        </form>
+    </view>
+</view>
+<view class="coupon-container" wx:if="{{isCouponShow}}">
+    <view class="panel">
+        <view class="ben-flex-row coupon-tab">
+            <view bind:tap="changeCouponTypeTab" class="{{item.active?'active':''}}" data-index="{{index}}" wx:for="{{couponTypeTab}}">{{item.name}}</view>
+            <text bind:tap="hideCoupon" class="icon-font icon-x"></text>
+        </view>
+        <view class="coupon-item">
+            <swiper autoplay="{{false}}" bindchange="swiperCouponType" class="" current="{{couponTypeIndex}}" indicatorDots="{{false}}">
+                <swiper-item class="choose-coupon">
+                    <scroll-view wx:if="{{couponList.length>0}}">
+                        <view class="couponlist-container">
+                            <view bind:tap="chooseCoupon" class="choose-item ben-flex-row" data-couponCode="{{item.couponCode}}" data-index="{{index}}" wx:if="{{item.couponStatus==2}}" wx:for="{{couponList}}">
+                                <view class="price">
+                                    <text class="symbol">￥</text>
+                                    <text>{{item.faceValue}}</text>
+                                </view>
+                                <view class="info">
+                                    <view class="title">{{item.activityName}}</view>
+                                    <view class="condition">{{item.activityRuleDesc}}</view>
+                                    <view class="date">{{Format.format.formatCouponDate(item.validBegin)}} 至 {{Format.format.formatCouponDate(item.validEnd)}}</view>
+                                </view>
+                                <view class="radio {{item.selected?'active':''}}">
+                                    <text class="{{item.selected?'icon-font icon-raidio_coupon_select':''}}"></text>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                    <view wx:else>
+                        <view class="coupon-empty">
+                            <text class="icon-font icon-coupon1"></text>
+                            <view>您还没有相关优惠券</view>
+                        </view>
+                    </view>
+                </swiper-item>
+                <swiper-item class="input-coupon">
+                    <input bindinput="codeInput" class="ben-input" placeholder="请输入优惠码" placeholderClass="place-holder" type="text"></input>
+                    <view class="checkout-coupoon-group-error" wx:if="{{couponCodeError}}">优惠码无效</view>
+                    <view bindtap="useCouponCode" class="coupoon-confirm">使用</view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+</view>
+<import src="/benUI/template/ben-doc-dialog.wxml"></import>
+<template is="doc-dialog" data="{{...sales_conditions}}"></template>
+<template is="doc-dialog" data="{{...privacy_policy}}"></template>
+<wxs module="Format">
+module.exports.format = ({
+    formatCouponDate: (function(str) {
+        var newStr = str.substring(0, 4) + "." + str.substring(4, 6) + "." + str.substring(6, 8) + " " + str.substring(8, 10) + ":" + str.substring(10, 12);
+        return (newStr)
+    }),
+});
+</wxs>
+<wxs module="format" src="../../benUI/wxs/ben_format.wxs" />

@@ -1,0 +1,69 @@
+<ben-headBar isHome title="ROTHY'S"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="wrap {{pageStatus.isIPX?'isIPX':''}}" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <image class="getgift-bg" mode="aspectFill" src="{{getGiftBg}}"></image>
+    <image class="getgift-bg-re" src="{{getGiftBgTwo}}"></image>
+    <view class="gift-bg">
+        <image class="gift" mode="aspectFit" src="{{image}}"></image>
+        <image class="gift-shadow" src="/static/images/plp_shadow.png"></image>
+    </view>
+    <view class="content">
+        <view class="box">
+            <view class="desc-box">
+                <view class="title">{{skuName}}</view>
+                <view>
+                    <text class="desc">尺码: {{size}}</text>
+                    <text wx:if="{{!!series}}"> 丨 颜色分类: {{series}}</text>
+                    <text class="num">数量:{{count}}</text>
+                </view>
+            </view>
+            <view class="pro-freebie" wx:for="{{giftList}}">
+                <view class="txt">
+                    <text class="tag">赠品</text>{{item.skuName}}</view>
+            </view>
+            <view class="form-desc">
+                <view class="desc">收货信息(请务必完整准确填写)</view>
+                <view catchtap="getLocaltion">
+                    <text class="icon-font icon-wechat"></text>
+                    <text class="local">使用微信地址</text>
+                </view>
+            </view>
+            <view class="form">
+                <view class="input-group">
+                    <form reportSubmit bind:submit="userSubmit">
+                        <button class="form_button" formType="submit">
+                            <input bindinput="username" class="input" placeholder="收货人姓名" type="text" value="{{username}}"></input>
+                        </button>
+                    </form>
+                </view>
+                <view class="input-group">
+                    <input bindblur="phoneBlur" bindinput="phone" class="input" maxlength="11" placeholder="手机号码" type="text" value="{{phone}}"></input>
+                </view>
+                <view class="input-group">
+                    <picker bindchange="bindRegionChange" class="input" customItem="{{customItem}}" mode="region" value="{{region}}">
+                        <view class="picker">
+                            <view class="ben-flex-col picker-txt">
+								{{region[0]}}/{{region[1]}}/{{region[2]}}
+							</view>
+                            <text class="icon-font icon-arrow_down"></text>
+                        </view>
+                    </picker>
+                </view>
+                <view class="input-group">
+                    <textarea bindinput="getTextarea" class="textarea" maxlength="50" name="textarea" placeholder="详细地址" value="{{textarea}}"></textarea>
+                </view>
+                <viwe class="advance-tips" wx:if="{{advanceTipsShow}}">
+                    <view class="tips-txt">{{advanceTips}}</view>
+                </viwe>
+            </view>
+        </view>
+    </view>
+    <view class="ben-fixed-bottom btn-box {{pageStatus.isIPX?'isIPX':''}}">
+        <view wx:if="{{btnFlag}}">
+            <form reportSubmit bind:submit="submit">
+                <button class="btn btn-green" formType="submit">确认领取</button>
+            </form>
+        </view>
+        <view class="btn btn-ccc" wx:else>确认领取</view>
+    </view>
+</view>

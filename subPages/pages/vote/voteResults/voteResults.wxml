@@ -1,0 +1,94 @@
+<ben-headBar noBack="{{noBack}}" title="投票结果"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}} voteResults-wrap" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="vote-banner-w">
+        <image mode="widthFix" src="{{bannerImgUrl}}"></image>
+        <view catch:tap="showRule" class="rule-w" wx:if="{{!!ruleUrl}}">
+            <text class="txt">投票规则</text>
+        </view>
+        <view class="contact-w">
+            <button class="contact-btn" hoverClass="none" openType="contact">
+                <text class="icon-font icon-service"></text>
+            </button>
+        </view>
+        <view class="share-btn-w">
+            <button bindtap="showShareMask" class="share-btn" hoverClass="none">
+                <text class="icon-font icon-share"></text>
+            </button>
+        </view>
+    </view>
+    <view class="vote-title">
+        <view class="over" wx:if="{{isOver}}">投票活动已结束</view>
+        <view class="title" wx:else>票数排行</view>
+    </view>
+    <view class="vote-rank-list">
+        <view class="ben-flex-row rank-item-w" wx:for="{{voteItems}}" wx:key="index">
+            <view class="img-w">
+                <image class="product-img" mode="widthFix" src="{{item.imgUrl}}"></image>
+                <view class="rank-top"></view>
+                <view class="top-txt">{{index+1}}</view>
+            </view>
+            <view class="ben-flex-col info-w">
+                <view class="product-title-w">
+                    <view class="product-title">{{item.title}}</view>
+                    <view class="checked-tag" wx:if="{{item.checked&&!!openid}}">已选</view>
+                </view>
+                <view class="product-color">{{item.colorTxt}}</view>
+                <view class="vote-num-w">
+                    <view class="ben-flex-row results-num-w">
+                        <view class="num">{{item.sum}}票</view>
+                        <view class="percent">{{format.getPercent(item.sum,allSum)}}%</view>
+                    </view>
+                    <progress backgroundColor="#DDDDDD" borderRadius="4rpx" class="vote-progress" color="#092DC5" percent="{{format.getPercent(item.sum,allSum)}}" strokeWidth="6rpx"></progress>
+                </view>
+            </view>
+        </view>
+    </view>
+    <canvas canvasId="{{canvas.id}}" style="width:{{canvas.width}}px; height: {{canvas.height}}px;position:absolute;top:-100000px;background:#E8E8E8"></canvas>
+    <view class="share-card-con {{cardShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{cardShow}}">
+        <view bindtap="shareSaveCancel" class="bg-mask"></view>
+        <view class="white-bg">
+            <button bindopensetting="saveShareCard" class="save-share-card {{isIPX?'cps-margin':''}}" openType="openSetting" wx:if="{{noAuthor}}">
+                <text class="icon-font icon-save"></text>保存图片到相册</button>
+            <button bindtap="getSetting" class="save-share-card {{isIPX?'cps-margin':''}}" wx:if="{{!noAuthor}}">
+                <text class="icon-font icon-save"></text>保存图片到相册</button>
+            <image class="{{isIPX?'cps-img-margin':''}}" src="{{shareCardPath}}"></image>
+        </view>
+    </view>
+    <view class="pdp-share-con {{maskShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{maskShow}}">
+        <view bindtap="cancelShare" class="bg-mask"></view>
+        <view class="share-btn-con">
+            <view class="share-btn">
+                <button bindtap="onShareAppMessage" class="btn-con" hoverClass="none" openType="share">
+                    <text class="icon-font icon-wechat"></text>
+                    <view class="share-friend">分享好友</view>
+                </button>
+                <button bindtap="sharepdpCard" class="btn-con" hoverClass="none">
+                    <text class="icon-font icon-friendster"></text>
+                    <view class="share-space">分享海报</view>
+                </button>
+            </view>
+            <view bindtap="cancelShare" class="share-true">取消</view>
+        </view>
+    </view>
+</view>
+<ben-modal class="steps-modal-wrap" closeBtn="{{false}}" open="{{!!bOpenRule}}" width="{{670}}">
+    <scroll-view scrollY class="rule-scroll-w">
+        <image mode="widthFix" src="{{ruleUrl}}"></image>
+    </scroll-view>
+    <view slot="ben-modal-bottom-close">
+        <view class="icon-font icon-close modal-bottom-close"></view>
+    </view>
+</ben-modal>
+<wxs module="format">
+module.exports = ({
+    getPercent: (function(sum, allSum) {
+        var percent = 0;
+        if (allSum > 0) {
+            percent = (sum / allSum) * 100;
+            percent = parseFloat(percent).toFixed(2)
+        };
+        return (percent)
+    }),
+});
+</wxs>

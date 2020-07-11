@@ -1,0 +1,85 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container .img-box {
+    position: relative;
+    width: 100vw;
+    min-height: 446rpx;
+    margin: 0 auto;
+}
+
+.container .img-box image {
+    width: 100%;
+}
+
+.container .img-box .price {
+    font-family: Publico Banner Light;
+    font-size: 64rpx;
+    color: #3E3D3E;
+    text-align: center;
+    padding: 38rpx 0 24rpx 0;
+}
+
+.container .img-box .price .symbol {
+    font-size: 24rpx;
+}
+
+.container .img-box .toast {
+    font-size: 24rpx;
+    color: #3E3D3E;
+    text-align: center;
+}
+
+.container .img-box .toast text {
+    display: block;
+    width: 100rpx;
+    margin: 0 auto;
+    padding-bottom: 54rpx;
+    border-bottom: 2rpx solid #C3C3C3;
+}
+
+.container .title {
+    font-size: 32rpx;
+    color: #3E3D3E;
+    padding-top: 74rpx;
+    text-align: center;
+}
+
+.container .title-sub {
+    font-size: 24rpx;
+    color: #A4A3A4;
+    line-height: 40rpx;
+    text-align: center;
+    padding: 52rpx 134rpx 102rpx;
+}
+
+.container .link {
+    display: inline-block;
+    padding: 20rpx 62rpx;
+    font-size: 24rpx;
+    color: #00BAFF;
+    line-height: 28rpx;
+    text-decoration: underline;
+}
+
+.container .btn {
+    width: 630rpx;
+    margin: 0 auto;
+    padding-bottom: 30rpx;
+}
+
+.container .fixed-btn {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 0 20rpx 20rpx;
+    background: white;
+}
+
+.container .fixed-btn .icon-gift {
+    font-size: 28rpx;
+}

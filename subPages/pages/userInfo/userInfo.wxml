@@ -1,0 +1,27 @@
+<import src="../../../benUI/template/ben-form.wxml"></import>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<ben-headBar isHome title="个人资料"></ben-headBar>
+<view class="page-con userInfo-wrap  {{pageStatus.isIPX?'userInfo-wrap-IPX isIPX':''}}">
+    <form reportSubmit bind:submit="_formSubmit" data-name="userInfoSubmit" data-submit="userInfoSubmit">
+        <template is="ben-input-group" data="{{...userName}}"></template>
+        <view class="gender-title">性别</view>
+        <view class="ben-flex-row gender-radio-group">
+            <view bind:tap="genderChange" class="ben-flex-row gender-radio-item {{gender=='01'?'active':''}}" data-name="Man">
+                <view class="label">
+                    <text class="icon-font {{gender=='01'?'icon-radio_selected':'icon-radio_default'}}"></text>
+                </view>男士
+            </view>
+            <view bind:tap="genderChange" class="ben-flex-row gender-radio-item {{gender=='02'?'active':''}}" data-name="lady">
+                <view class="label">
+                    <text class="icon-font {{gender=='02'?'icon-radio_selected':'icon-radio_default'}}"></text>
+                </view>女士
+            </view>
+        </view>
+        <template is="ben-date-picker" data="{{...birthday}}"></template>
+        <template is="ben-input-group" data="{{...userPhoneNumber}}"></template>
+        <template is="ben-input-group" data="{{...userEmail}}"></template>
+        <view class="userInfo-submit">
+            <template is="ben-btn-submit" data="{{...userInfoSubmit}}"></template>
+        </view>
+    </form>
+</view>

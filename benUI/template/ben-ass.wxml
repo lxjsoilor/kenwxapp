@@ -1,0 +1,121 @@
+<template name="ben-progress">
+    <view class="ben-progress-con {{name}}">
+        <view class="ben-progress-line ben-absolute-center">
+            <block wx:if="{{mode==='peg'}}">
+                <view class="ben-progress-marker {{pro_line.range(index,markers.length)}}" style="left:{{pro_line.peg( item,markers[markers.length-1] )}}%" wx:for="{{markers}}" wx:key="{{index}}">
+                    <text class="ben-progress-icon {{pro_line.icon(item,value)}}"></text>
+                    <text class="ben-progress-peg">{{item}}</text>
+                </view>
+                <progress active activeColor="{{color||'#000000'}}" percent="{{pro_line.peg( value,markers[markers.length-1] )}}" strokeWidth="2"></progress>
+            </block>
+            <view class="ben-progress-task" style="width:{{pro_line.percent(value,range)}}%;background-color: {{color||'#000000'}}" wx:else>
+                <view class="ben-progress-pos">{{value}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="ben-flex-row ">
+        <text>{{range[0]}}</text>
+        <text>{{range[1]}}</text>
+    </view>
+</template>
+<template name="ben-steps">
+    <view class="ben-steps-con {{!decoration||decoration=='x'?'ben-steps-x ben-flex-row':'ben-steps-y ben-flex-col'}}">
+        <block wx:if="{{!decoration||decoration=='x'}}">
+            <view class="ben-step {{steps_fn.status(index,current)}} {{steps_fn.index(index,list.length)}}" style="width: {{100/(list.length-1)}}%" wx:if="{{list.length}}" wx:for="{{list}}" wx:for-item="step" wx:key="{{ index }}">
+                <view class="ben-step-cell">
+                    <view class="ben-step-title">{{step.title||step.remark}}</view>
+                    <view class="ben-step-desc">{{step.desc||step.createTime}}</view>
+                </view>
+                <view class="ben-step-point {{steps_fn.icon(index,current)}}"></view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="ben-step ben-flex-row {{steps_fn.index(index,list.length)}}" style="justify-content: flex-start;" wx:if="{{list.length}}" wx:for="{{list}}" wx:for-item="step" wx:key="{{ index }}">
+                <view class="ben-step-point ben-flex-row {{steps_fn.icon(index,current)}}"></view>
+                <view class="ben-step-cell">
+                    <view class="ben-step-title">{{step.title||step.remark}}</view>
+                    <view class="ben-step-desc">{{step.desc||step.createTime}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>
+<template name="doc-dialog">
+    <view class="mask" wx:if="{{open}}">
+        <view bindtap="_doc_dialog_close" class="doc-close-mask" data-name="{{name}}"></view>
+        <view class="doc-dialog-con">
+            <view bindtap="_doc_dialog_close" class="close" data-name="{{name}}">
+                <view class="icon icon-font icon-close"></view>
+            </view>
+            <view class="title">{{title}}</view>
+            <view class="txt">
+                <scroll-view scrollY style="max-height: 756rpx;">
+                    <view wx:if="{{content}}" wx:for="{{content}}" wx:key="{{index}}">{{item}}</view>
+                    <view class="detailContent" wx:if="{{detailContent}}">
+                        <view class="detailContentBox" wx:if="{{detailContent}}" wx:for="{{detailContent}}" wx:key="{{index}}">
+                            <view class="middleTittle {{item.middleTittle.color=='black'?'black':'red'}}">{{item.middleTittle.text}}</view>
+                            <view class="contentInfo" wx:for="{{item.contentInfo}}" wx:key="index">
+                                <view class="smallTittle">
+                                    <text class="icon" wx:if="{{item.smallTittle.icon}}">{{item.smallTittle.icon}}</text>{{item.smallTittle.text}}</view>
+                                <view class="contentDes">
+                                    <view class="contentDesLi {{item==''?'padding-b':''}}" wx:for="{{item.contentDes}}" wx:key="index">{{item}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="ben-action">
+    <view bind:tap="_open_ben_action" class="ben-row" data-name="{{name}}">{{text}}</view>
+    <view hidden="{{!open}}">
+        <view bind:tap="{{cancel.onTap}}" class="ben-mask ben-fixed-top" data-name="{{name}}"></view>
+        <view class="ben-action-con {{name}} {{open?'show':'hide'}}">
+            <view bind:tap="{{item.onTap}}" class="ben-action-btn" wx:for="{{btn}}" wx:key="{{index}}">{{item.text}}</view>
+            <view bind:tap="{{cancel.onTap}}" class="ben-action-close" data-name="{{name}}">{{cancel.text}}</view>
+        </view>
+    </view>
+</template>
+<wxs module="steps_fn">
+module.exports = ({
+    index: (function(index, len) {
+        var len = len - 1;
+        switch (index) {
+            case 0:
+                return ('first');
+                break;
+            case len:
+                return ('last');
+                break;
+            default:
+                return ('');
+                break;
+        }
+    }),
+    status: (function(index, current) {
+        return (index < current ? 'done' : (index == current ? 'cur' : ''))
+    }),
+    icon: (function(index, current) {
+        return (index < current ? 'icon-font icon-radio_default' : 'icon-font icon-radio_default')
+    }),
+});
+</wxs>
+<wxs module="pro_line">
+module.exports = ({
+    peg: (function(cur, max) {
+        return ((cur * 100 / max))
+    }),
+    icon: (function(cur, value) {
+        return (cur <= value ? 'icon-font icon-clock reach' : '')
+    }),
+    range: (function(index, length) {
+        return (index === 0 ? 'first' : (index === length ? 'last' : ''))
+    }),
+    percent: (function(value, range) {
+        var percent_val = value / (range[(1)] - range[(0)]) * 100;
+        return (percent_val)
+    }),
+});
+</wxs>

@@ -1,0 +1,61 @@
+<import src="/benUI/template/load-more.wxml"></import>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<ben-headBar noHome title="搜索"></ben-headBar>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}}" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="search-nav" style="top:{{statusBarHeight+header_height}}px">
+        <view class="search-wrap">
+            <text class="icon-font icon-search"></text>
+            <input bindblur="onSearchBlur" bindconfirm="onSearchSubmit" bindfocus="onSearchFocus" bindinput="onSearchInput" class="search-input" confirmType="search" focus="{{focus}}" placeholder="{{searchHotList[0].hottext||searchHistory[0]}}" placeholderClass="search-placeholder" value="{{searchText}}" wx:if="{{focus}}"></input>
+            <view bind:tap="onFakeInputClick" class="search-input {{searchText?'':'search-placeholder'}}" wx:else>{{searchText||searchHotList[0].hottext||searchHistory[0]}}</view>
+        </view>
+        <view class="nav-wrap" wx:if="{{showResult&&itemList.length>0}}">
+            <view bind:tap="onNavItemClicked" class="nav-item {{navActiveIndex==index?'active':''}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{navs}}" wx:key="index">
+          {{item.label}}
+          <view class="trangle-wrap" wx:if="{{item.name=='sale_price'}}">
+                    <text class="trangle-up {{item.sort=='0'&&navs[navActiveIndex].name=='sale_price'?'active':''}}"></text>
+                    <text class="trangle-down {{item.sort=='1'&&navs[navActiveIndex].name=='sale_price'?'active':''}}"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="search-tip-wrap" wx:if="{{!showResult}}">
+        <block wx:if="{{searchHistory.length>0}}">
+            <view class="search-title-wrap">
+                <text class="title">历史搜索</text>
+                <text bind:tap="onSearchHistoryDelete" class="icon-font icon-delete"></text>
+            </view>
+            <view class="history-wrap">
+                <text bind:tap="onHotItemClicked" class="search-item" data-text="{{item}}" wx:for="{{searchHistory}}" wx:key="index">{{item}}</text>
+            </view>
+        </block>
+        <view class="search-title-wrap">
+            <text class="title">热门搜索</text>
+        </view>
+        <view class="search-items-wrap">
+            <text bind:tap="onHotItemClicked" class="search-item" data-text="{{item.hottext}}" wx:for="{{searchHotList}}" wx:key="index">{{item.hottext}}</text>
+        </view>
+    </view>
+    <view class="list-wrap" wx:else>
+        <view class="search-empty-wrap" wx:if="{{itemList.length===0&&pageStatus.loadStatus=='loaded'}}">
+            <view class="search-empty">
+                <text class="icon-font icon-search_empty"></text>
+                <view class="empty-title">抱歉，没有找到相关宝贝</view>
+            </view>
+            <view class="search-try-wrap">
+                <view class="search-try-title">搜索发现</view>
+                <view class="search-items-wrap">
+                    <text bind:tap="onHotItemClicked" class="search-item" data-text="{{item.hottext}}" wx:for="{{searchHotList}}" wx:key="index">{{item.hottext}}</text>
+                </view>
+            </view>
+        </view>
+        <view bind:tap="toPdpPage" class="product-wrap" data-spucode="{{item.spuCode}}" wx:for="{{itemList}}" wx:key="index">
+            <view class="tag-presell" wx:if="{{item.preOrder==0}}">预售</view>
+            <image class="image" mode="widthFix" src="{{item.images[0].src}}"></image>
+            <view class="title">{{item.title}}</view>
+            <view class="title">¥ {{format.currency(item.salePrice)}}</view>
+        </view>
+        <template is="ben-loading" data="{{loading:loading}}"></template>
+        <template is="no-more" data="{{list:itemList,loading:loading,isNoMore:isNoMore,noMoreConfig:noMoreConfig}}"></template>
+    </view>
+</view>
+<wxs module="format" src="../../benUI/wxs/ben_format.wxs" />

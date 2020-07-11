@@ -1,0 +1,59 @@
+var returnImgUrl = (function(image) {
+    let;
+    returnUrl = '';
+    if (image.indexOf('lifestyle') != -1 || image.indexOf('_1.png') != -1) {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_pad,h_620,w_495'
+    } else {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_fill,h_620,w_495'
+    };
+    return (returnUrl)
+});
+var returnPdpImgUrl = (function(image) {
+    let;
+    returnUrl = '';
+    if (image.indexOf('lifestyle') != -1 || image.indexOf('_1.png') != -1) {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_pad,h_750,w_750'
+    } else {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_fill,h_750,w_750'
+    };
+    return (returnUrl)
+});
+var returnSpImgUrl = (function(image) {
+    let;
+    returnUrl = '';
+    if (image.indexOf('lifestyle') != -1 || image.indexOf('_1.png') != -1) {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_pad,h_620,w_495'
+    } else {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_fill,h_620,w_495'
+    };
+    return (returnUrl)
+});
+var returnPdpMiniImgUrl = (function(image) {
+    console.log('image---\x3e', image);
+    let;
+    returnUrl = '';
+    if (image.indexOf('lifestyle') != -1 || image.indexOf('_1.png') != -1) {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_pad,h_320,w_252'
+    } else {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_fill,h_320,w_252'
+    };
+    return (returnUrl)
+});
+var returnCkMiniImgUrl = (function(image) {
+    console.log('image---\x3e', image);
+    let;
+    returnUrl = '';
+    if (image.indexOf('lifestyle') != -1 || image.indexOf('_1.png') != -1) {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_pad,h_308,w_246'
+    } else {
+        returnUrl = image + '?x-oss-process\x3dimage/resize,m_fill,h_308,w_246'
+    };
+    return (returnUrl)
+});
+module.exports = ({
+    returnImgUrl: returnImgUrl,
+    returnPdpImgUrl: returnPdpImgUrl,
+    returnSpImgUrl: returnSpImgUrl,
+    returnPdpMiniImgUrl: returnPdpMiniImgUrl,
+    returnCkMiniImgUrl: returnCkMiniImgUrl,
+});

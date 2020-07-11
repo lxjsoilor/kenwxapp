@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "支付失败",
+    "usingComponents": {
+        "ben-headBar": "../../../../benUI/components/ben-headBar/ben-headBar"
+    }
+}

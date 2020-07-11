@@ -1,0 +1,211 @@
+<import src="/benUI/template/load-more.wxml"></import>
+<import src="/benUI/template/ben-ass.wxml"></import>
+<ben-headBar isHome="{{!isMsg}}" noBack="{{isMsg}}" title="我的订单"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{isIPX?'isIPX':''}} orderDetail-wrap" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="ben-flex-row detail-top-wrap">
+        <view class="top-icon-w" wx:if="{{bGift||bTeam}}">
+            <text class="icon-font icon-gift" wx:if="{{bGift}}"></text>
+            <text class="icon-font icon-pintuan" wx:if="{{bTeam}}"></text>
+        </view>
+        <view class="ben-flex-col top-data-wrap">
+            <view class="order-status-txt">{{iStatusData.title}}</view>
+            <view class="order-status-desc time" wx:if="{{iStatusData.bShowTime}}">
+               {{stTimeTxt}}
+            </view>
+            <view class="order-status-desc" wx:if="{{!!iStatusData.desc}}">{{iStatusData.desc}} <text>
+ {{iStatusData.stTitleBottomDesc}}</text>
+            </view>
+        </view>
+        <view class="top-btn-wrap" wx:if="{{iStatusData.bshowCancelBtn}}">
+            <button bindtap="fnCancel" class="ben-btn-default-sub">取消订单</button>
+        </view>
+    </view>
+    <view bindtap="showStepsView" class="ben-flex-row showStep-wrap" wx:if="{{iStatusData.bShowStepsBtn}}">
+        <view class="left-wrap">
+            <text class="icon-font icon-sended"></text>
+        </view>
+        <view class="center-wrap">物流详情</view>
+        <view class="right-wrap">
+            <text class="icon-font icon-arrow_right"></text>
+        </view>
+    </view>
+    <view class="space-line" wx:if="{{iStatusData.bShowStepsBtn}}"></view>
+    <view class="ben-flex-col user-info-wrap">
+        <block wx:if="{{bGift}}">
+            <view class="ben-flex-row user-info-top" wx:if="{{iAddress.bNoHasAddress}}">
+                <view class="top-icon-w">
+                    <text class="icon-font icon-address"></text>
+                </view>
+                <view class="top-data-w">
+                    <text class="data-name">收货地址将由您赠送的好友填写</text>
+                </view>
+            </view>
+            <block wx:else>
+                <view class="ben-flex-row user-info-top">
+                    <view class="top-icon-w">
+                        <text class="icon-font icon-address"></text>
+                    </view>
+                    <view class="top-data-w">
+                        <text class="data-name">{{filter.pinName(iAddress.name)}}</text>
+                        <text class="data-phone">{{filter.pinPhone(iAddress.mobile)}}</text>
+                    </view>
+                </view>
+                <view class="user-info-address-w">
+                    <view class="address-top">{{iAddress.province}} {{iAddress.city}} {{iAddress.district}}</view>
+                </view>
+            </block>
+        </block>
+        <block wx:else>
+            <view class="ben-flex-row user-info-top">
+                <view class="top-icon-w">
+                    <text class="icon-font icon-address"></text>
+                </view>
+                <view class="top-data-w">
+                    <text class="data-name">{{iAddress.name}}</text>
+                    <text class="data-phone">{{iAddress.mobile}}</text>
+                </view>
+            </view>
+            <view class="user-info-address-w">
+                <view class="address-top">{{iAddress.province}} {{iAddress.city}} {{iAddress.district}}</view>
+                <view class="address-bottom">{{iAddress.address}}</view>
+            </view>
+        </block>
+    </view>
+    <view class="space-line"></view>
+    <ben-modal class="steps-modal-wrap" closeBtn="{{false}}" open="{{!!bOpenSteps}}" width="{{670}}">
+        <view class="order-steps-box">
+            <view class="ben-flex-row step-top">
+                <view class="top-icon-wrap">
+                    <text class="icon-font icon-wuliu"></text>
+                </view>
+                <view class="ben-flex-col top-text-wrap">
+                    <view>物流跟踪</view>
+                    <view>{{iExpress.companyName}}: {{iExpress.expressCode}}</view>
+                </view>
+            </view>
+        </view>
+        <scroll-view scrollY class="steps-scroll-w">
+            <template is="ben-steps" data="{{...y_steps}}" wx:if="{{iExpress.bShowExpressList}}"></template>
+            <view class="express-noData" wx:else>暂无相关物流信息</view>
+        </scroll-view>
+        <view class="steps-mask"></view>
+        <view slot="ben-modal-bottom-close">
+            <view class="icon-font icon-close modal-bottom-close"></view>
+        </view>
+    </ben-modal>
+    <view class="goods-info-wrap">
+        <block wx:for="{{goodsList}}" wx:key="index">
+            <view class="freebie-item" wx:if="{{item.isGift==1}}">
+                <view class="left">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.imgUrl}}"></image>
+                    </view>
+                    <view class="freebie">
+                        <view class="txt">
+                            <text class="tag">赠品</text>{{item.goodsName}}</view>
+                    </view>
+                </view>
+                <view class="num">x {{item.count}}</view>
+            </view>
+            <view class="ben-flex-row goods-wrap" wx:else>
+                <view class="goods-img-w">
+                    <image class="" src="{{item.imgUrl}}"></image>
+                </view>
+                <view class="ben-flex-col goods-info">
+                    <view class="ben-overflow-ellips goods-name">{{item.goodsName}}</view>
+                    <view class="advance" wx:if="{{item.isAdvance}}">预售</view>
+                    <view class="goods-size">
+                        <text>尺码: {{item.size}}</text>
+                        <text wx:if="{{!!item.series}}"> 丨 颜色分类: {{item.series}}</text>
+                    </view>
+                    <view class="good-price-w">
+                        <text class="goods-price">￥{{item.csellPrice}}</text>
+                        <text class="goods-num">x {{item.count}}</text>
+                    </view>
+                </view>
+                <view class="space-line"></view>
+            </view>
+        </block>
+    </view>
+    <view class="space-line"></view>
+    <view class="goods-total-wrap">
+        <view class="ben-flex-col num-wrap">
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">商品数量</view>
+                <view class="item-right">{{iOrderMonetInfo.nTotalNum}}</view>
+            </view>
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">商品金额</view>
+                <view class="item-right">￥{{iOrderMonetInfo.nProductAmount}}</view>
+            </view>
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">优惠</view>
+                <view class="item-right" style="color: {{iOrderMonetInfo.nCoupon>0?'red':''}}">-￥{{iOrderMonetInfo.nCoupon}}</view>
+            </view>
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">运费</view>
+                <view class="item-right">￥{{iOrderMonetInfo.nFreight}}</view>
+            </view>
+        </view>
+        <view class="ben-flex-row total-price-wrap">
+            <view class="item-left">商品总计</view>
+            <view class="item-right">￥{{iOrderMonetInfo.nAmount}}</view>
+        </view>
+    </view>
+    <view class="space-line"></view>
+    <view class="goods-total-wrap space-margin" wx:if="{{iOpenInvoice.bShow}}">
+        <view class="ben-flex-col num-wrap">
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">发票类型</view>
+                <view class="item-right">{{iOpenInvoice.typeName}}</view>
+            </view>
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">发票抬头</view>
+                <view class="item-right">{{iOpenInvoice.title}}</view>
+            </view>
+            <view class="ben-flex-row item-wrap" wx:if="{{iOpenInvoice.isPersonInVoice=='0'}}">
+                <view class="item-left">纳税人识别号</view>
+                <view class="item-right">{{iOpenInvoice.taxCode}}</view>
+            </view>
+        </view>
+        <view bindtap="loadInvoice" class="ben-flex-row show-bill" wx:if="{{iOpenInvoice.bShowCheckInvoice}}">
+            <text>查看发票</text>
+        </view>
+    </view>
+    <view class="goods-total-wrap" wx:else>
+        <view class="ben-flex-col num-wrap">
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">发票类型</view>
+                <view class="item-right">不需要发票</view>
+            </view>
+        </view>
+    </view>
+    <view class="space-line"></view>
+    <view class="goods-total-wrap">
+        <view class="ben-flex-col num-wrap">
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">订单号</view>
+                <view class="item-right">
+                    <text selectable="true">{{stOrderId}}</text>
+                </view>
+            </view>
+            <view class="ben-flex-row item-wrap">
+                <view class="item-left">下单时间</view>
+                <view class="item-right">{{stOrderDate}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="space-line"></view>
+    <view class="orderDetail-btn-wrap" wx:if="{{bShowBtnWrap}}">
+        <button bindtap="confirmOrder" class="ben-btn ben-btn-primary" wx:if="{{bShowPayBtn}}">微信支付</button>
+        <button class="ben-btn ben-btn-primary" data-id="gift" hoverClass="none" openType="share" wx:if="{{bShowGiveBtn}}">
+            <text class="icon-font icon-gift"></text>赠予好友</button>
+        <button bindtap="go_to_groupDetail" class="ben-btn ben-btn-primary" data-id="invite" wx:if="{{bShowInviteBtn}}">邀请闺蜜组团</button>
+        <button bindtap="go_to_groupDetail" class="ben-btn ben-btn-primary" wx:if="{{bShowTeamDetail}}">查看团详情</button>
+    </view>
+</view>
+<ben-modal custom maskClose bindonCancel="cancelDel" bindonEnsure="ensureDel" btnText="{{['确认','取消']}}" closeBtn="{{false}}" open="{{modalOpen}}" width="630">
+    <view class="modal-con">确定取消订单？</view>
+</ben-modal>
+<wxs module="filter" src="order.wxs" />

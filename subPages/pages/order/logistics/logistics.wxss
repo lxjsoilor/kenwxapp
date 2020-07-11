@@ -1,0 +1,235 @@
+page {
+    background: #F2F2F2;
+}
+
+page .logistics-wrap {
+    margin: 0 20rpx;
+}
+
+page .logistics-wrap .express-num {
+    margin: 22rpx 0;
+    text-align: center;
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: #3e3d3e;
+    line-height: 17px;
+}
+
+page .logistics-wrap .express-list .express-item {
+    background: #FFFFFF;
+    border-radius: 6rpx;
+    padding: 0 32rpx;
+    margin-bottom: 20rpx;
+}
+
+page .logistics-wrap .express-list .express-item .express-name-w {
+    padding: 24rpx 0;
+    border-bottom: 2rpx solid #F2F2F2;
+}
+
+page .logistics-wrap .express-list .express-item .express-name-w .express-name {
+    height: 34rpx;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: #3E3D3E;
+    line-height: 34rpx;
+}
+
+page .logistics-wrap .express-list .express-item .express-name-w .express-status {
+    height: 34rpx;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: #092DC5;
+    line-height: 34rpx;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item {
+    display: flex;
+    padding: 40rpx 0rpx 40rpx 0;
+    justify-content: space-between;
+    border-bottom: 2rpx solid #F2F2F2;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item .left {
+    display: flex;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item .img {
+    width: 100rpx;
+    height: 100rpx;
+    display: block;
+    background-color: #E8E8E8;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item .img image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item .freebie {
+    display: flex;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item .freebie .tag {
+    height: 30rpx;
+    line-height: 26rpx;
+    font-size: 20rpx;
+    border-radius: 3px;
+    color: #092DC5;
+    padding: 0 6rpx;
+    border: 2rpx solid #092dc5;
+    box-sizing: border-box;
+    align-items: center;
+    margin-right: 6rpx;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item .freebie .txt {
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular,PingFangSC;
+    font-weight: 400;
+    color: #3e3d3e;
+    margin-top: -2rpx;
+    padding-left: 20rpx;
+    width: 440rpx;
+    line-height: 40rpx;
+}
+
+page .logistics-wrap .express-list .express-item .freebie-item .num {
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular,PingFangSC;
+    font-weight: 400;
+    color: #3e3d3e;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-img-w {
+    width: 160rpx;
+    height: 160rpx;
+    margin: 32rpx 0;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-img-w image {
+    width: 160rpx;
+    height: 160rpx;
+    background-color: #E8E8E8;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-info {
+    width: calc(100% - 190rpx);
+    height: 160rpx;
+    font-family: PingFangSC-Regular;
+    padding-right: 60rpx;
+    position: relative;
+    justify-content: flex-start;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-info .goods-name {
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-info .advance {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 24rpx;
+    color: #092DC5;
+    width: 48rpx;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-info .goods-size {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    line-height: 34rpx;
+    color: #A4A3A4;
+    letter-spacing: 0;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-info .good-price-w {
+    margin-top: 38rpx;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .goods-info .good-price-w .goods-num {
+    float: right;
+}
+
+page .logistics-wrap .express-list .express-item .goods-wrap .space-line {
+    height: 2rpx;
+    background-color: #F2F2F2;
+    width: 100%;
+}
+
+page .order-steps-box .step-top {
+    height: 178rpx;
+    background-color: #FFFFFF;
+}
+
+page .order-steps-box .step-top .top-icon-wrap {
+    width: 110rpx;
+    text-align: center;
+}
+
+page .order-steps-box .step-top .top-icon-wrap .icon-font {
+    font-size: 40rpx;
+}
+
+page .order-steps-box .step-top .top-text-wrap {
+    width: 560rpx;
+}
+
+page .steps-scroll-w {
+    max-height: 800rpx;
+}
+
+page .steps-scroll-w .express-noData {
+    background-color: #F7F7F7;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    padding: 60rpx 0;
+    color: #7E7D7E;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+page .close-steps-btn-wrap {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    z-index: 999;
+    bottom: -120rpx;
+    color: #FFFFFF;
+}
+
+page .close-steps-btn-wrap .icon-font {
+    font-size: 80rpx;
+}
+
+page .ben-step {
+    padding: 20rpx 0;
+}
+
+page .modal-con {
+    padding: 80rpx 0;
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 44rpx;
+}
+
+page .modal-bottom-close.icon-font {
+    font-size: 80rpx;
+    color: #FFFFFF;
+}

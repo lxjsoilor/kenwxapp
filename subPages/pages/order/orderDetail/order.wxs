@@ -1,0 +1,36 @@
+var pinName = (function(name) {
+    var nameArr = name.split('');
+    for (i = 0; i < nameArr.length; i++) {
+        if (i != 0) {
+            nameArr[((nt_0 = (i), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))] = '*'
+        }
+    };
+    return (nameArr.join(''))
+});
+var pinPhone = (function(phone) {
+    if (phone) {
+        var phoneArr = phone.split('');
+        for (i = 3; i < (phoneArr.length - 4); i++) {
+            phoneArr[((nt_1 = (i), null == nt_1 ? undefined : 'number' === typeof nt_1 ? nt_1 : "" + nt_1))] = '*'
+        };
+        return (phoneArr.join(''))
+    }
+});
+var pinTime = (function(time) {
+    var timeArr = time.split('');
+    let;
+    returnArr = [];
+    for (i = 0; i < (timeArr.length - 3); i++) {
+        console.log('timeArr---------\x3e', timeArr[((nt_2 = (i), null == nt_2 ? undefined : 'number' === typeof nt_2 ? nt_2 : "" + nt_2))] == '-');
+        if (timeArr[((nt_3 = (i), null == nt_3 ? undefined : 'number' === typeof nt_3 ? nt_3 : "" + nt_3))] == '-') {
+            timeArr[((nt_4 = (i), null == nt_4 ? undefined : 'number' === typeof nt_4 ? nt_4 : "" + nt_4))] = '.'
+        };
+        returnArr.push(timeArr[((nt_5 = (i), null == nt_5 ? undefined : 'number' === typeof nt_5 ? nt_5 : "" + nt_5))])
+    };
+    return (returnArr.join(''))
+});
+module.exports = ({
+    pinName: pinName,
+    pinPhone: pinPhone,
+    pinTime: pinTime,
+});

@@ -1,0 +1,30 @@
+<ben-headBar isHome title="支付成功"></ben-headBar>
+<view class="container {{isIPX?'isIPX':''}}">
+    <view class="cover">
+        <view class="img-box">
+            <image mode="widthFix" src="{{successImg}}"></image>
+            <view class="title">感谢您的购买</view>
+            <view class="price" wx:if="{{amount}}">
+                <text class="symbol">￥</text>
+                <text>{{format.currency(amount)}}</text>
+            </view>
+            <view class="toast">
+                <text>支付成功</text>
+            </view>
+        </view>
+        <view class="title-sub" wx:if="{{orderType=='gift'}}">
+            <text>现在您只需要发送给好友填写收货信息，
+即可完成交易。若48小时仍未送出礼物，订单将会自动取消。
+</text>
+        </view>
+        <view class="title-sub" wx:else>订单#<text bind:tap="finished">{{orderId}}</text>的相关信息将通过微信服务通知发送给您，敬请查收。</view>
+    </view>
+    <view class="fixed-btn" wx:if="{{orderType=='gift'}}">
+        <button class="ben-btn-primary" openType="share">
+            <text class="icon-font icon-gift"></text> 赠予好友</button>
+    </view>
+    <view class="btn" wx:else>
+        <button bind:tap="goHome" class="ben-btn-primary">返回首页</button>
+    </view>
+</view>
+<wxs module="format" src="../../../../benUI/wxs/ben_format.wxs" />

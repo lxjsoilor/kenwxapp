@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+.page-con {
+    position: relative;
+    padding-top: 80rpx;
+    overflow: auto;
+}
+
+.page-con .nav-wrap {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    width: 100%;
+    height: 80rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    padding: 0 76rpx;
+    box-shadow: 0px 4rpx 16rpx 0px rgba(0,0,0,0.05);
+    z-index: 9;
+}
+
+.page-con .nav-wrap .nav-item {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 200rpx;
+}
+
+.page-con .nav-wrap .active {
+    color: #092DC5;
+}
+
+.page-con .nav-wrap .trangle-wrap {
+    margin-left: 18rpx;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-con .nav-wrap .trangle-up {
+    width: 0;
+    height: 0;
+    border-width: 8rpx;
+    border-style: solid;
+    border-color: transparent transparent #CCCCCC transparent;
+    margin-bottom: 4rpx;
+}
+
+.page-con .nav-wrap .trangle-down {
+    width: 0;
+    height: 0;
+    border-width: 8rpx;
+    border-style: solid;
+    border-color: #CCCCCC transparent transparent transparent;
+}
+
+.page-con .nav-wrap .trangle-up.active {
+    border-color: transparent transparent #092DC5 transparent;
+}
+
+.page-con .nav-wrap .trangle-down.active {
+    border-color: #092DC5 transparent transparent transparent;
+}
+
+.page-con .list-wrap {
+    padding: 20rpx;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.page-con .product-wrap {
+    display: inline-block;
+    background: #E8E8E8;
+    width: 348rpx;
+    height: 516rpx;
+    color: #3E3D3E;
+    text-align: center;
+    margin-bottom: 14rpx;
+    position: relative;
+}
+
+.page-con .product-wrap .tag-presell {
+    position: absolute;
+    left: 20rpx;
+    top: 20rpx;
+    width: 56rpx;
+    height: 32rpx;
+    background: #ffffff;
+    border-radius: 2rpx;
+    font-size: 20rpx;
+    color: #3E3D3E;
+    line-height: 32rpx;
+    text-align: center;
+}
+
+.page-con .product-wrap .image {
+    width: 348rpx;
+    height: 348rpx;
+}
+
+.page-con .product-wrap .title {
+    padding: 0 20rpx;
+    font-size: 24rpx;
+    margin-top: 20rpx;
+    margin-bottom: 16rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.page-con .product-wrap .price {
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+
+.no-more-con {
+    background: rgba(0,0,0,0)!important;
+}
+
+.no-more-con .no-more-msg {
+    background: rgba(0,0,0,0)!important;
+}
+
+.no-more-con .no-more-msg::before {
+    display: none;
+}

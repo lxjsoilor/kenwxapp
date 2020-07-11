@@ -1,0 +1,24 @@
+<ben-headBar title="活动预约"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}} bookSuccess-wrap" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="BS-banner-w">
+        <image mode="widthFix" src="{{bannerImgUrl}}"></image>
+    </view>
+    <view class="BS-title">
+        <view class="title">恭喜你，预约成功</view>
+        <view class="tips">感谢您的参与</view>
+    </view>
+    <viwe class="BS-tips">
+        <view class="tips-item">
+            <view class="item-title">预约时间</view>
+            <view class="item-data">{{date}}</view>
+        </view>
+        <view class="tips-item">
+            <view class="item-title">活动地址</view>
+            <view class="item-data">{{address}}</view>
+        </view>
+    </viwe>
+    <view class="btn-w">
+        <button catch:tap="go_to_index" class="ben-btn ben-btn-primary ben-btn-large goHome-btn" hoverClass="none">返回首页</button>
+    </view>
+</view>

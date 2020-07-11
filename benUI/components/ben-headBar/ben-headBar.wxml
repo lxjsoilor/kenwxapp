@@ -1,0 +1,15 @@
+<view class="ben-headBar-con ben-fixed-top">
+    <view class="ben-custom-statusBar" style="height:{{statusBarHeight}}px"></view>
+    <view class="ben-headBar ben-flex-row" style="height:{{header_height}}px;">
+        <view class="ben-headBar-btns ben-flex-row">
+            <view catch:tap="_page_go_back" class="icon-font icon-arrow_left" wx:if="{{!noBack}}"></view>
+            <view catch:tap="_page_go_home" class="icon-font icon-tabBar_home" wx:if="{{!isHome}}"></view>
+            <view catch:tap="_page_go_search" class="icon-font icon-search" wx:if="{{isSearch}}"></view>
+        </view>
+        <view class="ben-headBar-title">
+            <block wx:if="{{title}}">{{title}}</block>
+            <slot name="title" wx:else></slot>
+        </view>
+    </view>
+</view>
+<view style="height:{{statusBarHeight+header_height}}px"></view>

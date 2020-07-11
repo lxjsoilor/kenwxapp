@@ -1,0 +1,143 @@
+<template name="ben-btn-reset">
+    <button bind:tap="_resetForm" class="" data-keys="{{keys}}" data-name="{{name}}" disabled="{{state.disabled}}" formType="reset" loading="{{state.disabled}}">
+    {{text}}
+  </button>
+</template>
+<template name="ben-noLoading-btn-submit">
+    <button class="ben-btn ben-btn-primary" disabled="{{state.disabled}}" formType="submit">{{text}}</button>
+</template>
+<template name="ben-btn-submit">
+    <button class="ben-btn ben-btn-primary" disabled="{{state.disabled}}" formType="submit" loading="{{state.disabled}}">{{text}}</button>
+</template>
+<template name="ben-mutiPicker-group">
+    <input hidden name="{{name}}" value="{{value}}"></input>
+    <view class="ben-form-group picker {{name}} {{!!error?'error':''}}">
+        <view class="ben-form-label" wx:if="{{label}}">
+      {{label}}
+    </view>
+        <picker bind:change="_onMutiPickerChange" bindcolumnchange="_onMutiPickerColumnChange" data-name="{{name}}" mode="multiSelector" range="{{list}}" rangeKey="{{keyMap.text}}" value="{{data.index}}">
+            <view class="ben-input-group ben-flex-row">
+                <view class="ben-input">
+                    <text wx:if="{{text}}">{{text}}</text>
+                    <text class="ben-picker-placeholder" wx:else>{{placeholder}}</text>
+                </view>
+                <view class="icon-font {{icon}}" wx:if="{{icon}}"></view>
+            </view>
+        </picker>
+        <view class="error-message" hidden="{{!error}}" wx:if="{{required}}">{{validDec.required||'必选'}}</view>
+    </view>
+</template>
+<template name="ben-date-picker">
+    <input hidden name="{{name}}" value="{{value}}"></input>
+    <view class="ben-form-group picker {{name}} {{!!error?'error':''}}">
+        <view class="ben-form-label" wx:if="{{label}}">
+      {{label}}
+      <text class="error-message" hidden="{{!error}}" wx:if="{{required}}">{{validDec.required||'必选'}}</text>
+        </view>
+        <picker bindcancel="_date_picker_on_cancel" bindchange="_date_picker_on_change" data-name="{{name}}" end="{{endDate||''}}" mode="date" value="{{value}}">
+            <view class="ben-input-group ben-flex-row">
+                <view class="ben-input">
+                    <text wx:if="{{value}}">{{value}}</text>
+                    <text class="ben-picker-placeholder" wx:else>{{placeholder}}</text>
+                </view>
+                <view class="icon-font {{icon}}" wx:if="{{icon}}"></view>
+            </view>
+        </picker>
+    </view>
+</template>
+<template name="ben-region-picker">
+    <input hidden name="{{name}}" value="{{value}}"></input>
+    <view class="ben-form-group picker {{name}} {{!!error?'error':''}}">
+        <view class="ben-form-label" wx:if="{{label}}">
+      {{label}}
+      
+    </view>
+        <picker bindcancel="_region_on_cancel" bindchange="region_on_change" data-name="{{name}}" mode="region" value="{{value}}">
+            <view class="ben-input-group ben-flex-row">
+                <view class="ben-input picker" wx:if="{{value}}">{{text}}</view>
+                <view class="ben-picker-placeholder" wx:else>{{placeholder}}</view>
+                <view class="icon-font {{icon}}" wx:if="{{icon}}"></view>
+            </view>
+        </picker>
+        <view class="error-message" hidden="{{!error}}" wx:if="{{required}}">{{validDec.required||'必选'}}</view>
+    </view>
+</template>
+<template name="ben-picker-group">
+    <input hidden name="{{name}}" value="{{keyMap?list[data.index][keyMap.value]:list[data.index]}}"></input>
+    <view class="ben-form-group picker {{name}}  {{!!error?'error':''}}">
+        <label class="ben-form-label" wx:if="{{label}}">
+      {{label}}
+      <text class="error-message" hidden="{{!error}}" wx:if="{{required}}">{{validDec.required||'必选'}}</text>
+        </label>
+        <picker bind:change="{{keyMap?'_onPickerChange':'_sim_picker_on_change'}}" data-name="{{name}}" range="{{list}}" rangeKey="{{keyMap?keyMap.text:null}}" value="{{data.index}}">
+            <view class="ben-input-group ben-flex-row">
+                <view class="ben-input ">
+                    <text wx:if="{{data.index!==null}}">{{keyMap?list[data.index][keyMap.text]:list[data.index]}}</text>
+                    <text class="ben-picker-placeholder" wx:else>{{placeholder}}</text>
+                </view>
+                <view class="icon-font {{icon}}" wx:if="{{icon}}"></view>
+            </view>
+        </picker>
+    </view>
+</template>
+<template name="ben-chosen-group">
+    <input hidden name="{{name}}" value="{{value}}"></input>
+    <view class="{{name}} ben-form-group chosen">
+        <view class="ben-form-label" wx:if="{{label}}">
+      {{label}}
+      <text class="error-message" hidden="{{!error}}" wx:if="{{required}}">{{validDec.required||'必选'}}</text>
+        </view>
+        <view class="ben-chosen-con ben-flex-row">
+            <view bindtap="_onChosenItem" class="chosen-item {{data.index===index?'checked':''}}" data-index="{{index}}" data-name="{{name}}" wx:if="{{type==='radio'}}" wx:for="{{list}}" wx:key="{{index}}">
+        {{item[keyMap.text]}}
+      </view>
+            <view bindtap="_onChosenItem" class="chosen-item {{item.checked?'checked':''}}" data-index="{{index}}" data-name="{{name}}" wx:if="{{type==='checkbox'}}" wx:for="{{list}}" wx:key="{{index}}">
+        {{item[keyMap.text]}}
+      </view>
+        </view>
+    </view>
+</template>
+<template name="ben-wx-switch">
+    <view class="ben-form-group switch ben-wx-switch {{mode}} {{name}}">
+        <view class="ben-switch ben-flex-row {{name}}" hidden="{{hidden}}">
+            <switch bindchange="_wx_switch_on_tap" checked="{{checked}}" class="ben-switch-checkbox" color="{{color}}" data-name="{{name}}" id="{{id||name}}" name="{{name}}" type="checkbox" wx:if="{{mode==='checkbox'}}"></switch>
+            <switch bindchange="_wx_switch_on_tap" checked="{{checked}}" class="ben-switch-default" color="{{color}}" data-name="{{name}}" id="{{id||name}}" name="{{name}}" wx:else></switch>
+            <label for="{{id||name}}">{{text}}</label>
+        </view>
+        <view class="error-message" hidden="{{!error}}" wx:if="{{required}}">{{validDec.required||'必选'}}</view>
+    </view>
+</template>
+<template name="ben-form-switch">
+    <input hidden name="{{name}}" value="{{checked?'111':''}}"></input>
+    <view class="ben-form-group switch ben-switch-{{mode||'bar'}} {{name}}" hidden="{{hidden}}">
+        <view catch:tap="_custom_switch_on_tap" class="ben-switch custom ben-flex-row {{checked?'checked':''}}" data-name="{{name}}">
+      {{text}}
+      <block wx:if="{{mode==='checkbox'}}">
+                <view class="ben-switch-icon icon-font {{checked?icon[1]:icon[0]}}" wx:if="{{icon}}"></view>
+                <view class="ben-switch-icon ben-flex-row" wx:else></view>
+            </block>
+            <view class="ben-switch-bar" wx:else></view>
+        </view>
+        <view class="error-message" hidden="{{!error}}" wx:if="{{required}}">{{validDec.required||'必选'}}</view>
+    </view>
+</template>
+<template name="ben-textarea-group">
+    <view class="ben-form-group {{name}} {{state.onfocus?'focus':''}} {{!!error?'error':''}}">
+        <label class="ben-form-label" for="name" wx:if="{{label}}">{{label}}</label>
+        <view class="ben-textarea-group ben-flex-row">
+            <textarea bindblur="_blurHandler" bindfocus="_focusHandler" bindinput="_inputHandler" class="ben-textarea" data-name="{{name}}" data-rule="{{rule}}" data-valid="{{valid}}" id="{{id}}" maxlength="{{maxlength||-1}}" name="{{name}}" placeholder="{{placeholder}}" placeholderClass="ben-placeholder" value="{{value}}"></textarea>
+        </view>
+        <view class="error-message" hidden="{{!error}}">{{error}}</view>
+    </view>
+</template>
+<template name="ben-input-group">
+    <view class="ben-form-group {{name}} {{state.onfocus?'focus':''}} {{!!error?'error':''}}">
+        <label class="ben-form-label" for="name" wx:if="{{label}}">{{label}}</label>
+        <view class="ben-input-group ben-flex-row">
+            <input bindblur="_blurHandler" bindfocus="_focusHandler" bindinput="_inputHandler" class="ben-input" data-name="{{name}}" data-rule="{{rule}}" data-valid="{{valid}}" id="{{id}}" maxlength="{{maxlength||-1}}" name="{{inputName||name}}" password="{{isPassword}}" placeholder="{{placeholder}}" placeholderClass="ben-placeholder" type="{{type}}" value="{{value}}"></input>
+            <view class="icon-font {{icon}}" wx:if="{{icon}}"></view>
+        </view>
+        <view class="error-message" hidden="{{!error}}">{{error}}</view>
+    </view>
+</template>
+<wxs module="format" src="../wxs/ben_format.wxs" />

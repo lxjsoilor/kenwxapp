@@ -1,0 +1,119 @@
+<ben-headBar isHome isSearch noBack title="购物袋"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}}" style="height: calc(100vh - {{statusBarHeight}}px - {{header_height}}px)" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="null" wx:if="{{ableItems.length==0&&disableItems.length==0}}">
+        <view class="icon-font icon-shoppingcart_null"></view>
+        <view class="title">您的购物袋还没有商品</view>
+        <view class="guang_btn">
+            <button bind:tap="toIndex" class="ben-btn-default ben-btn-middle">去逛逛</button>
+        </view>
+    </view>
+    <block wx:else>
+        <scroll-view>
+            <block wx:for="{{ableItems}}" wx:key="index">
+                <view class="product-li {{item.del?'del':''}}">
+                    <view bind:tap="itemSelect" class="checkBox" data-sku="{{item.skuId}}">
+                        <view class="icon-font icon-checkbox_selected" wx:if="{{item.selectStatus=='1'}}"></view>
+                        <view class="icon-font icon-checkbox_default" wx:else></view>
+                    </view>
+                    <view bind:tap="toPdp" class="product-img" data-spucode="{{item.spuCode}}">
+                        <image class="img" mode="aspectFit" src="{{item.images}}"></image>
+                    </view>
+                    <view class="product-info">
+                        <view bind:tap="toPdp" class="ben-overflow-ellips title" data-spucode="{{item.spuCode}}">{{item.title}}</view>
+                        <view class="attr">
+                            <text>尺码: {{item.size}}</text>
+                            <text wx:if="{{!!item.series}}"> 丨 颜色分类: {{item.series}}</text>
+                        </view>
+                        <view class="price">￥{{item.salePrice}}</view>
+                        <view class="num">
+                            <calculate-num bind:onChange="changeBuyCount" extend="{{item}}" maxNum="{{item.stock>5?5:item.stock}}" num="{{item.buyCount}}" position="shoppingCart"></calculate-num>
+                        </view>
+                    </view>
+                    <view class="shadow" wx:if="{{false}}"></view>
+                    <view bind:tap="itemDelete" class="del" data-count="{{item.buyCount}}" data-sku="{{item.skuId}}" data-spu="{{item.spuCode}}">
+                        <view class="icon-font icon-x"></view>
+                    </view>
+                    <view class="toast">
+                        <view class="advance" wx:if="{{item.preOrder==0}}">预售</view>
+                        <block wx:if="{{item.saleStatus==0}}">已下架</block>
+                        <block wx:elif="{{item.stock==0}}">马上回来</block>
+                        <block wx:if="{{item.saleStatus!=0&&item.stock>0&&item.stock<=stockShortNum}}">库存紧张</block>
+                    </view>
+                </view>
+                <block wx:if="{{item.rewardType=='06'&&item.gifts.length>0}}" wx:for="{{item.promotion}}">
+                    <view class="pro-freebie" wx:for="{{item.gifts}}" wx:for-item="giftitem">
+                        <view class="txt">
+                            <text class="tag">赠品</text>{{giftitem.title}}</view>
+                    </view>
+                </block>
+            </block>
+            <view class="product-li {{item.del?'del':''}}" wx:for="{{disableItems}}" wx:key="index">
+                <view bind:tap="itemSelect" class="checkBox" data-sku="{{item.skuId}}">
+                    <view class="icon-font icon-checkbox_default"></view>
+                </view>
+                <view class="product-img">
+                    <image class="img" mode="aspectFit" src="{{item.images}}"></image>
+                </view>
+                <view class="product-info">
+                    <view class="title">{{item.title}}</view>
+                    <view class="attr">尺码：{{item.salesProps[0].propName}}</view>
+                    <view class="price">￥{{item.salePrice}}</view>
+                    <view class="num">
+                        <calculate-num bind:onChange="changeBuyCount" extend="{{item}}" maxNum="{{item.stock>5?5:item.stock}}" num="{{item.buyCount}}" position="shoppingCart"></calculate-num>
+                    </view>
+                </view>
+                <view class="shadow" wx:if="{{true}}"></view>
+                <view bind:tap="itemDelete" class="del" data-sku="{{item.skuId}}" data-spu="{{item.spuCode}}">
+                    <view class="icon-font icon-x"></view>
+                </view>
+                <view class="toast">
+                    <block wx:if="{{item.saleStatus==0}}">已下架</block>
+                    <block wx:elif="{{item.stock==0}}">马上回来</block>
+                    <block wx:if="{{item.saleStatus!=0&&item.stock>0&&item.stock<=stockShortNum}}">库存紧张</block>
+                </view>
+            </view>
+            <block wx:if="{{item.rewardType=='06'&&item.gifts.length>0}}" wx:for="{{ablePromotion}}">
+                <view class="freebie-item" wx:for="{{item.gifts}}" wx:for-item="giftitem">
+                    <view class="left">
+                        <view class="img">
+                            <image mode="aspectFit" src="{{giftitem.images}}"></image>
+                        </view>
+                        <view class="freebie">
+                            <view class="txt">
+                                <text class="tag">赠品</text>{{giftitem.title}}</view>
+                        </view>
+                    </view>
+                    <view class="num">x {{giftitem.count}}</view>
+                </view>
+            </block>
+        </scroll-view>
+        <view class="foot ben-flex-row">
+            <view bind:tap="itemSelectAll" class="checkBox ben-flex-row">
+                <block wx:if="{{selectedCount==ableItems.length&&selectedCount}}">
+                    <view class="icon-font icon-checkbox_selected"></view>
+                    <view class="text">全选</view>
+                </block>
+                <block wx:else>
+                    <view class="icon-font icon-checkbox_default"></view>
+                    <view class="text">全选</view>
+                </block>
+            </view>
+            <view class="clearing ben-flex-row">
+                <view class="amount">
+                    <text class="text">合计:</text>
+                    <text class="num">￥{{totalAmount}}</text>
+                </view>
+                <view class="btn">
+                    <form reportSubmit bind:submit="itemCheckout">
+                        <button class="ben-btn-primary ben-btn-middle" disabled="{{!selectedCount}}" formType="submit">立即结算</button>
+                    </form>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<ben-tabBar cartNum="{{cartNum}}" tab="3" wx:if="{{pageStatus.loadStatus=='loaded'}}"></ben-tabBar>
+<ben-modal custom maskClose bindonCancel="cancelDel" bindonEnsure="ensureDel" btnText="{{['确认','取消']}}" closeBtn="{{false}}" open="{{modalOpen}}" width="630">
+    <view class="modal-con">确定删除商品？</view>
+</ben-modal>

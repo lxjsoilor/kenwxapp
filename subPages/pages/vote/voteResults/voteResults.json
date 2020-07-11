@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "投票结果",
+    "usingComponents": {
+        "ben-headBar": "../../../../benUI/components/ben-headBar/ben-headBar",
+        "ben-modal": "../../../../benUI/components/ben-modal/ben-modal",
+        "error-panel": "../../../../components/error-panel/error-panel"
+    }
+}

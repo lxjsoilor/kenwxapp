@@ -1,0 +1,78 @@
+<template name="getCouponSuccess">
+    <view animation="{{animationMaskData}}" class="mask">
+        <view animation="{{animationDialogData}}" class="suc-wrap">
+            <text class="icon-font icon-coupon1"></text>
+            <view class="title">恭喜你，领取成功</view>
+            <view class="subtitle">优惠券已发放到您的账户</view>
+            <button bind:tap="onUseCouponClick" class="ben-btn-primary use-btn">立即使用</button>
+        </view>
+        <view bind:tap="onMaskCloseClick" class="icon-font icon-close"></view>
+    </view>
+</template>
+<template name="bottomBtns">
+    <button bind:tap="onSubmitClick" class="ben-btn-primary enter-btn" wx:if="{{step==allLength}}">提交</button>
+    <view class="bot-btn-wrap">
+        <view bind:tap="onLastBtnClick" class="item" data-index="{{index}}">
+            <text class="icon-font icon-triangle_right last-icon"></text>上一题</view>
+        <view class="item num">{{step}}/{{allLength}}</view>
+        <view bind:tap="onNextBtnClick" class="item {{step==allLength?'visible':''}}" data-index="{{index}}" data-type="{{type}}">下一题<text class="icon-font icon-triangle_right"></text>
+        </view>
+    </view>
+</template>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<ben-headBar noHome noBack="true" title="问卷反馈"></ben-headBar>
+<view class="{{finish?'finish-con':'page-con'}}  {{isIPX?'isIPX':''}}" style="height: calc(100vh - {{header_height}}px - {{statusBarHeight}}px);" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <image class="finish-img" mode="widthFix" src="{{imgs.result}}" wx:if="{{finish}}"></image>
+    <image class="bg-img" mode="widthFix" src="{{imgs.bg}}" wx:else></image>
+    <view class="ques-finish" wx:if="{{finish}}">
+        <view class="finish-title">感谢您的协助</view>
+        <block wx:if="{{receiveStatus!='5'&&finish&&activityStatus!='-1'}}">
+            <view class="finish-subtitle">恭喜您获得 ROTHY’S <text wx:if="{{faceUnit=='01'}}">¥</text>{{faceValue}}<text wx:if="{{faceUnit=='02'}}">折</text>代金券，快去领取吧！</view>
+            <button bind:tap="onGetCouponClick" class="ben-btn-primary home-btn">领取奖励</button>
+        </block>
+        <button bind:tap="toHomePage" class="ben-btn-primary home-btn" wx:else>返回首页</button>
+    </view>
+    <view class="ques-con" wx:else>
+        <block wx:for="{{dataSource}}" wx:key="{{item.id}}">
+            <view hidden="{{step!=index}}" wx:if="{{item.type=='start'}}">
+                <image class="logo" mode="aspectFit" src="../../../static/images/logo02.png"></image>
+                <view class="title">{{item.title}}</view>
+                <button bind:tap="{{btnItem.tap}}" class="ben-btn-primary {{btnItem.class}}" wx:for="{{item.btns}}" wx:for-item="btnItem" wx:key="btn{{index}}">
+            {{btnItem.text}}
+          </button>
+            </view>
+            <view hidden="{{step!=index}}" wx:elif="{{item.type=='single'||item.type=='multiple'}}">
+                <view class="ques-header">
+                    <text class="ques-step">Q{{index}}</text>
+                    <text class="ques-type">{{item.type=='single'?'单选':'多选'}}</text>
+                </view>
+                <view class="ques-title">{{item.title}}</view>
+                <view class="ques-item-wrap">
+                    <view bind:tap="onSelectionClick" class="ques-item" data-index="{{index}}" data-listindex="{{listIndex}}" data-type="{{item.type}}" wx:for="{{item.list}}" wx:for-index="listIndex" wx:for-item="listItem" wx:key="{{listIndex}}">
+                        <text class="icon-font {{listItem.choosed?'icon-raidio_coupon_select':'icon-radio_default'}}"></text>
+              {{listItem.text}}
+            </view>
+                </view>
+                <template is="bottomBtns" data="{{index:index,step:step,type:item.type,allLength:dataSource.length-1}}"></template>
+            </view>
+            <view hidden="{{step!=index}}" wx:elif="{{item.type=='textarea'}}">
+                <view class="ques-header">
+                    <text class="ques-step">Q{{index}}</text>
+                </view>
+                <view class="ques-title ques-textarea-title">
+            {{item.title}}
+            <view class="ques-subtitle">（{{item.max}}字以内）</view>
+                </view>
+                <view class="ques-textarea">
+                    <textarea bindinput="onTextareaInput" data-index="{{index}}" maxlength="{{item.max}}"></textarea>
+                    <view class="tips">
+                        <text class="cur">{{item.size}}</text>
+              /{{item.max}}
+            </view>
+                </view>
+                <template is="bottomBtns" data="{{index:index,step:step,type:item.type,allLength:dataSource.length-1}}"></template>
+            </view>
+        </block>
+    </view>
+    <template is="getCouponSuccess" data="{{animationMaskData:animationMaskData,animationDialogData:animationDialogData}}" wx:if="{{showMask}}"></template>
+</view>

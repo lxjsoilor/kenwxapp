@@ -1,0 +1,33 @@
+.page-con {
+    padding-top: 170rpx;
+    text-align: center;
+}
+
+.page-con .icon-font {
+    font-size: 134rpx;
+    color: #7E7D7E;
+}
+
+.page-con .toast {
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #7E7D7E;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 40rpx;
+    margin-top: 34rpx;
+}
+
+.page-con .refresh {
+    width: 166rpx;
+    height: 64rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 64rpx;
+    margin: 66rpx auto;
+    border: 2rpx solid #A4A3A4;
+    border-radius: 6rpx;
+}

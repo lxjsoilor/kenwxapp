@@ -1,0 +1,22 @@
+<ben-headBar isHome title="支付失败"></ben-headBar>
+<view class="container {{isIPX?'isIPX':''}}">
+    <view class="cover">
+        <view class="img-box">
+            <image mode="widthFix" src="{{failedImg}}"></image>
+            <view class="title">支付遇到问题</view>
+            <view class="price" wx:if="{{amount}}">
+                <text class="symbol">￥</text>
+                <text>{{format.currency(amount)}}</text>
+            </view>
+            <view class="toast">
+                <text>交易失败</text>
+            </view>
+        </view>
+        <view class="title-sub">很抱歉，交易出现问题，您也可以去“我的订单”中重新支付。若30分钟内未完成交易，订单将会自动取消，请尽快完成支付。</view>
+    </view>
+    <view class="btn">
+        <button bind:tap="reBuy" class="ben-btn-primary">重新支付</button>
+        <button bind:tap="goHome" class="ben-btn-default">返回首页</button>
+    </view>
+</view>
+<wxs module="format" src="../../../../benUI/wxs/ben_format.wxs" />

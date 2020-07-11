@@ -1,0 +1,129 @@
+var calcuNumber = 99;
+var getSalePriceRange = (function(skuList) {
+    if (!skuList) {
+        return ('')
+    };
+    return (true)
+});
+var hasDelPrice = (function(listPriceRange, salePriceRange) {
+    if (!listPriceRange || !salePriceRange) {
+        return (false)
+    };
+    var flag = false;
+    if (listPriceRange.length > 1) {
+        if (salePriceRange.length > 1) {
+            flag = listPriceRange[(0)] >= salePriceRange[(0)] && listPriceRange[(1)] >= salePriceRange[(1)] && !(listPriceRange[(0)] == salePriceRange[(0)] && listPriceRange[(1)] == salePriceRange[(1)])
+        } else {
+            flag = listPriceRange[(0)] >= salePriceRange[(0)] && listPriceRange[(1)] > salePriceRange[(0)]
+        }
+    } else {
+        if (salePriceRange.length > 1) {
+            flag = listPriceRange[(0)] >= salePriceRange[(1)]
+        } else {
+            flag = listPriceRange[(0)] > salePriceRange[(0)]
+        }
+    };
+    return (flag)
+});
+var getPropSelected = (function(salesProps) {
+    var text = '';
+    if (salesProps && salesProps.length) {
+        for (var i = 0; i < salesProps.length; i++) {
+            var prop = salesProps[((nt_16 = (i), null == nt_16 ? undefined : 'number' === typeof nt_16 ? nt_16 : "" + nt_16))];
+            if (prop.valueSelected) {
+                text += (text ? '; ' : '') + prop.name + ': ' + prop.valueSelected.name
+            }
+        }
+    };
+    return (text)
+});
+var getPropNotic = (function(salesProps) {
+    var text = '';
+    if (salesProps && salesProps.length) {
+        for (var i = 0; i < salesProps.length; i++) {
+            var prop = salesProps[((nt_17 = (i), null == nt_17 ? undefined : 'number' === typeof nt_17 ? nt_17 : "" + nt_17))];
+            if (prop.valueSelected) {
+                text += (text ? '; ' : '已选: ') + prop.valueSelected.name
+            }
+        }
+    };
+    if (!text) {
+        text += '请选择: ';
+        var textUnList = [];
+        for (var i = 0; i < salesProps.length; i++) {
+            var prop = salesProps[((nt_18 = (i), null == nt_18 ? undefined : 'number' === typeof nt_18 ? nt_18 : "" + nt_18))];
+            if (!prop.valueSelected) {
+                textUnList.push(prop.name)
+            }
+        };
+        text += textUnList.join(',')
+    };
+    return (text)
+});
+var getStockNotic = (function(stock, skuSelected) {
+    if (!stock) {
+        return ('')
+    };
+    var text = '';
+    if (skuSelected) {
+        if (skuSelected.stock <= 10) {
+            text = '库存紧张'
+        }
+    };
+    return (text)
+});
+var getCountDownText = (function(res) {
+    if (!res) {
+        return ([])
+    };
+    var days = res.days || 0;
+    var hours = res.hours || 0;
+    var minutes = res.minutes || 0;
+    var seconds = res.seconds || 0;
+    var timeLimit = [];
+    if (days == 0 && hours == 0 && minutes == 0 && seconds == 0) {
+        timeLimit = []
+    } else {
+        if (days) {
+            timeLimit.push(({
+                num: days,
+                text: '天',
+            }))
+        };
+        if (days || hours) {
+            timeLimit.push(({
+                num: hours,
+                text: '小时',
+            }))
+        };
+        if (days || hours || minutes) {
+            timeLimit.push(({
+                num: minutes,
+                text: '分',
+            }))
+        };
+        if (days || hours || minutes || seconds) {
+            timeLimit.push(({
+                num: seconds,
+                text: '秒',
+            }))
+        }
+    };
+    return (timeLimit)
+});
+var getMaxStock = (function(stock, skuSelected, calcuNumber) {
+    if (skuSelected) {
+        return (skuSelected.stock > calcuNumber ? calcuNumber : skuSelected.stock)
+    } else {
+        return (stock > calcuNumber ? calcuNumber : stock)
+    }
+});
+module.exports = ({
+    getSalePriceRange: getSalePriceRange,
+    hasDelPrice: hasDelPrice,
+    getPropSelected: getPropSelected,
+    getPropNotic: getPropNotic,
+    getStockNotic: getStockNotic,
+    getCountDownText: getCountDownText,
+    getMaxStock: getMaxStock,
+});

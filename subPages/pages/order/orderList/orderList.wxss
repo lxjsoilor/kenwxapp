@@ -1,0 +1,291 @@
+.orderList-wrap {
+    width: 100%;
+    min-height: calc(100vh - 210rpx);
+    background-color: #F2F2F2;
+    position: relative;
+}
+
+.orderList-wrap .ben-fixed-top {
+    position: fixed;
+    width: 100%;
+    top: 117rpx;
+    height: 94rpx;
+    background-color: #fff;
+    justify-content: space-around;
+}
+
+.orderList-wrap .ben-fixed-top .tab-status-item {
+    min-width: 120rpx;
+    color: #666666;
+    text-align: center;
+    border-bottom: 4rpx solid #ffffff;
+    font-size: 26rpx;
+    line-height: 88rpx;
+    font-family: PingFangSC-Regular;
+    transition: color 0.3s,border-color 0.3s;
+}
+
+.orderList-wrap .ben-fixed-top .tab-status-item.ben-active {
+    font-size: 36rpx;
+    font-family: PingFangSC-Semibold;
+    color: #3E3D3E;
+    position: relative;
+}
+
+.orderList-wrap .ben-fixed-top .tab-status-item.ben-active:after {
+    content: '';
+    position: absolute;
+    bottom: -4rpx;
+    background: #494949;
+    width: 40%;
+    left: 30%;
+    text-align: center;
+    height: 4rpx;
+}
+
+.orderList-wrap .cp-bar {
+    position: fixed;
+    width: 100%;
+    height: 94rpx;
+    top: 182rpx;
+}
+
+.orderList-wrap .order-list {
+    padding: 28rpx 20rpx 20rpx 20rpx;
+    margin-top: 96rpx;
+}
+
+.orderList-wrap .order-list .order-item {
+    border-radius: 6rpx;
+    overflow: hidden;
+}
+
+.orderList-wrap .order-list .order-item .unit-price {
+    color: #666666;
+}
+
+.orderList-wrap .order-list .order-item .unit-price-value {
+    font-size: 24rpx;
+}
+
+.orderList-wrap .order-list .order-item .order-total {
+    background-color: #fff;
+}
+
+.orderList-wrap .order-list .order-item+.order-item {
+    margin-top: 20rpx;
+}
+
+.orderList-wrap .order-list .ben-list-none {
+    padding-top: 120rpx;
+}
+
+.orderList-wrap .order-list .ben-list-none .none-list-icon {
+    width: 134rpx;
+    height: 134rpx;
+    font-size: 120rpx;
+    line-height: 134rpx;
+    color: #7E7D7E;
+    margin: 0 auto;
+}
+
+.orderList-wrap .order-list .ben-list-none .none-list-title {
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    padding: 20rpx 0;
+    color: #7E7D7E;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.orderList-wrap .order-item-footer {
+    padding: 0 32rpx;
+    background-color: #fff;
+    margin-top: 2rpx;
+}
+
+.orderList-wrap .order-item-footer .item-top {
+    padding: 28rpx 0;
+}
+
+.orderList-wrap .order-item-footer .item-top .icon-font {
+    color: #999999;
+    padding-right: 12rpx;
+}
+
+.orderList-wrap .order-item-footer .item-top .order-time {
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #999999;
+    letter-spacing: 0;
+    line-height: 24rpx;
+}
+
+.orderList-wrap .order-item-footer .item-top .order-status-txt {
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    float: right;
+    line-height: 24rpx;
+}
+
+.orderList-wrap .order-item-footer .order-data {
+    height: 224rpx;
+    padding: 32rpx 0;
+    display: flex;
+    flex-direction: row;
+    border-top: 2rpx solid #EEEEEE;
+    border-bottom: 2rpx solid #EEEEEE;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-img-w {
+    width: 160rpx;
+    height: 160rpx;
+    margin-right: 32rpx;
+    position: relative;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-img-w image {
+    background-color: #E8E8E8;
+    border: 2rpx solid #EEEEEE;
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-img-w .tag {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    height: 30rpx;
+    line-height: 26rpx;
+    font-size: 20rpx;
+    border-radius: 3px;
+    color: #092DC5;
+    padding: 0 6rpx;
+    border: 2rpx solid #092dc5;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-more-img-w {
+    width: 56rpx;
+    height: 160rpx;
+    line-height: 160rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #504F4F;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 160rpx;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-info .top {
+    font-family: PingFangSC-Regular;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    padding-right: 54rpx;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-info .advance {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 24rpx;
+    color: #092DC5;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-info .center {
+    padding: 8rpx 0;
+    font-family: PingFangSC-Regular;
+    line-height: 34rpx;
+    font-size: 24rpx;
+    color: #A4A3A4;
+    letter-spacing: 0;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-info .bottom {
+    margin-top: 38rpx;
+    font-family: PingFangSC-Regular;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.orderList-wrap .order-item-footer .order-data .order-info .bottom .right {
+    float: right;
+}
+
+.orderList-wrap .order-item-footer .order-item-bottom {
+    height: 128rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orderList-wrap .order-item-footer .order-item-bottom .order-num {
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    text-align: right;
+    line-height: 32rpx;
+}
+
+.orderList-wrap .order-item-footer .order-item-bottom .order-num text {
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #000000;
+    letter-spacing: 0;
+}
+
+.orderList-wrap .order-item-footer .order-item-bottom .order-btn {
+    background: #092DC5;
+    border-radius: 3px;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.orderList-wrap .order-item-footer .order-item-bottom .order-btn button {
+    padding: 0 34rpx;
+}
+
+.orderList-wrap .order-item-footer .order-btn-con {
+    justify-content: flex-end;
+}
+
+.orderList-wrap .order-item-footer .order-btn-con .ben-btn-mini {
+    margin-left: 16rpx;
+}
+
+.orderList-wrap .order-item-footer .order-btn-con .btn-service-mobile {
+    width: 172rpx;
+}
+
+.orderList-wrap .order-item-footer .order-btn-con .btn-service-mobile .icon-font {
+    font-size: 26rpx;
+}
+
+.orderList-wrap .no-more-con {
+    background-color: #F2F2F2;
+    margin-top: 20rpx;
+}

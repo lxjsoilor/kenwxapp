@@ -1,0 +1,47 @@
+@import "../../__wuBaseWxss__/2.wxss";
+
+.error-panel {
+    width: 100%;
+    height: 100vh;
+    padding: 170rpx 60rpx 0;
+    background-color: #fff;
+    font-family: PingFangSC-Regular;
+    text-align: center;
+}
+
+.error-panel .error-panel-title {
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #7E7D7E;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 40rpx;
+    margin-top: 34rpx;
+}
+
+.error-panel .error-panel-msg {
+    color: #000000;
+}
+
+.error-panel .error-icon {
+    font-size: 134rpx;
+    color: #7E7D7E;
+}
+
+.error-panel .refresh {
+    width: 166rpx;
+    height: 64rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 64rpx;
+    margin: 66rpx auto;
+    border: 2rpx solid #A4A3A4;
+    border-radius: 6rpx;
+}
+
+button.vict-btn-primary {
+    position: relative;
+}

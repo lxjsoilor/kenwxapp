@@ -1,0 +1,6 @@
+<ben-headBar></ben-headBar>
+<view class="page-con">
+    <view class="icon-font icon-xinhaocha"></view>
+    <view class="toast">网络连接异常，请检查网络</view>
+    <view bind:tap="refresh" class="refresh">刷新</view>
+</view>

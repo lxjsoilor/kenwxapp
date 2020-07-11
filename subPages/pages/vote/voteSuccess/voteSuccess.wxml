@@ -1,0 +1,17 @@
+<ben-headBar title="投票"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}} voteSuccess-wrap" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="vote-banner-w">
+        <image mode="widthFix" src="{{bannerImgUrl}}"></image>
+    </view>
+    <view class="vote-title">
+        <view class="title">投票成功</view>
+        <view class="tips">恭喜你为自己心爱的鞋子投出了宝贵的票数</view>
+    </view>
+    <view class="btn-w">
+        <button catch:tap="go_to_voteResults" class="ben-btn ben-btn-primary ben-btn-large" hoverClass="none">查看投票结果</button>
+    </view>
+    <view class="btn-w">
+        <button catch:tap="go_to_index" class="ben-btn ben-btn-default ben-btn-large goHome-btn" hoverClass="none">返回首页</button>
+    </view>
+</view>

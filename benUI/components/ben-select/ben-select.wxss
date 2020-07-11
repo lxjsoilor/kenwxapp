@@ -1,0 +1,127 @@
+.ben-fixed-top {
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.ben-fixed-bottom {
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.ben-mask {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.ben-mask-hidden {
+    position: fixed;
+    bottom: -300%;
+    left: -300%;
+    z-index: -9999;
+}
+
+.ben-flex-row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ben-form-group .error-message {
+    font-size: 28rpx;
+    line-height: 40rpx;
+    color: #FF0000;
+    margin-top: 16rpx;
+}
+
+.ben-form-group .ben-form-label {
+    font-size: 24rpx;
+    line-height: 32rpx;
+    color: #919191;
+}
+
+.ben-form-group .ben-input-group .ben-input {
+    flex: 1;
+    border-radius: 2px;
+    font-size: 28rpx;
+    color: #3E3D3E;
+}
+
+.ben-select-item.ben-selected {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.ben-form-group {
+    position: relative;
+    min-height: 48px;
+    margin-bottom: 40rpx;
+}
+
+.ben-form-group .ben-input-group {
+    height: 48px;
+    margin-top: 20rpx;
+}
+
+.ben-form-group .ben-input-group .ben-input {
+    height: 48px;
+    line-height: 46px;
+}
+
+.ben-form-group .ben-picker-placeholder {
+    color: #C3C3C3;
+}
+
+.ben-form-group.focus .ben-input {
+    border-color: #000;
+}
+
+.ben-form-group.error .ben-input {
+    border-color: #FF0000;
+    color: #FF0000;
+}
+
+.ben-fixed-top {
+    position: fixed;
+}
+
+.ben-fixed-bottom {
+    position: fixed;
+}
+
+.ben-select-group {
+    width: 100vw;
+    background-color: #fff;
+    z-index: 9999;
+}
+
+.ben-selct-btn-group {
+    height: 64rpx;
+    line-height: 76rpx;
+    padding: 0 30rpx;
+    border-bottom: 2rpx solid #000;
+}
+
+.ben-select-list-con {
+    padding: 0 10rpx;
+}
+
+.ben-select-list-con scroll-view {
+    height: 100%;
+    flex: 1;
+    overflow: hidden;
+}
+
+.ben-select-list-con scroll-view::-webkit-scrollbar {
+    width: 10rpx;
+}
+
+.ben-select-item {
+    padding: 0 10rpx;
+    font-size: 20rpx;
+    line-height: 64rpx;
+}

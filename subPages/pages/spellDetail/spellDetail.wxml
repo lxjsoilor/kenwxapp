@@ -1,0 +1,115 @@
+<ben-headBar>
+    <text class="custom-header-img" slot="title">组团详情</text>
+</ben-headBar>
+<canvas canvasId="{{canvas.id}}" style="width:{{canvas.width}}px; height: {{canvas.height}}px;position:absolute;top:-100000px;background:#E8E8E8"></canvas>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<block wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="page-con" style="height:{{maskHeight}}px">
+        <view class="spell-img-con">
+            <image class="bg-img" src="{{group_buying}}"></image>
+            <image class="logo_img" src="/static/images/logogroup.png"></image>
+            <view bindtap="showRule" class="spell-rull-con">组团规则</view>
+        </view>
+        <view class="spell-tips" style="margin-bottom:44rpx" wx:if="{{teamStatus==4&&timeOver&&isLeader}}">
+            <view>恭喜你，组团成功！</view>
+            <view class="spell-success-tip">成团后每人返￥{{couponMoney}}现金券，下次购物使用，不成团不影响发货</view>
+        </view>
+        <view class="spell-tips" wx:if="{{teamStatus==2&&teamDetails.length>=2&&isLeader}}">
+            <view>组团成功！邀请更多好友参团</view>
+        </view>
+        <view class="spell-tips" wx:if="{{teamStatus==1&&teamDetails.length<2&&isLeader}}">再邀请1人以上，即可同享￥{{couponMoney}}现金券</view>
+        <view class="spell-tips" style="margin-bottom:40rpx" wx:if="{{teamStatus==3&&timeOver}}">
+            <view>拼团失败</view>
+            <view class="spell-success-tip">没关系，订单将照常发货，您也可以重新开团</view>
+        </view>
+        <view class="spell-tips" style="margin-bottom: 46rpx;margin-bottom: 96rpx" wx:if="{{teamStatus==4&&!isLeader}}">
+            <view class="spell-member-tip">哎呀，你来晚了，闺蜜团已结束！你可以自己去开一个新团哦<text class="icon-font icon-yinhao_left"></text>
+                <text class="icon-font icon-yinhao_right"></text>
+            </view>
+        </view>
+        <view class="spell-tips" wx:if="{{(teamStatus==1||teamStatus==2)&&!isLeader}}">
+            <view class="spell-member-tip">亲爱的，快来参与我的闺蜜团，一起赢取￥{{couponMoney}}现金券吧<text class="icon-font icon-yinhao_left"></text>
+                <text class="icon-font icon-yinhao_right"></text>
+            </view>
+        </view>
+        <view class="parent-con {{!slideTrue?'mask-slideDown':''}}">
+            <view class="member-con">
+                <view class="member-item {{index<6?'zero-margin':''}}" data-index="{{index}}" style="{{index!=0&&!( (index+1)%6 )?'margin-right:0':''}}" wx:for="{{teamDetails}}" wx:key="{{index}}">
+                    <image src="{{item.avatarUrl}}"></image>
+                    <text class="icon-font icon-leader" wx:if="{{item.teamLeader}}"></text>
+                </view>
+                <view class="add-item" wx:if="{{teamDetails.length<2}}" wx:for="{{teamDetails.length}}" wx:key="{{index}}">
+                    <text class="icon-font icon-add"></text>
+                </view>
+            </view>
+        </view>
+        <view bindtap="spellSlide" class="slide-btn" wx:if="{{overMember&&slideTrue}}">全部成员<text class="icon-font icon-arrow_right"></text>
+        </view>
+        <view bindtap="spellSlide" class="slide-btn shouqi-btn" wx:if="{{overMember&&!slideTrue}}">收起<text class="icon-font icon-arrow_right slide-up"></text>
+        </view>
+        <view class="spell-time-con" style="{{overMember&&slideTrue?'margin-top:64rpx':'margin-top:36rpx'}}" wx:if="{{countTime&&teamStatus!=3&&teamStatus!=4}}">
+		剩余<view class="count-num">{{timeText}}</view>结束
+	</view>
+        <view bindtap="join_to_plp" class="spell-btn" style="margin-bottom: 40rpx" wx:if="{{(teamStatus==1||teamStatus==2)&&!canInvite}}">我要参团</view>
+        <button bind:tap="onInviteBtnClick" hoverClass="none">
+            <view class="spell-btn" wx:if="{{(teamStatus==1||teamStatus==2)&&canInvite}}">邀请闺蜜参团</view>
+        </button>
+        <view bindtap="go_to_orderdetail" class="spell-btn" style="margin-top:24rpx" wx:if="{{teamStatus==4&&isLeader}}">查看订单详情</view>
+        <view bindtap="go_to_plp" class="spell-btn" style="margin-top:68rpx" wx:if="{{teamStatus==3&&isLeader}}">重新组团</view>
+        <view bindtap="go_to_plp" class="spell-btn" style="margin-top:68rpx 0 80rpx" wx:if="{{(teamStatus==3||teamStatus==4)&&!canInvite}}">去组新团</view>
+        <view bindtap="go_to_orderdetail" class="btn-bot-tip" wx:if="{{(teamStatus==1||teamStatus==2)&&canInvite&&isLeader}}">查看订单详情<text class="icon-font icon-arrow_right"></text>
+        </view>
+        <view bindtap="go_to_plp" class="btn-bot-tip" style="{{overMember&&teamStatus==4?'margin-bottom:12rpx':''}}" wx:if="{{(teamStatus==4||teamStatus==3)&&isLeader}}">进店逛逛<text class="icon-font icon-arrow_right"></text>
+        </view>
+        <view class="spell-bot-tip" wx:if="{{teamStatus!=3&&teamStatus!=4}}">
+            <view>
+                <view class="spell-circle"></view>
+                <view class="spell-ttips">组团成功后，闺蜜同享券会陆续发放至您的账户，在您下次购物时可使用</view>
+            </view>
+            <view>
+                <view class="spell-circle"></view>
+                <view class="spell-ttips">不论是否成团，您已购买成功的订单将照常发货</view>
+            </view>
+        </view>
+    </view>
+    <view class="rule-mask" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{ruleShow}}">
+        <view bindtap="closeRule" class="bg-mask"></view>
+        <view class="pop-center">
+            <view class="pop-up-con">
+                <view class="rule-title">组团规则</view>
+                <view class="rule-detail">
+                    <view class="{{index==0?'ruletitle':'ruletext'}}" data-index="{{index}}" wx:for="{{ruleArr}}" wx:key="{{index}}">{{item}}</view>
+                </view>
+            </view>
+            <view class="butn-center">
+                <text bindtap="closeRule" class="icon-font icon-close"></text>
+            </view>
+        </view>
+    </view>
+</block>
+<view class="pdp-share-con {{maskShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{maskShow}}">
+    <view bindtap="cancelShare" class="bg-mask"></view>
+    <view class="share-btn-con">
+        <view class="share-btn">
+            <button bindtap="onShareAppMessage" class="btn-con" hoverClass="none" openType="share">
+                <text class="icon-font icon-wechat"></text>
+                <view class="share-friend">分享好友</view>
+            </button>
+            <button bindtap="sharepdpCard" class="btn-con" hoverClass="none">
+                <text class="icon-font icon-friendster"></text>
+                <view class="share-space">分享海报</view>
+            </button>
+        </view>
+        <view bindtap="cancelShare" class="share-true">取消</view>
+    </view>
+</view>
+<view class="share-card-con {{isIPX?'isIpx':''}} {{cardShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{cardShow}}">
+    <view bindtap="shareSaveCancel" class="bg-mask"></view>
+    <view class="white-bg">
+        <button bindopensetting="saveShareCard" class="save-share-card " openType="openSetting" wx:if="{{noAuthor}}">
+            <text class="icon-font icon-save"></text>保存图片到相册</button>
+        <button bindtap="getSetting" class="save-share-card " wx:if="{{!noAuthor}}">
+            <text class="icon-font icon-save"></text>保存图片到相册</button>
+        <image src="{{shareCardPath}}"></image>
+    </view>
+</view>

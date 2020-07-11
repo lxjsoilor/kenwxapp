@@ -1,0 +1,91 @@
+page {
+    background-color: #FFFFFF;
+}
+
+.userInfo-wrap {
+    width: 100%;
+    min-height: calc(100vh - 128rpx);
+    position: relative;
+    padding: 0 40rpx;
+}
+
+.userInfo-wrap .ben-form-group {
+    margin-top: 40rpx;
+}
+
+.userInfo-wrap .ben-form-group .ben-form-label {
+    margin-left: 20rpx;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: #A4A3A4;
+    line-height: 34rpx;
+}
+
+.userInfo-wrap .ben-form-group .ben-input-group {
+    margin-top: 12rpx;
+    border-radius: 4rpx;
+}
+
+.userInfo-wrap .gender-title {
+    margin-left: 20rpx;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: #A4A3A4;
+    line-height: 34rpx;
+    margin-bottom: 12rpx;
+}
+
+.userInfo-wrap .gender-radio-group {
+    justify-content: flex-start;
+    margin-left: 20rpx;
+    margin-top: 24rpx;
+}
+
+.userInfo-wrap .gender-radio-group .gender-radio-item {
+    justify-content: flex-start;
+    width: 160rpx;
+    position: relative;
+    padding: 20rpx 0 20rpx 48rpx;
+    font-size: 26rpx;
+    color: #000000;
+    line-height: 28rpx;
+    margin-right: 80rpx;
+}
+
+.userInfo-wrap .gender-radio-group .gender-radio-item .label {
+    position: absolute;
+    left: 0;
+}
+
+.userInfo-wrap .gender-radio-group .gender-radio-item .label .icon-font {
+    color: #DDDDDD;
+}
+
+.userInfo-wrap .gender-radio-group .gender-radio-item.active .label {
+    border: 0;
+    text-align: center;
+    line-height: 28rpx;
+}
+
+.userInfo-wrap .gender-radio-group .gender-radio-item.active .label text {
+    color: #092DC5;
+    display: inline-block;
+}
+
+.userInfo-wrap .userInfo-submit {
+    position: fixed;
+    width: 100%;
+    height: 80rpx;
+    bottom: 40rpx;
+}
+
+.userInfo-wrap .userInfo-submit button {
+    width: 670rpx;
+    height: 80rpx;
+    border-radius: 6rpx;
+    background-color: #FFFFFF;
+    border: 1px solid #092DC5;
+    color: #092DC5;
+}

@@ -1,0 +1,13 @@
+<ben-headBar noHome="false" title="ROTHY'S"></ben-headBar>
+<view class="wrap {{isIPX?'isIPX':''}}">
+    <image class="image-bg" src="{{imageBg}}"></image>
+    <view class="content">
+        <view class="title">礼物领取成功</view>
+        <view class="subtitle">已收到您的收货信息，即将发货</view>
+        <view class="line"></view>
+        <view class="desc">礼物的相关信息将通过微信服务通知发送给你，敬请查收</view>
+    </view>
+    <view class="ben-fixed-bottom btn-box {{isIPX?'isIPX':''}}">
+        <view catchtap="goToDetail" class="btn-green">我也要送</view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "投票",
+    "usingComponents": {
+        "error-panel": "../../../../components/error-panel/error-panel",
+        "ben-modal": "../../../../benUI/components/ben-modal/ben-modal",
+        "ben-headBar": "../../../../benUI/components/ben-headBar/ben-headBar"
+    }
+}

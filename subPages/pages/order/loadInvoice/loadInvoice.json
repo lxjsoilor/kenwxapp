@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "",
+    "usingComponents": {
+        "ben-headBar": "../../../../benUI/components/ben-headBar/ben-headBar"
+    }
+}

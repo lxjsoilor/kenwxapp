@@ -1,0 +1,29 @@
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<ben-headBar isHome isSearch noBack title="晒单"></ben-headBar>
+<scroll-view scrollY bindscroll="onscroll" bindscrolltolower="onScrolltolower" bindscrolltoupper="onScrolltoupper" bindtouchend="onTouchEnd" bindtouchstart="onTouchStart" class="page-con {{pageStatus.isIPX?'isIPX':''}}" scrollTop="{{scrollTop}}" style="height: calc( 100vh - {{headerHeight}}px - {{tabbarHeight*2}}rpx   )" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="share-wrap" wx:for="{{itemList}}" wx:key="index">
+        <image class="share-cover-img" mode="widthFix" src="{{item.doclistImage}}"></image>
+        <view class="con-wrap">
+            <view class="title">{{item.doclistTitle}}</view>
+            <view class="con-bot">
+                <view class="user-wrap">
+                    <image class="user-img" mode="widthFix" src="{{item.doclistVideo}}"></image>
+                    <text class="user-name">{{item.doclistSubTitle}}</text>
+                </view>
+                <view class="bot-r">
+                    <view class="favor-wrap">
+                        <text class="icon-font {{likeCountObj[item.doclistCode].optName!=openid?'icon-unLike':'icon-liked'}}"></text>
+                        <text class="num">{{likeCountObj[item.doclistCode].sum}}</text>
+                        <button bind:tap="onFavorClick" class="hotarea-btn" data-id="{{item.doclistCode}}"></button>
+                    </view>
+                    <view class="more">
+                        <text>了解更多</text>
+                        <text class="icon-font icon-triangle_right"></text>
+                        <button bind:tap="onMoreClick" class="hotarea-btn" data-page="{{item.seoTitle}}"></button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<ben-tabBar cartNum="{{cartNum}}" needAuth="{{needAuth}}" tab="2" wx:if="{{pageStatus.loadStatus=='loaded'}}"></ben-tabBar>

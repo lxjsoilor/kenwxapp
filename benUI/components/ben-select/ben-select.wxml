@@ -1,0 +1,35 @@
+<view class="ben-form-group {{name}} {{!!value?'focus':''}} {{!!error?'error':''}}">
+    <view class="ben-form-label" wx:if="{{label}}">{{label}}
+    <text class="error-message" hidden="{{!error}}">{{error}}</text>
+    </view>
+    <view class="ben-input-group">
+        <view catch:tap="_open_the_select_mask" class="ben-input ben-flex-row">
+            <text wx:if="{{value}}">{{text}}</text>
+            <text class="ben-picker-placeholder" wx:else>{{placeholder}}</text>
+            <view class="icon-font {{icon}}" wx:if="{{icon}}"></view>
+        </view>
+    </view>
+</view>
+<view catch:tap="_close_the_select_mask" class="ben-mask  {{open?'ben-fixed-top':'ben-mask-hidden'}}"></view>
+<view class="ben-select-group  {{open?'ben-fixed-bottom':'ben-mask-hidden'}}" style="height: {{height}}" wx:if="{{mode==1}}">
+    <view class="ben-flex-row ben-selct-btn-group">
+        <view catch:tap="_ben_select_on_cancel" class="ben-selct-btn">取消</view>
+        <view catch:tap="_ben_select_on_ensure" class="ben-selct-btn">确定</view>
+    </view>
+    <view class="ben-select-list-con ben-flex-row" style="height: calc(100% - 80rpx)">
+        <scroll-view scrollWithAnimation scrollY scrollIntoView="list-{{colume}}-{{temp[colume][keyMap.value]}}" wx:for="{{ass.array(col)}}" wx:for-index="colume" wx:key="{{ colume }}">
+            <view catch:tap="_ben_select_item_on_tap" class="ben-select-item ben-ellips-line {{temp[colume][keyMap.value]===item[keyMap.value]?'ben-selected':''}}" data-colume="{{colume}}" data-num="{{itm_no}}" id="list-{{colume}}-{{item[keyMap.value]}}" wx:for="{{list[colume]}}" wx:for-index="itm_no" wx:key="{{ itm_no }}">
+          {{item[keyMap.text]}}
+        </view>
+        </scroll-view>
+    </view>
+</view>
+<wxs module="ass">
+module.exports = ({
+    array: (function(len) {
+        var arr = [];
+        arr.length = len;
+        return (arr)
+    }),
+});
+</wxs>

@@ -1,0 +1,400 @@
+<canvas canvasId="{{canvas.id}}" style="width:{{canvas.width}}px; height: {{canvas.height}}px;position:absolute;top:-100000px;background:#E8E8E8"></canvas>
+<ben-headBar noBack="{{noBack}}">
+    <image class="custom-header-img" slot="title" src="/static/images/logo.png"></image>
+</ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<block wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <block wx:if="{{!errorPro}}">
+        <view class="page-con" style="height:{{maskHeight}}px">
+            <view class="swiper-con">
+                <block wx:if="{{mainImages}}">
+                    <swiper autoplay="" bindchange="mainSwiperChange" circular="true" current="{{mainSwiperIndexCur}}" wx:if="{{mainImages.length>1}}">
+                        <swiper-item wx:for="{{mainImages}}" wx:key="index">
+                            <block wx:if="{{index==0}}">
+                                <view class="tips-item-con" wx:for="{{tipArray}}" wx:for-item="viewItem" wx:key="index">
+                                    <image bindtap="showProtip" data-position="{{index}}" src="/assets/images/sign-{{index+1}}.png"></image>
+                                    <view bindtap="showProtip" class="tips-name" data-position="{{index}}">
+                                        <text>{{viewItem.imgdes}}</text>
+                                        <text class="icon-font icon-arrow"></text>
+                                    </view>
+                                </view>
+                            </block>
+                            <image bindtap="previewImg" data-current="{{item.src}}" src="{{item.src}}"></image>
+                        </swiper-item>
+                    </swiper>
+                    <block wx:if="{{mainImages.length<=1}}">
+                        <view class="tips-item-con" wx:for="{{tipArray}}" wx:for-item="viewItem" wx:key="index">
+                            <image bindtap="showProtip" data-position="{{index}}" src="/assets/images/sign-{{index+1}}.png"></image>
+                            <view bindtap="showProtip" class="tips-name" data-position="{{index}}">
+                                <text>{{viewItem.imgdes}}</text>
+                                <text class="icon-font icon-arrow"></text>
+                            </view>
+                        </view>
+                    </block>
+                    <image class="promain-img" src="{{mainImages[0].src}}" wx:if="{{mainImages.length<=1}}"></image>
+                    <view class="swiper-count-con">{{mainSwiperIndex}}/{{mainImages.length}}</view>
+                </block>
+                <block wx:else>
+                    <swiper autoplay="" bindchange="swiperChange" circular="true" wx:if="{{images.length>1}}">
+                        <swiper-item wx:for="{{images}}" wx:key="index">
+                            <block wx:if="{{index==0}}">
+                                <view class="tips-item-con" wx:for="{{tipArray}}" wx:for-item="viewItem" wx:key="index">
+                                    <image bindtap="showProtip" data-position="{{index}}" src="/assets/images/sign-{{index+1}}.png"></image>
+                                    <view bindtap="showProtip" class="tips-name" data-position="{{index}}">
+                                        <text>{{viewItem.imgdes}}</text>
+                                        <text class="icon-font icon-arrow"></text>
+                                    </view>
+                                </view>
+                            </block>
+                            <image bindtap="previewImg" data-current="{{item.src}}" src="{{item.src}}"></image>
+                        </swiper-item>
+                    </swiper>
+                    <block wx:if="{{images.length<=1}}">
+                        <view class="tips-item-con" wx:for="{{tipArray}}" wx:for-item="viewItem" wx:key="index">
+                            <image bindtap="showProtip" data-position="{{index}}" src="/assets/images/sign-{{index+1}}.png"></image>
+                            <view bindtap="showProtip" class="tips-name" data-position="{{index}}">
+                                <text>{{viewItem.imgdes}}</text>
+                                <text class="icon-font icon-arrow"></text>
+                            </view>
+                        </view>
+                    </block>
+                    <image class="promain-img" src="{{images[0].src}}" wx:if="{{images.length<=1}}"></image>
+                    <view class="swiper-count-con">{{swiperIndex}}/{{images.length}}</view>
+                </block>
+            </view>
+            <view class="proinfo-con">
+                <view class="pro-title">{{title}}</view>
+                <view class="pro-desc">{{subTitle}}</view>
+                <view class="pro-price-con">
+                    <view class="pro-price">￥{{!skuSelected?salePrice:skuSelected.salePrice}}</view>
+                    <view class="pro-share">
+                        <view class="cps-share" wx:if="{{isCps}}">￥</view>
+                        <button class="icon-font icon-service" hoverClass="none" openType="contact" sendMessageImg="{{images[0].src}}" sendMessagePath="/pages/pdp/pdp?spuCode={{spuCode}}" sendMessageTitle="{{title}}" showMessageCard="{{true}}"></button>
+                        <text class="shu-line">|</text>
+                        <button bindtap="{{isCps?'cpsShareShow':'showShareMask'}}" class="icon-font icon-share" hoverClass="none"></button>
+                    </view>
+                </view>
+                <view class="pro-freebie" wx:for="{{giftList}}" wx:key="index">
+                    <view class="txt">
+                        <text class="tag">赠品</text>{{item.skuName}}</view>
+                </view>
+            </view>
+            <view class="pro-detail-con">
+                <view class="pro-desc-con {{isIPX?'IPXimg':''}}">
+                    <view class="detail-title">商品详情</view>
+                    <image mode="widthFix" src="{{item.src}}" wx:for="{{description}}" wx:key="index"></image>
+                </view>
+            </view>
+        </view>
+        <view class="pdp-btn-con {{isIPX?'isIPX':''}} {{joinSpell&&hasInventory&&saleStatus!=0?'nopadding-left':''}}">
+            <block wx:if="{{hasInventory&&canSpell&&!joinSpell&&saleStatus!=0}}">
+                <view class="shopbag-con {{isIPX?'IPX-bag':''}}" name="isissiis">
+                    <view class="shop-icon">
+                        <text class="icon-font {{cartNum?'icon-tabBar_cart':'icon-tabBar_cart1'}}"></text>
+                        <text class="shop-num">{{cartNum?cartNum:''}}</text>
+                    </view>
+                    <view class="bag-title">购物袋</view>
+                    <button bindgetuserinfo="bindGetUserInfo" class="shopbag-btn " data-name="shoppingCart" openType="getUserInfo" wx:if="{{needAuth}}"></button>
+                    <button bindtap="go_to_bag" class="shopbag-btn " data-name="shoppingCart" wx:else></button>
+                </view>
+                <form action="" bindsubmit="formSubmit" reportSubmit="true">
+                    <button bindgetuserinfo="giveGift" class="pad-btn" data-type="gift" formType="submit" hoverClass="none" openType="getUserInfo">赠予好友</button>
+                </form>
+                <form action="" bindsubmit="formSubmit" reportSubmit="true">
+                    <button bindgetuserinfo="giveGift" class="pad-btn" data-type="spell" formType="submit" hoverClass="none" openType="getUserInfo">闺蜜同享</button>
+                </form>
+                <form action="" bindsubmit="formSubmit" reportSubmit="true">
+                    <button bindgetuserinfo="bindGetUserInfo" class="pad-btn" data-name="singleBuy" data-type="normal" formType="submit" hoverClass="none" openType="getUserInfo" wx:if="{{needAuth}}">单独购买</button>
+                    <button bind:tap="showSkuMask" class="pad-btn" data-name="singleBuy" data-type="normal" formType="submit" hoverClass="none" wx:else>单独购买</button>
+                </form>
+            </block>
+            <block wx:if="{{!hasInventory&&saleStatus!=0}}">
+                <view class="shopbag-con {{isIPX?'IPX-bag':''}}">
+                    <view class="shop-icon">
+                        <text class="icon-font {{cartNum?'icon-tabBar_cart':'icon-tabBar_cart1'}}"></text>
+                        <text class="shop-num">{{cartNum?cartNum:''}}</text>
+                    </view>
+                    <view class="bag-title">购物袋</view>
+                    <button bindgetuserinfo="bindGetUserInfo" class="shopbag-btn " data-name="shoppingCart" openType="getUserInfo" wx:if="{{needAuth}}"></button>
+                    <button bindtap="go_to_bag" class="shopbag-btn " data-name="shoppingCart" wx:else></button>
+                </view>
+                <button class="nostock-btn" hoverClass="none">马上回来</button>
+            </block>
+            <block wx:if="{{saleStatus==0}}">
+                <view class="shopbag-con {{isIPX?'IPX-bag':''}}">
+                    <view class="shop-icon">
+                        <text class="icon-font {{cartNum?'icon-tabBar_cart':'icon-tabBar_cart1'}}"></text>
+                        <text class="shop-num">{{cartNum?cartNum:''}}</text>
+                    </view>
+                    <view class="bag-title">购物袋</view>
+                    <button bindgetuserinfo="bindGetUserInfo" class="shopbag-btn " data-name="shoppingCart" openType="getUserInfo" wx:if="{{needAuth}}"></button>
+                    <button bindtap="go_to_bag" class="shopbag-btn " data-name="shoppingCart" wx:else></button>
+                </view>
+                <button class="nostock-btn" hoverClass="none">商品已下架</button>
+            </block>
+            <button bindgetuserinfo="giveGift" class="joinspell-btn" data-type="spell" hoverClass="none" openType="getUserInfo" wx:if="{{joinSpell&&hasInventory&&saleStatus!=0}}">我要参团</button>
+            <block wx:if="{{hasInventory&&!canSpell&&!joinSpell&&saleStatus!=0}}">
+                <view class="shopbag-con {{isIPX?'IPX-bag':''}}">
+                    <view class="shop-icon">
+                        <text class="icon-font {{cartNum?'icon-tabBar_cart':'icon-tabBar_cart1'}}"></text>
+                        <text class="shop-num">{{cartNum?cartNum:''}}</text>
+                    </view>
+                    <view class="bag-title">购物袋</view>
+                    <button bindgetuserinfo="bindGetUserInfo" class="shopbag-btn " data-name="shoppingCart" openType="getUserInfo" wx:if="{{needAuth}}"></button>
+                    <button bindtap="go_to_bag" class="shopbag-btn " data-name="shoppingCart" wx:else></button>
+                </view>
+                <form action="" bindsubmit="formSubmit" reportSubmit="true">
+                    <button bindgetuserinfo="giveGift" class="nospell-btn" data-type="gift" formType="submit" hoverClass="none" openType="getUserInfo">赠予好友</button>
+                </form>
+                <form action="" bindsubmit="formSubmit" reportSubmit="true">
+                    <button bindgetuserinfo="bindGetUserInfo" class="nospell-btn" data-name="singleBuy" data-type="normal" formType="submit" hoverClass="none" openType="getUserInfo" wx:if="{{needAuth}}">单独购买</button>
+                    <button bind:tap="showSkuMask" class="nospell-btn" data-name="singleBuy" data-type="normal" formType="submit" hoverClass="none" wx:else>单独购买</button>
+                </form>
+            </block>
+        </view>
+    </block>
+    <view class="error-con" wx:else>
+        <text class="icon-font icon-pdp_noproduct"></text>
+        <view class="error-tps">商品过期或不存在</view>
+    </view>
+</block>
+<view class="pdp-share-con {{maskShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{maskShow}}">
+    <view bindtap="cancelShare" class="bg-mask"></view>
+    <view class="share-btn-con">
+        <view class="share-btn">
+            <button bindtap="onShareAppMessage" class="btn-con" hoverClass="none" openType="share">
+                <text class="icon-font icon-wechat"></text>
+                <view class="share-friend">分享好友</view>
+            </button>
+            <button bindtap="sharepdpCard" class="btn-con" hoverClass="none">
+                <text class="icon-font icon-friendster"></text>
+                <view class="share-space">分享海报</view>
+            </button>
+        </view>
+        <view bindtap="cancelShare" class="share-true">取消</view>
+    </view>
+</view>
+<view class="sku-select-con {{skuShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{skuShow}}">
+    <view bindtap="cancelSelectSku" class="bg-mask"></view>
+    <view class="sku-bg-con {{isIPX?'isIPX':''}}">
+        <scroll-view scrollY class="salesProps-scroll-w">
+            <block wx:for="{{salesProps}}" wx:for-item="itemLable" wx:key="index">
+                <block wx:if="{{itemLable.name=='尺码'}}">
+                    <view class="sku-label">{{itemLable.name}}：<text class="select-tip" wx:if="{{!sizeErrorTipShow&&!!itemLable.valueSelected}}">{{itemLable.showdesc}} (美码{{sizeChart.sizeKV[itemLable.valueSelected.name].us}}，中国码{{sizeChart.sizeKV[itemLable.valueSelected.name].cn}})</text>
+                        <text class="noselect-error" wx:if="{{sizeErrorTipShow}}">请选择尺码</text>
+                    </view>
+                    <view class="sku-items-con">
+                        <view class="sku-size-wrap">
+                            <view bindtap="{{item.isDisabled?'':'selectSku'}}" class="sku-item {{item.isDisabled?'disable-item':''}}  {{item.isActive?'select-item':''}}" data-groupid="{{itemLable.groupId}}" data-item="{{item}}" data-label="{{itemLable.name}}" wx:for="{{itemLable.values}}" wx:key="index">
+                                <view class="one">{{item.name}}</view>
+                                <view class="two">{{sizeChart.sizeKV[item.name].cn}}</view>
+                            </view>
+                        </view>
+                        <view class="tips-text" wx:if="{{tipsShow}}">{{tips}}</view>
+                    </view>
+                </block>
+                <block wx:if="{{itemLable.name=='颜色分类'}}">
+                    <view class="sku-label">{{itemLable.name}}：<text class="select-tip" wx:if="{{!seriesErrorTipShow&&!!itemLable.valueSelected}}">{{itemLable.valueSelected.name}} </text>
+                        <text class="noselect-error" wx:if="{{seriesErrorTipShow}}">请选择颜色分类</text>
+                    </view>
+                    <view class="advance-list-w">
+                        <view bindtap="{{item.isDisabled?'':'selectSku'}}" class="ben-flex-row advance-item {{item.isActive?'select-item':''}} {{item.isDisabled?'disable-advance-item':''}}" data-groupid="{{itemLable.groupId}}" data-item="{{item}}" data-label="{{itemLable.name}}" wx:for="{{itemLable.values}}" wx:key="index">
+                            <view class="disable-item" wx:if="{{item.isDisabled}}"></view>
+                            <view class="img-w">
+                                <image class="advance-img" mode="widthFix" src="{{item.pic}}"></image>
+                            </view>
+                            <view class="title">{{item.name}}</view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </scroll-view>
+        <view class="advanceTips-w" wx:if="{{advanceTipsShow}}">
+            <view class="advanceTips">{{advanceTips}}</view>
+        </view>
+        <view class="sku-num-con">
+            <view class="num-title">数量：</view>
+            <calculate-num bind:onChange="changeBuyCount" isPdp="{{true}}" maxNum="{{pdpwxs.getMaxStock(stock,skuSelected,calcuNumber)}}" num="{{buyCount}}" position="pdp"></calculate-num>
+        </view>
+        <view class="sku-btn-con {{isIPX?'isIPX':''}}">
+            <block wx:if="{{!spellType}}">
+                <view bindtap="joinCart" class="sku-btn">加入购物袋</view>
+                <form action="" bindsubmit="formSubmit" reportSubmit="true">
+                    <button formType="submit">
+                        <view bindtap="confirmOrder" class="sku-btn sku-btn-buy">立即购买</view>
+                    </button>
+                </form>
+            </block>
+            <form action="" bindsubmit="formSubmit" reportSubmit="true" style="width:100%" wx:if="{{spellType}}">
+                <button class="spell-btn" formType="submit">
+                    <view bindtap="confirmOrder">确定</view>
+                </button>
+            </form>
+        </view>
+    </view>
+</view>
+<view class="desc-pop {{descShow?'mask-popUp':'mask-popDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{descShow}}">
+    <view bindtap="descCancel" class="bg-mask"></view>
+    <view class="pop-parent-con">
+        <view class="pop-up-con">
+            <image mode="widthFix" src="{{cmsImg.imgfile}}"></image>
+            <view class="pop-second-img">
+                <image mode="widthFix" src="{{cmsImg.videobgurl}}"></image>
+            </view>
+        </view>
+        <text bindtap="descCancel" class="icon-font icon-close"></text>
+    </view>
+</view>
+<view class="share-card-con {{cardShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{cardShow}}">
+    <view bindtap="shareSaveCancel" class="bg-mask"></view>
+    <view class="white-bg">
+        <button bindopensetting="saveShareCard" class="save-share-card {{isIPX?'cps-margin':''}}" openType="openSetting" wx:if="{{noAuthor}}">
+            <text class="icon-font icon-save"></text>保存图片到相册</button>
+        <button bindtap="getSetting" class="save-share-card {{isIPX?'cps-margin':''}}" wx:if="{{!noAuthor}}">
+            <text class="icon-font icon-save"></text>保存图片到相册</button>
+        <image class="{{isIPX?'cps-img-margin':''}}" src="{{shareCardPath}}"></image>
+    </view>
+</view>
+<view class="share-card-con {{cpsShow?'mask-slideUp':'mask-slideDown'}}" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{cpsShow}}">
+    <view bindtap="cpsShareCancel" class="bg-mask"></view>
+    <view class="cps-bg-con">
+        <image src="{{share_cps}}"></image>
+        <view class="cps-share-btn">
+            <button bindtap="onShareAppMessage" class="btn-con" hoverClass="none" openType="share">
+                <text class="icon-font icon-wechat"></text>
+                <view class="share-friend">分享好友</view>
+            </button>
+            <button bindtap="sharepdpCard" class="btn-con" hoverClass="none">
+                <text class="icon-font icon-friendster"></text>
+                <view class="share-space">分享海报</view>
+            </button>
+        </view>
+        <text bindtap="cpsShareCancel" class="icon-font icon-close"></text>
+    </view>
+</view>
+<view class="stop-tap-mask" style="height:{{maskHeight}}px;top:{{topHeight}}px" wx:if="{{stopTab}}"></view>
+<wxs module="pdpwxs" src="pdp.wxs" />
+<wxs module="sizeChart">
+module.exports.sizeKV = ({
+    "220": ({
+        us: 5,
+        chn: 220,
+        jp: 22,
+        eu: 35,
+        uk: 2.5,
+        cn: 34,
+    }),
+    "225": ({
+        us: 5.5,
+        chn: 225,
+        jp: 22.5,
+        eu: 35.5,
+        uk: 3,
+        cn: 35,
+    }),
+    "230": ({
+        us: 6,
+        chn: 230,
+        jp: 23,
+        eu: 36,
+        uk: 3.5,
+        cn: 36,
+    }),
+    "235": ({
+        us: 6.5,
+        chn: 235,
+        jp: 23.5,
+        eu: 37,
+        uk: 4,
+        cn: 36.5,
+    }),
+    "240": ({
+        us: 7,
+        chn: 240,
+        jp: 24,
+        eu: 37.5,
+        uk: 4.5,
+        cn: 37,
+    }),
+    "245": ({
+        us: 7.5,
+        chn: 245,
+        jp: 24.5,
+        eu: 38,
+        uk: 5,
+        cn: 38,
+    }),
+    "250": ({
+        us: 8,
+        chn: 250,
+        jp: 25,
+        eu: 38.5,
+        uk: 5.5,
+        cn: 39,
+    }),
+    "255": ({
+        us: 8.5,
+        chn: 255,
+        jp: 25.5,
+        eu: 39,
+        uk: 6,
+        cn: 39.5,
+    }),
+    "260": ({
+        us: 9,
+        chn: 260,
+        jp: 26,
+        eu: 40,
+        uk: 6.5,
+        cn: 40,
+    }),
+    "265": ({
+        us: 9.5,
+        chn: 265,
+        jp: 26.5,
+        eu: 40.5,
+        uk: 7,
+        cn: 41,
+    }),
+    "270": ({
+        us: 10,
+        chn: 270,
+        jp: 27,
+        eu: 41,
+        uk: 7.5,
+        cn: 42,
+    }),
+    "275": ({
+        us: 10.5,
+        chn: 275,
+        jp: 27.5,
+        eu: 41.5,
+        uk: 8,
+        cn: 43,
+    }),
+    "280": ({
+        us: 11,
+        chn: 280,
+        jp: 28,
+        eu: 42,
+        uk: 8.5,
+        cn: 44,
+    }),
+    "285": ({
+        us: 11.5,
+        chn: 285,
+        jp: 28.5,
+        eu: 42.5,
+        uk: 9,
+        cn: 44.5,
+    }),
+    "290": ({
+        us: 12,
+        chn: 290,
+        jp: 29,
+        eu: 43,
+        uk: 9.5,
+        cn: 45,
+    }),
+});
+</wxs>

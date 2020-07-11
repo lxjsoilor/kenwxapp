@@ -1,0 +1,63 @@
+@import "../../__wuBaseWxss__/1.wxss";
+
+.wrap.isIPX {
+    padding-bottom: 40rpx;
+}
+
+.gift-top {
+    position: relative;
+}
+
+.gift-top .gift-bg {
+    height: 724rpx;
+}
+
+.gift-top .user-image {
+    position: absolute;
+    top: 674rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+
+.gift-content {
+    margin: 106rpx 76rpx 70rpx;
+    font-family: PublicoBanner-Light;
+    font-size: 14px;
+    color: #7E7D7E;
+    letter-spacing: 0;
+}
+
+.gift-content .desc {
+    margin: 30rpx 0;
+    line-height: 20px;
+}
+
+.gift-content .name {
+    text-align: right;
+    line-height: 28rpx;
+}
+
+.btn-box {
+    width: 100%;
+    padding: 0 20rpx 18rpx;
+}
+
+.btn-box.isIPX {
+    bottom: 40rpx;
+}
+
+.btn-box .btn-green {
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    background: #092DC5;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 28rpx;
+    letter-spacing: 1px;
+    font-family: PingFangSC-Regular;
+}

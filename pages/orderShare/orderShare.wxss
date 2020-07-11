@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+.page-con {
+    position: relative;
+    overflow: auto;
+}
+
+.page-con .share-wrap {
+    background-color: #fff;
+    margin: 10rpx 0;
+}
+
+.page-con .share-wrap .share-cover-img {
+    width: 100%;
+}
+
+.page-con .share-wrap .con-wrap {
+    padding: 22rpx 40rpx 28rpx 40rpx;
+}
+
+.page-con .share-wrap .con-wrap .title {
+    font-size: 26rpx;
+}
+
+.page-con .share-wrap .con-wrap .con-bot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 22rpx;
+}
+
+.page-con .share-wrap .con-wrap .user-img {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 100%;
+}
+
+.page-con .share-wrap .con-wrap .user-name {
+    font-size: 22rpx;
+    margin-left: 16rpx;
+}
+
+.page-con .share-wrap .con-wrap .bot-r {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-con .share-wrap .con-wrap .favor-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 28rpx;
+    color: #A4A3A4;
+}
+
+.page-con .share-wrap .con-wrap .favor-wrap .num {
+    font-size: 20rpx;
+    margin-left: 10rpx;
+    font-weight: bold;
+}
+
+.page-con .share-wrap .con-wrap .favor-wrap .icon-font {
+    position: relative;
+    top: 2rpx;
+}
+
+.page-con .share-wrap .con-wrap .favor-wrap .icon-liked {
+    color: #092DC5;
+}
+
+.page-con .share-wrap .con-wrap .more {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: #3E3D3E;
+    font-size: 22rpx;
+    padding-left: 28rpx;
+    border-left: 2rpx solid #EEEEEE;
+    height: 24rpx;
+    line-height: 24rpx;
+}
+
+.page-con .share-wrap .con-wrap .more .icon-font {
+    font-size: 14rpx;
+    color: #3E3D3E;
+    position: relative;
+    top: 2rpx;
+}
+
+.page-con .share-wrap .hotarea-btn {
+    position: absolute;
+    opacity: 0;
+    top: -20rpx;
+    left: 0;
+    right: 0;
+    bottom: -20rpx;
+}

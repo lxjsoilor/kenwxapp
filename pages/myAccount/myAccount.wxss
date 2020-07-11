@@ -1,0 +1,226 @@
+.m-wrap {
+    width: 100%;
+    height: 1334rpx;
+    background-color: #F2F2F2;
+    position: relative;
+}
+
+.m-wrap .top-bg {
+    width: 100%;
+    height: 440rpx;
+    opacity: 0.8;
+    position: relative;
+}
+
+.m-wrap .top-bg .bg-img {
+    position: relative;
+}
+
+.m-wrap .top-bg .bg-img .bg-img-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background: rgba(0,0,0,0.5);
+    opacity: 0.2;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.m-wrap .top-bg .bg-img image {
+    width: 100%;
+    height: 440rpx;
+}
+
+.m-wrap .top-bg .user-info {
+    position: absolute;
+    top: 74rpx;
+    width: 100%;
+    text-align: center;
+    z-index: 9;
+}
+
+.m-wrap .top-bg .user-info .m-userAvatar-wrap {
+    text-align: center;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 100%;
+    border: 1rpx solid #FFFFFF;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.m-wrap .top-bg .user-info .m-userNickName-wrap {
+    text-align: center;
+}
+
+.m-wrap .top-bg .user-info .m-userNickName-wrap .m-userNickName {
+    font-family: PublicoBanner-Light;
+    font-size: 40rpx;
+    color: #FFFFFF;
+    letter-spacing: 0;
+}
+
+.m-wrap .top-bg .edit-userInfo-w {
+    position: absolute;
+    top: 280rpx;
+    left: 296rpx;
+    width: 158rpx;
+    height: 60rpx;
+    z-index: 99;
+}
+
+.m-wrap .top-bg .edit-userInfo-w .edit-userInfo {
+    position: relative;
+}
+
+.m-wrap .top-bg .edit-userInfo-w .edit-userInfo.btn {
+    display: initial;
+}
+
+.m-wrap .top-bg .edit-userInfo-w .edit-userInfo .edit-userInfo-bg {
+    width: 158rpx;
+    height: 60rpx;
+    border-radius: 30rpx;
+    background: black;
+    opacity: 0.5;
+}
+
+.m-wrap .top-bg .edit-userInfo-w .edit-userInfo .txt-w {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 158rpx;
+    text-align: center;
+}
+
+.m-wrap .top-bg .edit-userInfo-w .edit-userInfo .txt-w .txt {
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 60rpx;
+}
+
+.m-wrap .order-tab-wrap {
+    position: absolute;
+    width: calc(100vw - 40rpx);
+    margin: -52rpx 20rpx 20rpx 20rpx;
+    background-color: #FFFFFF;
+    height: 178rpx;
+    border-radius: 6rpx;
+    overflow: hidden;
+}
+
+.m-wrap .order-tab-wrap .tab-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 178rpx;
+    position: relative;
+}
+
+.m-wrap .order-tab-wrap .tab-box .tab-space-wrap {
+    position: absolute;
+    left: 138.5rpx;
+    width: 13rpx;
+}
+
+.m-wrap .order-tab-wrap .tab-box .tab-space-wrap .icon-font {
+    font-size: 80rpx;
+    color: #DDDDDD;
+}
+
+.m-wrap .order-tab-wrap .tab-box .tab-item {
+    width: 25%;
+    text-align: center;
+}
+
+.m-wrap .order-tab-wrap .tab-box .tab-item .tab-img {
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.m-wrap .order-tab-wrap .tab-box .tab-item .icon-font {
+    font-size: 44rpx;
+}
+
+.m-wrap .order-tab-wrap .tab-box .tab-item .allOrder {
+    color: #092DC5;
+}
+
+.m-wrap .order-tab-wrap .tab-box .tab-item .tab-title {
+    margin-top: 10rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.m-wrap .bottom-wrap {
+    background-color: #FFFFFF;
+    margin: 146rpx 20rpx 20rpx 20rpx;
+}
+
+.m-wrap .bottom-wrap .bottom-item {
+    position: relative;
+    height: 120rpx;
+    line-height: 120rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #3E3D3E;
+    letter-spacing: 0;
+}
+
+.m-wrap .bottom-wrap .bottom-item .b-left {
+    margin: 0 20rpx 0 48rpx;
+}
+
+.m-wrap .bottom-wrap .bottom-item .but-left {
+    position: absolute;
+    left: 40rpx;
+}
+
+.m-wrap .bottom-wrap .bottom-item .but-left .icon-font {
+    font-size: 32rpx;
+}
+
+.m-wrap .bottom-wrap .bottom-item button {
+    height: 120rpx;
+    line-height: 120rpx;
+    font-size: 28rpx;
+    text-align: left;
+    color: #3E3D3E;
+    margin: 0 80rpx 0 100rpx;
+    background-color: #ffffff;
+    justify-content: flex-start;
+}
+
+.m-wrap .bottom-wrap .bottom-item button .node {
+    width: 12rpx;
+    height: 12rpx;
+    background: #092DC5;
+    border-radius: 100%;
+    margin-left: 16rpx;
+}
+
+.m-wrap .bottom-wrap .bottom-item .but-right {
+    position: absolute;
+    right: 40rpx;
+    top: 0;
+}
+
+.m-wrap .bottom-wrap .bottom-item .but-right .icon-arrow_right {
+    font-size: 24rpx;
+}
+
+.m-wrap .bottom-wrap .b-line {
+    height: 2rpx;
+    margin-left: 40rpx;
+    background-color: #F2F2F2;
+    width: calc(100vw - 80rpx);
+}

@@ -1,0 +1,93 @@
+<ben-headBar isHome isSearch noBack>
+    <image class="custom-header-img" slot="title" src="/static/images/logo.png"></image>
+</ben-headBar>
+<view class="page-con {{isIPX?'isIPX':''}} m-wrap">
+    <view class="top-bg">
+        <view class="bg-img">
+            <image mode="widthFix" src="{{bgImgUrl}}"></image>
+            <view class="bg-img-mask"></view>
+        </view>
+        <view class="user-info">
+            <view class="m-userAvatar-wrap">
+                <open-data class="m-userAvatar" type="userAvatarUrl"></open-data>
+            </view>
+            <view class="m-userNickName-wrap">
+                <open-data class="m-userNickName" openGid="{{stOpenid}}" type="userNickName"></open-data>
+            </view>
+        </view>
+        <view catch:tap="showUserInfoView" class="edit-userInfo-w" wx:if="{{telephone}}">
+            <view class="edit-userInfo">
+                <view class="edit-userInfo-bg"></view>
+                <view class="txt-w">
+                    <view class="txt">编辑资料</view>
+                </view>
+            </view>
+        </view>
+        <view class="edit-userInfo-w" wx:else>
+            <button bindgetphonenumber="getPhoneNumber" class="edit-userInfo btn" openType="getPhoneNumber">
+                <view class="edit-userInfo-bg"></view>
+                <view class="txt-w btn-txt">
+                    <view class="txt">编辑资料</view>
+                </view>
+            </button>
+        </view>
+    </view>
+    <view class="order-tab-wrap">
+        <view class="tab-box">
+            <view bindtap="showOrderListView" class="tab-item" data-index="0">
+                <image class="tab-img" src="/static/images/order.png"></image>
+                <view class="tab-title">全部订单</view>
+            </view>
+            <view class="tab-space-wrap">
+                <text class="icon-font icon-fengexian"></text>
+            </view>
+            <view bindtap="showOrderListView" class="tab-item" data-index="1">
+                <image class="tab-img" src="/static/images/unpay.png"></image>
+                <view class="tab-title">待支付</view>
+            </view>
+            <view bindtap="showOrderListView" class="tab-item" data-index="2">
+                <image class="tab-img" src="/static/images/unsend.png"></image>
+                <view class="tab-title">待发货</view>
+            </view>
+            <view bindtap="showOrderListView" class="tab-item" data-index="3">
+                <image class="tab-img" src="/static/images/sended.png" style="width: 58rpx;"></image>
+                <view class="tab-title">待收货</view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom-wrap">
+        <view class="bottom-item">
+            <view class="but-left">
+                <text class="icon-font icon-coupon"></text>
+            </view>
+            <button bindtap="showCouponView">我的优惠券</button>
+            <view class="but-right">
+                <text class="icon-font icon-arrow_right"></text>
+            </view>
+        </view>
+        <view class="b-line"></view>
+        <view class="bottom-item">
+            <view class="but-left">
+                <text class="icon-font icon-user_info"></text>
+            </view>
+            <button catch:tap="showUserInfoView" class="ben-flex-row" wx:if="{{telephone}}">个人资料<view class="node" wx:if="{{isNoAllFill}}"></view>
+            </button>
+            <button bindgetphonenumber="getPhoneNumber" class="ben-flex-row" openType="getPhoneNumber" wx:else>个人资料<view class="node" wx:if="{{isNoAllFill}}"></view>
+            </button>
+            <view class="but-right">
+                <text class="icon-font icon-arrow_right"></text>
+            </view>
+        </view>
+        <view class="b-line"></view>
+        <view class="bottom-item">
+            <view class="but-left">
+                <text class="icon-font icon-service"></text>
+            </view>
+            <button openType="contact">在线客服</button>
+            <view class="but-right">
+                <text class="icon-font icon-arrow_right"></text>
+            </view>
+        </view>
+    </view>
+</view>
+<ben-tabBar cartIndex="{{3}}" cartNum="{{cartNum}}" tab="4" wx:if="{{pageStatus.loadStatus=='loaded'}}"></ben-tabBar>

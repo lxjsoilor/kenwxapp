@@ -1,0 +1,263 @@
+@charset "UTF-8";
+
+page {
+    background-color: #F2F2F2;
+}
+
+.page-con {
+    position: relative;
+    padding: 296rpx 40rpx 60rpx 40rpx;
+}
+
+.page-con .bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.page-con .ques-con {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1;
+    box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.08);
+    border-radius: 4rpx;
+    padding: 56rpx 50rpx 0 50rpx;
+}
+
+.page-con .ques-con .logo {
+    margin-top: 64rpx;
+    height: 160rpx;
+}
+
+.page-con .ques-con .title {
+    padding: 66rpx 20rpx 198rpx 20rpx;
+    color: #666666;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    text-align: center;
+}
+
+.page-con .ques-con .enter-btn {
+    background-color: #092DC5;
+    height: 80rpx;
+    border-radius: 6rpx;
+    color: #fff;
+    line-height: 80rpx;
+    font-size: 28rpx;
+    margin: 0 20rpx;
+}
+
+.page-con .ques-con .bot-btn-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 70rpx;
+    right: 70rpx;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 24rpx;
+    height: 134rpx;
+}
+
+.page-con .ques-con .bot-btn-wrap .icon-font {
+    font-size: 14rpx;
+}
+
+.page-con .ques-con .bot-btn-wrap .last-icon {
+    display: inline-block;
+    transform: rotateY(180deg);
+}
+
+.page-con .ques-con .bot-btn-wrap .item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.page-con .ques-con .bot-btn-wrap .num {
+    color: #BBBBBB;
+}
+
+.page-con .ques-con .bot-btn-wrap .visible {
+    visibility: hidden;
+}
+
+.page-con .ques-con .ques-header {
+    padding-bottom: 24rpx;
+}
+
+.page-con .ques-con .ques-header .ques-step {
+    font-family: '苹方-简 细体';
+    font-size: 48rpx;
+}
+
+.page-con .ques-con .ques-header .ques-type {
+    font-size: 20rpx;
+    color: #666666;
+    padding: 0 10rpx;
+    border-radius: 4rpx;
+    border: 2rpx solid #dddddd;
+    margin-left: 20rpx;
+}
+
+.page-con .ques-con .ques-title {
+    font-size: 28rpx;
+    padding: 0 20rpx 72rpx 20rpx;
+    border-bottom: 2rpx solid #eeeeee;
+}
+
+.page-con .ques-con .ques-item-wrap {
+    height: 474rpx;
+    overflow: auto;
+}
+
+.page-con .ques-con .ques-item {
+    display: flex;
+    justify-items: center;
+    padding: 42rpx 20rpx;
+    font-size: 24rpx;
+    color: #666666;
+    border-bottom: 2rpx solid #eeeeee;
+}
+
+.page-con .ques-con .ques-item .icon-font {
+    display: inline-block;
+    margin-right: 24rpx;
+}
+
+.page-con .ques-con .ques-item .icon-raidio_coupon_select {
+    color: #092DC5;
+}
+
+.page-con .ques-con .ques-title.active {
+    color: #092DC5;
+}
+
+.page-con .ques-con .last-btn {
+    position: absolute;
+    bottom: 12rpx;
+    left: 70rpx;
+    right: 70rpx;
+    background-color: rgba(0,0,0,0);
+    color: #000000;
+    font-size: 24rpx;
+    font-weight: bold;
+}
+
+.page-con .ques-con .submi-btn {
+    margin-bottom: 78rpx;
+}
+
+.page-con .ques-con .ques-textarea-title {
+    border: none;
+    padding-bottom: 36rpx;
+}
+
+.page-con .ques-con .ques-subtitle {
+    font-size: 24rpx;
+    color: #999999;
+}
+
+.page-con .ques-con .ques-textarea {
+    position: relative;
+    margin: 0 20rpx;
+    border: 2rpx solid #E7E7E7;
+    padding: 20rpx;
+    margin-bottom: 36rpx;
+}
+
+.page-con .ques-con .ques-textarea textarea {
+    height: 274rpx;
+    width: 100%;
+}
+
+.page-con .ques-con .ques-textarea .tips {
+    position: absolute;
+    right: 30rpx;
+    bottom: 30rpx;
+    font-size: 24rpx;
+    color: #cccccc;
+}
+
+.page-con .ques-con .ques-textarea .tips .cur {
+    color: #666666;
+}
+
+.finish-con {
+    background-color: #fff;
+}
+
+.finish-con .ques-finish {
+    padding: 0 60rpx;
+    text-align: center;
+}
+
+.finish-con .ques-finish .finish-title {
+    font-size: 48rpx;
+    margin-top: 116rpx;
+    text-align: center;
+}
+
+.finish-con .ques-finish .finish-subtitle {
+    margin-top: 40rpx;
+    font-size: 24rpx;
+}
+
+.finish-con .ques-finish .home-btn {
+    width: 530rpx;
+    height: 80rpx;
+    margin: 0 auto;
+    margin-top: 96rpx;
+    background-color: #092DC5;
+}
+
+.mask {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.6);
+    padding: 0 80rpx;
+    text-align: center;
+}
+
+.mask .suc-wrap {
+    position: relative;
+    margin-top: 430rpx;
+    width: 100%;
+    min-height: 498rpx;
+    background: #fff;
+    border-radius: 6rpx;
+    padding: 50rpx 80rpx;
+    text-align: center;
+}
+
+.mask .suc-wrap .icon-coupon1 {
+    font-size: 134rpx;
+}
+
+.mask .suc-wrap .title {
+    font-size: 32rpx;
+    font-weight: 44rpx;
+    padding: 36rpx 0 16rpx 0;
+}
+
+.mask .suc-wrap .subtitle {
+    font-size: 24rpx;
+    color: #999999;
+    margin-bottom: 54rpx;
+}
+
+.mask .suc-wrap .use-btn {
+    margin-top: 36rpx;
+}
+
+.mask .icon-close {
+    margin-top: 40rpx;
+    font-size: 78rpx;
+    color: #fff;
+}

@@ -1,0 +1,78 @@
+<template name="express-product-item">
+    <block wx:for="{{dataList}}" wx:key="index">
+        <view class="freebie-item" wx:if="{{item.isGift==1}}">
+            <view class="left">
+                <view class="img">
+                    <image mode="aspectFit" src="{{item.imgUrl}}"></image>
+                </view>
+                <view class="freebie">
+                    <view class="txt">
+                        <text class="tag">赠品</text>{{item.goodsName}}</view>
+                </view>
+            </view>
+            <view class="num">x {{item.count}}</view>
+        </view>
+        <view class="ben-flex-row goods-wrap" wx:else>
+            <view class="goods-img-w">
+                <image class="" src="{{item.imgUrl}}"></image>
+            </view>
+            <view class="ben-flex-col goods-info">
+                <view class="ben-overflow-ellips goods-name">{{item.goodsName}}</view>
+                <view class="goods-size">
+                    <text>尺码: {{item.size}}</text>
+                    <text wx:if="{{!!item.series}}"> 丨 颜色分类: {{item.series}}</text>
+                </view>
+                <viwe class="good-price-w">
+                    <text class="goods-price">￥{{item.csellPrice}}</text>
+                    <text class="goods-num">x {{item.count}}</text>
+                </viwe>
+            </view>
+            <view class="space-line"></view>
+        </view>
+    </block>
+</template>
+<template name="sub-express-list">
+    <view catch:tap="showStepsView" class="express-item" data-code="{{item.expressCode}}" wx:for="{{subExpressList}}" wx:key="{{ index }}">
+        <view class="ben-flex-row express-name-w">
+            <view class="express-name" wx:if="{{item.companyName&&item.expressCode}}">{{item.companyName}}：{{item.expressCode}}</view>
+            <view class="express-name" wx:else>暂无物流信息</view>
+            <view class="express-status" wx:if="{{item.subOrderStatus==0}}">备货中</view>
+            <view class="express-status" wx:if="{{item.subOrderStatus==1}}">已完成</view>
+            <view class="express-status" wx:if="{{item.subOrderStatus==2}}">已发货</view>
+        </view>
+        <view class="product-list">
+            <template is="express-product-item" data="{{...item}}"></template>
+        </view>
+    </view>
+</template>
+<import src="/benUI/template/load-more.wxml"></import>
+<import src="/benUI/template/ben-ass.wxml"></import>
+<ben-headBar title="物流详情"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{pageStatus.isIPX?'isIPX':''}} logistics-wrap" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class="express-num">共{{subExpressList.length}}个包裹</view>
+    <view class="express-list">
+        <template is="sub-express-list" data="{{subExpressList:subExpressList}}"></template>
+    </view>
+</view>
+<ben-modal class="steps-modal-wrap" closeBtn="{{false}}" open="{{!!bOpenSteps}}" width="{{670}}">
+    <view class="order-steps-box">
+        <view class="ben-flex-row step-top">
+            <view class="top-icon-wrap">
+                <text class="icon-font icon-wuliu"></text>
+            </view>
+            <view class="ben-flex-col top-text-wrap">
+                <view>物流跟踪</view>
+                <view>{{iExpress.companyName}}: {{iExpress.expressCode}}</view>
+            </view>
+        </view>
+    </view>
+    <scroll-view scrollY class="steps-scroll-w">
+        <template is="ben-steps" data="{{...y_steps}}" wx:if="{{iExpress.bShowExpressList}}"></template>
+        <view class="express-noData" wx:else>暂无相关物流信息</view>
+    </scroll-view>
+    <view class="steps-mask"></view>
+    <view slot="ben-modal-bottom-close">
+        <view class="icon-font icon-close modal-bottom-close"></view>
+    </view>
+</ben-modal>

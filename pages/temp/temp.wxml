@@ -1,0 +1,61 @@
+<ben-headBar>
+    <image class="custom-header-img" slot="title" src="/static/images/logo.png"></image>
+</ben-headBar>
+<ben-headBar title="我的订单"></ben-headBar>
+<view bind:touchend="moveend" bind:touchstart="movestart" class="turntable">
+    <view class="table-li {{ben_rotate.symClass(index,turntableList.length)}}" wx:for="{{turntableList}}" wx:key="index">{{item.name}}</view>
+</view>
+<view class="test-box">
+    <view class="line"></view>
+</view>
+<view class="test-box2">
+    <view class="box"></view>
+</view>
+<import src="/benUI/template/ben-form.wxml"></import>
+<view class="ben-form-section">
+    <form bind:submit="_formSubmit" data-submit="temp_submit">
+        <template is="ben-input-group" data="{{...mobile}}"></template>
+        <template is="ben-region-picker" data="{{...region}}"></template>
+        <template is="ben-textarea-group" data="{{...address}}"></template>
+        <template is="ben-form-switch" data="{{...need_voice}}"></template>
+        <template is="ben-btn-submit" data="{{...temp_submit}}"></template>
+    </form>
+</view>
+<view class="btnList">
+    <view class="title">按钮列表</view>
+    <button class="ben-btn-primary">按钮文字 正常</button>
+    <button class="ben-btn-primary ben-btn-large">按钮文字 大</button>
+    <button class="ben-btn-primary ben-btn-middle">按钮文字 中</button>
+    <button class="ben-btn-primary ben-btn-small">按钮文字 小</button>
+    <button class="ben-btn-primary" disabled="{{true}}">按钮文字 禁用</button>
+    <button class="ben-btn-default">按钮文字</button>
+    <button class="ben-btn-default ben-btn-large">按钮文字 大</button>
+    <button class="ben-btn-default ben-btn-middle">按钮文字 中</button>
+    <button class="ben-btn-default ben-btn-small">按钮文字 小</button>
+    <button class="ben-btn-default" disabled="{{true}}">按钮文字 禁用</button>
+    <button class="ben-btn-default-sub">按钮文字 正常</button>
+    <button class="ben-btn-default-sub ben-btn-large">按钮文字 大</button>
+    <button class="ben-btn-default-sub ben-btn-middle">按钮文字 中</button>
+    <button class="ben-btn-default-sub ben-btn-small">按钮文字 小</button>
+    <button class="ben-btn-default-sub" disabled="{{true}}">按钮文字 禁用</button>
+    <button class="ben-btn-default-special">+ 立即购买</button>
+</view>
+<view class="example">
+    <view class="dot"></view>
+</view>
+<wxs module="ben_rotate">
+module.exports = ({
+    symClass: (function(index, len) {
+        index = index + '';
+        var _map = ({
+            '0': 'cur',
+            '1': 'next',
+            '2': 'nextAll',
+        });
+        console.log('_map---------------------\x3e', _map);
+        _map[((nt_0 = ((len - 2) + ''), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))] = 'preAll';
+        _map[((nt_1 = ((len - 1) + ''), null == nt_1 ? undefined : 'number' === typeof nt_1 ? nt_1 : "" + nt_1))] = 'pre';
+        return (_map[((nt_2 = (index), null == nt_2 ? undefined : 'number' === typeof nt_2 ? nt_2 : "" + nt_2))] ? _map[((nt_3 = (index), null == nt_3 ? undefined : 'number' === typeof nt_3 ? nt_3 : "" + nt_3))] : 'other')
+    }),
+});
+</wxs>

@@ -1,0 +1,62 @@
+<template name="order-row">
+    <view catch:tap="go_to_order_detail" class="order-item" data-id="{{orderId}}" data-index="{{index}}">
+        <view class="order-item-footer">
+            <view class="item-top">
+                <text class="icon-font icon-gift" hidden="{{!bGift}}"></text>
+                <text class="icon-font icon-pintuan" hidden="{{!bTeam}}"></text>
+                <text class="order-time">{{orderDate}}</text>
+                <text class="order-status-txt">{{orderStatusName}}</text>
+            </view>
+            <view class="order-data" wx:if="{{bOneGoods}}">
+                <view class="order-img-w">
+                    <image class="order-img" src="{{iGoods.imgUrl}}"></image>
+                </view>
+                <view class="order-info">
+                    <view class="ben-overflow-ellips top">{{iGoods.goodsName}}</view>
+                    <view class="advance" wx:if="{{iGoods.isAdvance}}">预售</view>
+                    <view class="center">
+                        <text>尺码: {{iGoods.size}}</text>
+                        <text wx:if="{{!!iGoods.series}}"> 丨 颜色分类: {{iGoods.series}}</text>
+                    </view>
+                    <view class="bottom">
+                        <text class="left">￥{{iGoods.csellPrice}}</text>
+                        <text class="right">x {{iGoods.count}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="order-data" wx:else>
+                <view class="order-img-w" wx:for="{{goodsList}}" wx:key="{{item.skuId}}">
+                    <image class="order-img" src="{{item.imgUrl}}"></image>
+                    <view class="tag" wx:if="{{item.isGift==1}}">赠品</view>
+                </view>
+                <view class="order-more-img-w" wx:if="{{bMoreGoods}}">...</view>
+            </view>
+            <view class="order-item-bottom">
+                <view class="order-num">共 {{porductNum}} 件商品 合计:<text>￥{{amount}}</text>
+                </view>
+                <view class="order-btn">
+                    <button catch:tap="order_toPayTap" class="ben-btn-primary ben-btn-middle" data-id="{{orderId}}" data-index="{{index}}" wx:if="{{bShowPayBtn}}">立即支付</button>
+                    <button catch:tap="shareReturnFalse" class="ben-btn-primary ben-btn-middle" data-id="{{orderId}}" hoverClass="none" openType="share" wx:if="{{bShowGiveBtn}}">赠与好友</button>
+                    <button catch:tap="go_to_groupDetail" class="ben-btn-primary ben-btn-middle" data-id="{{orderId}}" wx:if="{{bShowTeamDetail}}">查看团详情</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="order-product-list">
+    <template is="order-row" data="{{...item,index:index,onTabStatus:onTabStatus}}" wx:for="{{list}}" wx:key="{{ index }}"></template>
+    <template is="ben-loading" data="{{loading:loading}}"></template>
+    <template is="no-more" data="{{list:list,loading:loading,isNoMore:isNoMore,noMoreConfig:noMoreConfig}}"></template>
+</template>
+<import src="/benUI/template/load-more.wxml"></import>
+<import src="/benUI/template/ben-ass.wxml"></import>
+<ben-headBar isHome title="我的订单"></ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{isIPX?'isIPX':''}} orderList-wrap" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <view class=" ben-fixed-top ben-flex-row {{isIPX?'cp-bar':''}} " style="top:{{nfixeTop}}px;">
+        <view catch:tap="_status_on_tab" class="tab-status-item {{onTabStatus==item?'ben-active':''}}" data-status="{{item}}" wx:for="{{tabList}}" wx:key="{{ index }}">{{tabList[index]}}</view>
+    </view>
+    <view class="order-list">
+        <template is="order-product-list" data="{{...orderList[onTabStatus],noMoreConfig:noMoreConfig,onTabStatus:onTabStatus}}"></template>
+    </view>
+</view>

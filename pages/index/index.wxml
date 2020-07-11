@@ -1,0 +1,43 @@
+<ben-headBar isHome isSearch noBack>
+    <image class="custom-header-img" slot="title" src="/static/images/logo.png"></image>
+</ben-headBar>
+<error-panel bind:refresh="{{pageStatus.error.method}}" btn="{{pageStatus.error.btn}}" icon="{{pageStatus.error.icon}}" title="{{pageStatus.error.title}}" wx:if="{{pageStatus.loadStatus=='error'}}"></error-panel>
+<view class="page-con {{isIPX?'isIPX':''}}" style="height: calc(100vh - {{header_height}}px - {{statusBarHeight}}px);" wx:if="{{pageStatus.loadStatus=='loaded'}}">
+    <swiper bindchange="swiper_change" current="{{currentIndex}}">
+        <swiper-item wx:for="{{viewData}}" wx:key="index">
+            <block wx:if="{{item.type=='video'}}">
+                <video autoplay="true" bindended="playEnd" class="slide-video" data-code="{{index}}" id="myVideo" objectFit="fill" showFullscreenBtn="{{false}}" src="{{item.videoUrl}}" wx:if="{{item.play}}"></video>
+                <block wx:else>
+                    <view bind:tap="play" class="icon-font icon-play" data-code="{{index}}" wx:if="{{item.sourcetype=='2'}}"></view>
+                    <view bind:tap="more" class="more-bg" data-url="{{item.moreUrl}}">
+                        <view class="more">
+                            <view class="text">了解更多</view>
+                            <view class="icon-font icon-more"></view>
+                        </view>
+                    </view>
+                    <image class="slide-image" mode="aspectFill" src="{{item.imgUrl}}"></image>
+                </block>
+            </block>
+            <block wx:else>
+                <view bind:tap="navTo" class="more-bg" data-url="{{item.toUrl}}">
+                    <view class="more">
+                        <view class="text">了解更多</view>
+                        <view class="icon-font icon-more"></view>
+                    </view>
+                </view>
+                <image class="slide-image" mode="aspectFill" src="{{item.imgUrl}}"></image>
+            </block>
+        </swiper-item>
+    </swiper>
+    <scroll-view scrollX scrollIntoView="item_{{intoViewItem}}">
+        <view class="view-long" style="width:{{(scroImgList.length-1)*260+320}}rpx">
+            <view bind:tap="click" class="scroll-view-item ishadow {{index==currentIndex?'checked':''}}" data-code="{{index}}" data-type="{{item.type}}" id="item_{{index}}" wx:for="{{scroImgList}}" wx:key="index">
+                <view class="icon-font icon-play" wx:if="{{item.type=='video'&&item.sourcetype=='2'}}"></view>
+                <view class="shadow" wx:if="{{index!=currentIndex}}"></view>
+                <image class="slide-image" src="{{item.url}}"></image>
+                <image class="slide-image-sub" src="{{item.url}}"></image>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<ben-tabBar cartNum="{{cartNum}}" needAuth="{{needAuth}}" tab="0" wx:if="{{pageStatus.loadStatus=='loaded'}}"></ben-tabBar>

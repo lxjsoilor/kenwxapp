@@ -1,0 +1,830 @@
+page {
+    background: #F2F2F2;
+    padding-bottom: 160rpx;
+}
+
+page .main-container .spell-txt {
+    padding: 40rpx 60rpx 20rpx 52rpx;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    display: flex;
+    align-items: center;
+}
+
+page .main-container .spell-txt .icon-font {
+    font-size: 36rpx;
+    color: #3E3D3E;
+    margin-right: 36rpx;
+}
+
+page .main-container .gift-header {
+    position: relative;
+    margin-bottom: -120rpx;
+}
+
+page .main-container .gift-header image {
+    width: 100%;
+    display: block;
+}
+
+page .main-container .gift-header .txt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 40rpx;
+}
+
+page .main-container .gift-header .txt .icon-gift {
+    font-size: 40rpx;
+    color: #3E3D3E;
+}
+
+page .main-container .gift-header .txt .h2 {
+    font-size: 36rpx;
+    color: #3E3D3E;
+    padding: 12rpx 0 6rpx 0;
+}
+
+page .main-container .gift-header .txt .h3 {
+    font-size: 24rpx;
+    color: #7E7D7E;
+}
+
+page .main-container .container {
+    position: relative;
+    padding: 20rpx;
+}
+
+page .main-container .container .checkout-address {
+    background: white;
+    padding: 20rpx 32rpx 32rpx;
+    color: #3E3D3E;
+    margin-bottom: 20rpx;
+    border-radius: 6rpx;
+}
+
+page .main-container .container .checkout-address .title {
+    font-size: 28rpx;
+}
+
+page .main-container .container .checkout-address .wechat-address {
+    font-size: 24rpx;
+}
+
+page .main-container .container .checkout-address .wechat-address text {
+    margin: 0 12rpx 0;
+    position: relative;
+    bottom: -4rpx;
+}
+
+page .main-container .container .checkout-address .add-address {
+    height: 100rpx;
+    line-height: 100rpx;
+    margin-top: 16rpx;
+    text-align: center;
+    border: 1px dashed #C3C3C3;
+    font-size: 28rpx;
+    color: #C3C3C3;
+}
+
+page .main-container .container .checkout-address .add-address text {
+    margin: 0 18rpx 0 0;
+    font-size: 20rpx;
+}
+
+page .main-container .container .checkout-address .checkout-address-detail {
+    position: relative;
+    padding: 32rpx 0 0 0;
+    margin-top: 32rpx;
+}
+
+page .main-container .container .checkout-address .checkout-address-detail::after {
+    content: '';
+    width: calc(100% + 32rpx);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 2rpx solid #F2F2F2;
+}
+
+page .main-container .container .checkout-address .checkout-address-detail .user {
+    padding-bottom: 22rpx;
+    color: #3E3D3E;
+    font-size: 28rpx;
+}
+
+page .main-container .container .checkout-address .checkout-address-detail .user .name {
+    padding-right: 60rpx;
+}
+
+page .main-container .container .checkout-address .checkout-address-detail .address-info {
+    color: #A4A3A4;
+    font-size: 28rpx;
+}
+
+page .main-container .container .checkout-address .checkout-address-detail .edit {
+    position: absolute;
+    padding: 15rpx;
+    right: -15rpx;
+    top: 17rpx;
+}
+
+page .main-container .container .checkout-address .checkout-address-form .btn-group view {
+    width: 50%;
+}
+
+page .main-container .container .checkout-address .checkout-address-form .btn-group view:first-child {
+    padding-right: 6rpx;
+}
+
+page .main-container .container .checkout-address .checkout-address-form .btn-group view:last-child {
+    padding-left: 6rpx;
+}
+
+page .main-container .container .wish-card {
+    background: white;
+    padding: 30rpx 32rpx;
+    border-radius: 6rpx;
+    margin-bottom: 20rpx;
+    color: #3E3D3E;
+}
+
+page .main-container .container .wish-card .title {
+    font-size: 28rpx;
+}
+
+page .main-container .container .wish-card .change {
+    font-size: 26rpx;
+}
+
+page .main-container .container .wish-card .words {
+    border-top: 1px solid #F2F2F2;
+    padding: 60rpx 0 30rpx 0;
+    font-size: 28rpx;
+    color: #A4A3A4;
+    line-height: 20px;
+    margin-top: 30rpx;
+}
+
+page .main-container .container .wish-card .icon-handover {
+    color: black;
+    font-size: 32rpx;
+    padding-right: 12rpx;
+}
+
+page .main-container .container .product-list {
+    background: white;
+    padding: 0 0 0 32rpx;
+    border-radius: 6rpx;
+    margin-bottom: 20rpx;
+}
+
+page .main-container .container .product-list .product {
+    padding: 32rpx 32rpx 32rpx 0;
+    border-top: 2rpx solid #F2F2F2;
+}
+
+page .main-container .container .product-list .product:first-of-type {
+    border-top: 0;
+}
+
+page .main-container .container .product-list .product.ben-flex-row {
+    align-items: stretch;
+}
+
+page .main-container .container .product-list .product .img {
+    background: #E8E8E8;
+}
+
+page .main-container .container .product-list .product .img image {
+    display: block;
+    width: 160rpx;
+    height: 160rpx;
+}
+
+page .main-container .container .product-list .product .info {
+    flex: 1;
+    padding-left: 20rpx;
+    position: relative;
+}
+
+page .main-container .container .product-list .product .info .name {
+    font-size: 28rpx;
+    color: #504F4F;
+    padding-right: 54rpx;
+}
+
+page .main-container .container .product-list .product .info .advance {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 24rpx;
+    color: #092DC5;
+}
+
+page .main-container .container .product-list .product .info .size {
+    font-size: 24rpx;
+    color: #A4A3A4;
+    margin-top: 6rpx;
+}
+
+page .main-container .container .product-list .product .info .bottom-line {
+    width: 100%;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 28rpx;
+    color: #504F4F;
+}
+
+page .main-container .container .product-list .freebie-item {
+    display: flex;
+    padding: 40rpx 30rpx 40rpx 0;
+    justify-content: space-between;
+    border-top: 2rpx solid #F2F2F2;
+}
+
+page .main-container .container .product-list .freebie-item .left {
+    display: flex;
+}
+
+page .main-container .container .product-list .freebie-item .img {
+    width: 100rpx;
+    height: 100rpx;
+    display: block;
+    background-color: #E8E8E8;
+}
+
+page .main-container .container .product-list .freebie-item .img image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+page .main-container .container .product-list .freebie-item .freebie {
+    display: flex;
+}
+
+page .main-container .container .product-list .freebie-item .freebie .tag {
+    height: 30rpx;
+    line-height: 26rpx;
+    font-size: 20rpx;
+    border-radius: 3px;
+    color: #092DC5;
+    padding: 0 6rpx;
+    border: 2rpx solid #092dc5;
+    box-sizing: border-box;
+    align-items: center;
+    margin-right: 6rpx;
+}
+
+page .main-container .container .product-list .freebie-item .freebie .txt {
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular,PingFangSC;
+    font-weight: 400;
+    color: #3e3d3e;
+    margin-top: -2rpx;
+    padding-left: 20rpx;
+    width: 440rpx;
+    line-height: 40rpx;
+}
+
+page .main-container .container .product-list .freebie-item .num {
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular,PingFangSC;
+    font-weight: 400;
+    color: #3e3d3e;
+}
+
+page .main-container .container .gift-list {
+    background: white;
+    padding: 0 0 0 32rpx;
+    border-radius: 6rpx;
+    margin-bottom: 20rpx;
+}
+
+page .main-container .container .gift-list .product {
+    padding: 32rpx 32rpx 32rpx 0;
+}
+
+page .main-container .container .gift-list .product:first-of-type {
+    border-top: 0;
+}
+
+page .main-container .container .gift-list .product.ben-flex-row {
+    align-items: stretch;
+}
+
+page .main-container .container .gift-list .product .img image {
+    display: block;
+    width: 114rpx;
+    height: 114rpx;
+}
+
+page .main-container .container .gift-list .product .info {
+    flex: 1;
+    padding-left: 20rpx;
+    position: relative;
+}
+
+page .main-container .container .gift-list .product .info .name {
+    font-size: 28rpx;
+    color: #3E3D3E;
+    display: flex;
+}
+
+page .main-container .container .gift-list .product .info .name text {
+    margin-top: -2rpx;
+}
+
+page .main-container .container .gift-list .product .info .name text.tag {
+    font-size: 20rpx;
+    color: #092DC5;
+    border-radius: 4rpx;
+    border: 1px solid #092DC5;
+    padding: 0 10rpx;
+    height: 30rpx;
+    line-height: 28rpx;
+    margin-right: 20rpx;
+    margin-top: 0;
+}
+
+page .main-container .container .gift-list .product .info .size {
+    font-size: 24rpx;
+    color: #A4A3A4;
+    margin-top: 6rpx;
+}
+
+page .main-container .container .gift-list .product .info .bottom-line {
+    font-size: 28rpx;
+    color: #A4A3A4;
+}
+
+page .main-container .container .checkout-invoice {
+    background: white;
+    padding: 40rpx 32rpx;
+    color: #3E3D3E;
+    margin-bottom: 20rpx;
+    border-radius: 6rpx;
+}
+
+page .main-container .container .checkout-invoice .title {
+    font-size: 28rpx;
+}
+
+page .main-container .container .checkout-invoice .ben-form-group {
+    margin: 0;
+}
+
+page .main-container .container .checkout-invoice .ben-form-group .ben-switch.custom {
+    border-radius: 6rpx;
+}
+
+page .main-container .container .checkout-invoice .ben-form-group .ben-switch.custom .ben-switch-bar {
+    margin: 0;
+    background: #dddddd;
+    border-radius: 6rpx;
+}
+
+page .main-container .container .checkout-invoice .ben-form-group .ben-switch.custom.checked .ben-switch-bar {
+    background: #092DC5;
+}
+
+page .main-container .container .checkout-invoice .choose-wxinvoice {
+    padding: 36rpx 0;
+    font-size: 28rpx;
+    color: #3E3D3E;
+    border-top: 2rpx solid #EEEEEE;
+    margin-top: 30rpx;
+}
+
+page .main-container .container .checkout-invoice .choose-wxinvoice .wechat {
+    font-size: 24rpx;
+}
+
+page .main-container .container .checkout-invoice .choose-wxinvoice .wechat text {
+    margin: 0 12rpx 0;
+    position: relative;
+    bottom: -4rpx;
+}
+
+page .main-container .container .checkout-invoice .invoice-tab-cover {
+    position: absolute;
+    top: 0;
+    right: -40rpx;
+    padding: 36rpx 40rpx;
+}
+
+page .main-container .container .checkout-invoice .invoice-tab {
+    width: 76rpx;
+    height: 40rpx;
+    overflow: hidden;
+    background: #E2E2E2;
+    border-radius: 3px;
+    box-sizing: content-box;
+}
+
+page .main-container .container .checkout-invoice .invoice-tab>view {
+    width: 76rpx;
+    height: 40rpx;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #00BAFF;
+    box-shadow: inset 0 0 3px 0 rgba(0,0,0,0.1);
+    text-align: right;
+    box-sizing: content-box;
+    margin-left: -50%;
+    transition: margin-left 0.3s;
+}
+
+page .main-container .container .checkout-invoice .invoice-tab>view.move {
+    margin-left: 0;
+}
+
+page .main-container .container .checkout-invoice .invoice-tab>view>text {
+    display: inline-block;
+    box-sizing: content-box;
+    width: 34rpx;
+    height: 36rpx;
+    background: #FFFFFF;
+    border: 1px solid #E7E7E7;
+    box-shadow: 1px 0 2px 0 rgba(0,0,0,0.05);
+    border-radius: 3px;
+}
+
+page .main-container .container .checkout-invoice .title {
+    font-size: 28rpx;
+    color: #000000;
+    line-height: 36rpx;
+}
+
+page .main-container .container .checkout-invoice .invoice-checkbox-group {
+    display: flex;
+}
+
+page .main-container .container .checkout-invoice .invoice-checkbox-row {
+    width: 160rpx;
+    position: relative;
+    padding: 20rpx 0 20rpx 48rpx;
+    font-size: 26rpx;
+    color: #000000;
+    line-height: 28rpx;
+    margin-right: 108rpx;
+}
+
+page .main-container .container .checkout-invoice .invoice-checkbox-row .label {
+    width: 32rpx;
+    height: 32rpx;
+    position: absolute;
+    top: 16rpx;
+    left: 0;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 32px;
+}
+
+page .main-container .container .checkout-invoice .invoice-checkbox-row.active .label {
+    border: 0;
+    text-align: center;
+    line-height: 28rpx;
+}
+
+page .main-container .container .checkout-invoice .invoice-checkbox-row.active .label text {
+    color: #092DC5;
+    display: inline-block;
+}
+
+page .main-container .container .checkout-invoice .checkout-invoice-empty {
+    margin-bottom: 80rpx;
+}
+
+page .main-container .container .checkout-coupon {
+    background: white;
+    color: #3E3D3E;
+    margin-bottom: 20rpx;
+    border-radius: 6rpx;
+    position: relative;
+}
+
+page .main-container .container .checkout-coupon .coupon-use-w .coupon-box {
+    width: 624rpx;
+    height: 110rpx;
+    line-height: 110rpx;
+}
+
+page .main-container .container .checkout-coupon .coupon-use-w .coupon-box .title {
+    font-size: 28 rpx;
+    margin-left: 32rpx;
+}
+
+page .main-container .container .checkout-coupon .coupon-use-w .coupon-box .nums-block {
+    font-size: 28 rpx;
+}
+
+page .main-container .container .checkout-coupon .coupon-use-w .coupon-box .nums-block .num {
+    color: #FF0000;
+}
+
+page .main-container .container .checkout-coupon .coupon-use-w .coupon-box .nums-block .txt {
+    color: #A4A3A4;
+}
+
+page .main-container .container .checkout-coupon .coupon-use-w .icon-font {
+    font-size: 20rpx;
+    padding: 20rpx;
+    margin: 0 12rpx 0 4rpx;
+    text-align: center;
+}
+
+page .main-container .container .checkout-coupon .checkoutNote-tips {
+    box-sizing: border-box;
+    margin-left: 32rpx;
+    padding: 14rpx 0;
+    font-size: 22rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: #092DC5;
+    line-height: 32rpx;
+    border-top: 2rpx solid #EEEEEE;
+}
+
+page .main-container .container .checkout-price {
+    background: white;
+    padding: 24rpx 32rpx 0;
+    color: #3E3D3E;
+    margin-bottom: 20rpx;
+    border-radius: 6rpx;
+}
+
+page .main-container .container .checkout-price .price-info .line {
+    font-size: 14px;
+    color: #3E3D3E;
+    padding: 16rpx 0;
+}
+
+page .main-container .container .checkout-price .price-info .line .gray {
+    color: #A4A3A4;
+}
+
+page .main-container .container .checkout-price .price-info .line .red {
+    color: #FF0000;
+}
+
+page .main-container .container .checkout-price .total {
+    margin-top: 16rpx;
+    font-size: 28rpx;
+    color: #3E3D3E;
+    padding: 32rpx 0;
+    border-top: 2rpx solid #F2F2F2;
+}
+
+page .main-container .footer-panel {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    background: white;
+    width: 100%;
+    padding: 0 20rpx 20rpx;
+    border-top: 2rpx solid #F2F2F2;
+    box-sizing: border-box;
+}
+
+page .main-container .footer-panel .conditions {
+    padding: 24rpx 0;
+    font-size: 24rpx;
+    color: #3E3D3E;
+    display: flex;
+}
+
+page .main-container .footer-panel .conditions .accept-checkbox {
+    width: 32rpx;
+    height: 32rpx;
+    border: 2rpx solid #A4A3A4;
+    border-radius: 4rpx;
+    margin-right: 20rpx;
+}
+
+page .main-container .footer-panel .conditions .accept-checkbox.active {
+    color: #092DC5;
+    border: 0;
+}
+
+page .main-container .footer-panel .conditions text {
+    color: #092DC5;
+}
+
+page .main-container.isIPX {
+    padding-bottom: 40rpx;
+}
+
+page .main-container.isIPX .footer-panel {
+    padding-bottom: 60rpx;
+}
+
+page .coupon-container {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+page .coupon-container .panel {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+page .coupon-container .panel .coupon-tab {
+    position: relative;
+    height: 120rpx;
+    line-height: 120rpx;
+    font-size: 28rpx;
+    color: #A4A3A4;
+    text-align: center;
+    background: white;
+    padding: 0 50rpx;
+}
+
+page .coupon-container .panel .coupon-tab view {
+    width: 50%;
+}
+
+page .coupon-container .panel .coupon-tab view.active {
+    color: #3E3D3E;
+    position: relative;
+}
+
+page .coupon-container .panel .coupon-tab view.active::after {
+    content: '';
+    width: 44rpx;
+    height: 4rpx;
+    background: #3E3D3E;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin-left: -22rpx;
+}
+
+page .coupon-container .panel .coupon-tab text {
+    position: absolute;
+    padding: 0 40rpx;
+    right: 0;
+    top: 0;
+    height: 120rpx;
+    line-height: 120rpx;
+    font-size: 24rpx;
+    color: #3E3D3E;
+}
+
+page .coupon-container .panel .coupon-item {
+    height: 800rpx;
+    background: #f7f7f7;
+}
+
+page .coupon-container .panel .coupon-item swiper {
+    height: 800rpx;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon scroll-view {
+    height: 800rpx;
+    box-sizing: border-box;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon scroll-view .couponlist-container {
+    padding: 30rpx 20rpx;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item {
+    position: relative;
+    background: white;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.05);
+    border-radius: 6px;
+    padding: 40rpx 40rpx 40rpx 0;
+    margin-bottom: 20rpx;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .price {
+    width: 168rpx;
+    text-align: center;
+    font-size: 52rpx;
+    font-family: PublicoBanner-Light;
+    color: #092DC5;
+    display: flex;
+    justify-content: center;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .price text.symbol {
+    font-size: 28rpx;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .free-delivery {
+    width: 168rpx;
+    text-align: center;
+    font-size: 52rpx;
+    font-family: PublicoBanner-Light;
+    color: #092DC5;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .free-delivery .icon-font {
+    font-size: 52rpx;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .info {
+    flex: 1;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .info .title {
+    font-size: 32rpx;
+    color: #3E3D3E;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .info .condition {
+    font-size: 24rpx;
+    color: #3E3D3E;
+    padding: 4rpx 0 12rpx 0;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .info .date {
+    font-size: 24rpx;
+    color: #A4A3A4;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .radio {
+    padding: 32rpx;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .radio text {
+    display: block;
+    width: 34rpx;
+    height: 34rpx;
+    border: 2rpx solid #A4A3A4;
+    background: white;
+    border-radius: 50rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+page .coupon-container .panel .coupon-item swiper .choose-coupon .choose-item .radio.active text {
+    border: 0;
+    color: #092DC5;
+}
+
+page .coupon-container .panel .coupon-item swiper .input-coupon {
+    padding: 30rpx 40rpx;
+    box-sizing: border-box;
+}
+
+page .coupon-container .panel .coupon-item swiper .input-coupon input {
+    height: 96rpx;
+    padding: 0 24rpx;
+    border: 1px solid #DDDDDD;
+    background: white;
+    font-size: 28rpx;
+}
+
+page .coupon-container .panel .coupon-item swiper .input-coupon .place-holder {
+    color: #C3C3C3;
+}
+
+page .coupon-container .panel .coupon-item swiper .input-coupon .checkout-coupoon-group-error {
+    font-size: 24rpx;
+    color: #D0021B;
+    line-height: 28rpx;
+    margin-top: 14rpx;
+}
+
+page .coupon-container .panel .coupon-item swiper .input-coupon .coupoon-confirm {
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #092dc5;
+    border-radius: 3px;
+    font-size: 28rpx;
+    color: white;
+    margin-top: 40rpx;
+    text-align: center;
+}
+
+page .coupon-container .panel .coupon-empty {
+    text-align: center;
+    padding-top: 160rpx;
+    font-size: 28rpx;
+    color: #7E7D7E;
+}
+
+page .coupon-container .panel .coupon-empty text {
+    font-size: 130rpx;
+    padding-bottom: 34rpx;
+    display: inline-block;
+}

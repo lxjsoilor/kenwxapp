@@ -1,0 +1,28 @@
+<view class="ben-toast-con" style="{{animation}}" wx:if="{{toast}}">
+    <slot></slot>
+</view>
+<block wx:else>
+    <view capture-catch:tap="{{!!maskClose?'_closeModal':null}}" class="ben-mask ben-fixed-top" hidden="{{!open}}" wx:if="{{mask}}"></view>
+    <view catch:touchstart="{{!!maskClose?'_touchDialog':null}}" class="ben-modal-dialog ben-fixed-top" hidden="{{!open}}" style="width: {{width}}rpx; top: {{top}}">
+        <view catch:touchstart="_closeModal" class="ben-modal-close ben-flex-row" wx:if="{{!!closeBtn}}">
+            <slot name="ben-modal-close"></slot>
+        </view>
+        <view class="ben-modal-title">{{title}}<slot name="modal-title"></slot>
+        </view>
+        <view class="ben-modal-content">
+            <slot></slot>
+        </view>
+        <view class="ben-btn-con ben-flex-row" wx:if="{{btnText.length}}">
+            <view catch:touchstart="_onTapCancel" class="ben-btn ben-btn-cancel" wx:if="{{btnText.length>1}}">{{btnText[1]}}</view>
+            <view catch:touchstart="_onTapEnsure" class="ben-btn ben-btn-ensure">
+                <slot name="icon-ensure"></slot> {{btnText[0]}}
+      </view>
+        </view>
+        <view wx:else>
+            <slot name="ben-modal-footer"></slot>
+        </view>
+        <view catch:touchstart="_closeModal" class="ben-modal-bottom-close" wx:if="{{!closeBottomBtn}}">
+            <slot class="close-btn" name="ben-modal-bottom-close"></slot>
+        </view>
+    </view>
+</block>

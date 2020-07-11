@@ -1,0 +1,160 @@
+@import "../../__wuBaseWxss__/0.wxss";
+
+@import "../../__wuBaseWxss__/1.wxss";
+
+.page-con swiper {
+    width: 100vw;
+    height: calc(100% - 358rpx);
+}
+
+.page-con swiper swiper-item {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.page-con swiper swiper-item .slide-video {
+    width: 100%;
+    height: 100%;
+}
+
+.page-con swiper swiper-item .icon-play {
+    font-size: 80rpx;
+    color: #fff;
+    position: absolute;
+    top: 322rpx;
+    left: 50%;
+    transform: translateY(-50%);
+}
+
+.page-con swiper swiper-item .more-bg {
+    width: 100%;
+    height: 140rpx;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.page-con swiper swiper-item .more-bg .more {
+    position: absolute;
+    right: 0;
+    bottom: 32rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    color: #FFFFFF;
+    letter-spacing: 2rpx;
+    text-align: center;
+    line-height: 36rpx;
+    padding: 12rpx 56rpx 12rpx 22rpx;
+    background: rgba(0,0,0,0.3);
+    border-radius: 32rpx 0 0 32rpx;
+}
+
+.page-con swiper swiper-item .more-bg .more .icon-more {
+    font-size: 28rpx;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    right: 18rpx;
+    transform: translateY(-50%);
+}
+
+.page-con swiper swiper-item .slide-image {
+    width: 100%;
+    height: 100%;
+}
+
+.page-con.isIPX swiper {
+    height: calc(100% - 398rpx);
+}
+
+.page-con.isIPX swiper swiper-item .icon-play {
+    top: 434rpx;
+}
+
+.page-con scroll-view {
+    width: 100vw;
+    height: 242rpx;
+}
+
+.page-con scroll-view .view-long {
+    padding-right: 20rpx;
+    min-width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.page-con scroll-view .view-long .scroll-view-item {
+    padding-left: 20rpx;
+    width: 260rpx;
+    height: 160rpx;
+    border-radius: 8rpx;
+    position: relative;
+}
+
+.page-con scroll-view .view-long .scroll-view-item .icon-font {
+    font-size: 32rpx;
+    color: #fff;
+    position: absolute;
+    right: 12rpx;
+    bottom: 12rpx;
+}
+
+.page-con scroll-view .view-long .scroll-view-item image {
+    width: 240rpx;
+    height: 100%;
+    border-radius: 8rpx;
+}
+
+.page-con scroll-view .view-long .scroll-view-item .shadow {
+    width: 240rpx;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 8rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 0rpx;
+}
+
+.page-con scroll-view .view-long .scroll-view-item .slide-image-sub {
+    width: 240rpx;
+    height: 100%;
+    border-radius: 8rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 6rpx;
+    z-index: -1;
+    transform: scale(0.9);
+    filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.page-con scroll-view .view-long .scroll-view-item.checked {
+    padding-left: 20rpx;
+    width: 300rpx;
+    height: 188rpx;
+}
+
+.page-con scroll-view .view-long .scroll-view-item.checked image {
+    width: 280rpx;
+    height: 100%;
+    border-radius: 8rpx;
+}
+
+.page-con scroll-view .view-long .scroll-view-item.checked .slide-image-sub {
+    width: 280rpx;
+    height: 100%;
+    border-radius: 8rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 6rpx;
+    z-index: -1;
+    transform: scale(0.9);
+    filter: blur(8px);
+    backdrop-filter: blur(8px);
+}

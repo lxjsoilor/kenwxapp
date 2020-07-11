@@ -1,0 +1,7 @@
+<view class="ben-calculate-num {{position}}">
+    <view bindtap="onMinus" class="ben-calculate-minus icon-font icon-minus {{minusFlag?'':'disabled'}}">
+        <text></text>
+    </view>
+    <view class="ben-calculate-input {{isPdp?'pdp-width':''}}">{{num}}</view>
+    <view bindtap="onPlus" class="ben-calculate-plus icon-font icon-add {{plusFlag?'':'disabled'}}"></view>
+</view>
